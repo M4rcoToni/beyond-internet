@@ -3,7 +3,7 @@ import theme from '../theme'
 
 export const SubTitle = styled.Text`
   text-align: center;
-  font-size: ${theme.FONT_SIZE.MD}px;
+  font-size: ${theme.FONT_SIZE.LG}px;
   font-family: ${theme.FONT_FAMILY.REGULAR};
-  color: ${theme.COLORS.GRAY_300};
+  color: ${theme.COLORS.BLACK};
 `

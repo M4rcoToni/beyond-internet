@@ -4,10 +4,11 @@ import styled from 'styled-components/native'
 import theme from '../theme'
 
 export const InputStyled = styled(TextInput)`
-  flex: 1;
+  width: 100%;
+  max-width: 60%;
+
   min-height: 56px;
   max-height: 56px;
-  max-width: 600 px;
 
   background-color: ${theme.COLORS.GRAY_300};
   color: ${theme.COLORS.WHITE};
