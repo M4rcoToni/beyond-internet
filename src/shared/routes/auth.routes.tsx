@@ -7,7 +7,7 @@ import {
 
 type AuthRoutes = {
   signIn: undefined
-  SignUp: undefined
+  signUp: undefined
 }
 
 export type AuthNavigatorRouterProps = NativeStackNavigationProp<AuthRoutes>
@@ -21,8 +21,8 @@ export function AuthRoutes() {
         headerShown: false,
       }}
     >
-      <Screen name="signIn" component={SignIn} />
       <Screen name="signUp" component={SignUp} />
+      <Screen name="signIn" component={SignIn} />
     </Navigator>
   )
 }
