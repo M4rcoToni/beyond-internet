@@ -1,7 +1,9 @@
+import React from 'react'
 import { TextInput, TextInputProps } from 'react-native'
 
-import { InputStyled } from '../../../shared/styles/Input'
 import theme from '../../../shared/theme'
+
+import { InputStyled } from './InputStyled'
 
 type Props = TextInputProps & {
   inputRef?: React.RefObject<TextInput>

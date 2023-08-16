@@ -1,9 +1,11 @@
-import { Content, Logo, Title } from './styles'
-
+import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+
 import { Button, Container, Input, SubTitle, Link } from '@shared/components'
 
-export function SignIn() {
+import { Content, Logo, Title } from './styles'
+
+export function SignUp() {
   const navigation = useNavigation()
   return (
     <Container>
@@ -13,10 +15,7 @@ export function SignIn() {
         <Input placeholder="CPF" />
         <Input placeholder="Senha" />
         <Button title="Entrar" type="PRIMARY" />
-        <Link
-          title="Esqueci minha senha"
-          onPress={() => navigation.navigate('SignUp')}
-        />
+        <Link title="Volar para o login" onPress={() => navigation.goBack()} />
       </Content>
       <Logo source={require('../../../shared/assets/logo_ifsul.png')} />
     </Container>

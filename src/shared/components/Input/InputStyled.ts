@@ -1,11 +1,11 @@
 import { TextInput } from 'react-native'
 
 import styled from 'styled-components/native'
-import theme from '../theme'
+import theme from '@shared/theme'
 
 export const InputStyled = styled(TextInput)`
   width: 100%;
-  max-width: 60%;
+  max-width: 400px;
 
   min-height: 56px;
   max-height: 56px;
