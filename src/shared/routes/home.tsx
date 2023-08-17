@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { SafeAreaView, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { useTheme } from 'styled-components/native'
 
@@ -8,10 +8,10 @@ import { useAuth } from '../hooks/useAuth'
 
 export function Routes() {
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         <AuthRoutes />
       </NavigationContainer>
-    </View>
+    </SafeAreaView>
   )
 }

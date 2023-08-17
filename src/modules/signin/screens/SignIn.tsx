@@ -14,8 +14,8 @@ export function SignIn() {
         <Input placeholder="Senha" />
         <Button title="Entrar" type="PRIMARY" />
         <Link
-          title="Esqueci minha senha"
-          onPress={() => navigation.navigate('SignUp')}
+          title="Cadastre-se"
+          onPress={() => navigation.navigate('signUp')}
         />
       </Content>
       <Logo source={require('../../../shared/assets/logo_ifsul.png')} />

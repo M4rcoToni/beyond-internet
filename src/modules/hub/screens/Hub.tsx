@@ -1,10 +1,22 @@
+import { ScrollView, View } from 'react-native'
+import { ClassCard } from '../components/ClassCard/ClassCard'
 import React from 'react'
-import { View, Text } from 'react-native'
+import { Container, ScrollViewStyled } from './styles'
 
 export function Hub() {
   return (
-    <View>
-      <Text>Hub</Text>
-    </View>
+    <ScrollViewStyled>
+      <Container>
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+
+        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+      </Container>
+    </ScrollViewStyled>
   )
 }
