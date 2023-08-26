@@ -7,6 +7,7 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins'
 import React from 'react'
+import 'react-native-gesture-handler'
 import theme from './src/shared/theme'
 import { Routes } from '@shared/routes/home'
 

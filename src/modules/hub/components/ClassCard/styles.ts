@@ -5,7 +5,9 @@ export const Content = styled.View`
   justify-content: space-between;
   margin: 10px;
   border-radius: 10px;
-  border: 1px solid ${theme.COLORS.BLACK};
+  border: 1px solid ${theme.COLORS.GRAY_200};
+  width: 230px;
+  height: 200px;
 `
 export const ClassBanner = styled.Image`
   width: 100%;
@@ -13,11 +15,21 @@ export const ClassBanner = styled.Image`
   border-radius: 10px 10px 0 0;
   background-color: white;
 `
-export const CardSubTitle = styled.Text`
-  max-width: 90%;
-  padding-top: 5px;
+
+export const CardTitle = styled.Text`
+  padding: 2% 2% 0 0;
+
   align-self: center;
   font-size: ${theme.FONT_SIZE.MD}px;
+  font-family: ${theme.FONT_FAMILY.REGULAR};
+  color: ${theme.COLORS.BLACK};
+`
+
+export const CardSubTitle = styled.Text`
+  max-width: 80%;
+  padding: 0 2% 2% 0;
+  align-self: center;
+  font-size: ${theme.FONT_SIZE.SM}px;
   font-family: ${theme.FONT_FAMILY.REGULAR};
   color: ${theme.COLORS.BLACK};
 `

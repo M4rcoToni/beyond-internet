@@ -1,4 +1,3 @@
-import { Hub } from '@modules/hub/screens/Hub'
 import { SignIn } from '@modules/signin/screens/SignIn'
 import { SignUp } from '@modules/signup/screens/SignUp'
 import {
@@ -23,7 +22,6 @@ export function AuthRoutes() {
         headerShown: false,
       }}
     >
-      <Screen name="hub" component={Hub} />
       <Screen name="signIn" component={SignIn} />
       <Screen name="signUp" component={SignUp} />
     </Navigator>

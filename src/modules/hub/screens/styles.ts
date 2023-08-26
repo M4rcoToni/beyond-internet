@@ -7,6 +7,7 @@ export const ScrollViewStyled = styled.ScrollView`
 `
 export const Container = styled.View`
   justify-content: center;
+  gap: 10px;
   flex-direction: row;
   flex-wrap: wrap;
   background-color: ${theme.COLORS.WHITE};

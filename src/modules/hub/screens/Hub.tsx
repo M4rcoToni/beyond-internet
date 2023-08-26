@@ -7,15 +7,8 @@ export function Hub() {
   return (
     <ScrollViewStyled>
       <Container>
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
-
-        <ClassCard title="Empreendedorismsadasdsaodsdsdsds" />
+        <ClassCard title="Empreendedorismo" subTitle="6 semestre" />
+        <ClassCard title="Empreendedorismo" subTitle="6 semestre" />
       </Container>
     </ScrollViewStyled>
   )

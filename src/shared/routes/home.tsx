@@ -5,13 +5,24 @@ import { useTheme } from 'styled-components/native'
 
 import { AuthRoutes } from './auth.routes'
 import { useAuth } from '../hooks/useAuth'
+import { AppRoutes } from './app.routes'
+import HubDrawer from '@modules/hub/routes/Hub.drawer'
+import { AuthContextProvider } from '@shared/contexts/AuthContext'
+import { DimensionContextProvider } from '@shared/contexts/DimensionsContext'
 
 export function Routes() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <AuthRoutes />
-      </NavigationContainer>
+      <AuthContextProvider>
+        <DimensionContextProvider>
+          <NavigationContainer>
+            {/* {
+            user ? 
+            {/* } */}
+            <AppRoutes />
+          </NavigationContainer>
+        </DimensionContextProvider>
+      </AuthContextProvider>
     </SafeAreaView>
   )
 }

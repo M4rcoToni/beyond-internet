@@ -1,12 +1,10 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Hub } from '../screens/Hub'
+// import { NavigationContainer } from '@react-navigation/native'
+// import HubDrawer from './Hub.drawer'
 
-const { Navigator, Screen } = createNativeStackNavigator()
-
-export function HubStack() {
-  return (
-    <Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
-      <Screen name="hub" component={Hub} />
-    </Navigator>
-  )
-}
+// export function HubStack() {
+//   return (
+//     <NavigationContainer>
+//       <HubDrawer />
+//     </NavigationContainer>
+//   )
+// }

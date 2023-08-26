@@ -1,13 +1,14 @@
 import React from 'react'
-import { CardSubTitle, ClassBanner, Content } from './styles'
+import { CardSubTitle, CardTitle, ClassBanner, Content } from './styles'
 import { TouchableOpacity, View } from 'react-native'
 
 interface ClassCardProps {
   title: string
+  subTitle: string
   image?: string
   onPress?: () => void
 }
-export function ClassCard({ image, onPress, title }: ClassCardProps) {
+export function ClassCard({ image, onPress, title, subTitle }: ClassCardProps) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -20,7 +21,8 @@ export function ClassCard({ image, onPress, title }: ClassCardProps) {
         <ClassBanner
           source={require('../../../../shared/assets/Empreendedorismo.jpg')}
         />
-        <CardSubTitle>{title}</CardSubTitle>
+        <CardTitle>{title}</CardTitle>
+        <CardSubTitle>{subTitle}</CardSubTitle>
       </Content>
     </TouchableOpacity>
   )
