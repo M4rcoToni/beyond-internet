@@ -1,20 +1,24 @@
 import React from 'react'
-import { TextInput, TextInputProps } from 'react-native'
+import { TextInput, TextInputProps, Text } from 'react-native'
 
 import theme from '../../../shared/theme'
 
-import { InputStyled } from './InputStyled'
+import { ErrorMessage, InputStyled } from './InputStyled'
 
 type Props = TextInputProps & {
   inputRef?: React.RefObject<TextInput>
+  errorMessage?: string | null
 }
 
-export function Input({ inputRef, ...rest }: Props) {
+export function Input({ errorMessage = null, inputRef, ...rest }: Props) {
   return (
-    <InputStyled
-      ref={inputRef}
-      placeholderTextColor={theme.COLORS.WHITE}
-      {...rest}
-    />
+    <>
+      <InputStyled
+        ref={inputRef}
+        placeholderTextColor={theme.COLORS.WHITE}
+        {...rest}
+      />
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </>
   )
 }

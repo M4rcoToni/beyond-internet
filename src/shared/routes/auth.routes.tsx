@@ -1,5 +1,4 @@
-import { SignIn } from '@modules/signin/screens/SignIn'
-import { SignUp } from '@modules/signup/screens/SignUp'
+import { SignIn, SignUp } from '@modules/login/screens'
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,

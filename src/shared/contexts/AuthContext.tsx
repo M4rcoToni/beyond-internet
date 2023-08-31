@@ -1,11 +1,13 @@
-/* eslint-disable no-useless-catch */
+import { FormDataProps } from '@modules/login/utils/FormValidator'
+import { createUserController } from 'databases/modules/users/controller/UserController'
+import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
-import { UserDTO } from '../dtos/UserDTO'
 
 export type AuthContextDataProps = {
-  user: UserDTO
+  user: User
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
+  signUp: (user: FormDataProps) => Promise<boolean | undefined>
   isLoadingUserStorage: boolean
 }
 
@@ -18,57 +20,70 @@ export const AuthContext = createContext<AuthContextDataProps>(
 )
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState<UserDTO>({} as UserDTO)
+  const [user, setUser] = useState<User>({} as User)
   const [isLoadingUserStorage, setIsLoadingUserStorage] = useState(true)
 
   async function signIn(email: string, password: string) {
-    try {
-      // const { data } = await api.post('/sessions', { email, password });
-      // if (data.user) {
-      //   setUser(data.user);
-      //   storageUserSave(data.user)
-      // }
-    } catch (error) {
-      throw error
-    }
+    //   try {
+    //     // const { data } = await api.post('/sessions', { email, password });
+    //     // if (data.user) {
+    //     //   setUser(data.user);
+    //     //   storageUserSave(data.user)
+    //     // }
+    //   } catch (error) {
+    //     throw error
+    //   }
   }
 
-  async function signOut() {
+  async function signUp({
+    cpf,
+    name,
+    password,
+    passwordConfirm,
+  }: FormDataProps) {
     try {
-      // setIsLoadingUserStorage(true);
-      // setUser({} as UserDTO);
-      // await storageUserRemove();
+      setIsLoadingUserStorage(true)
+      if (password === passwordConfirm) {
+        const callback = (userId: number | null) => {
+          if (userId !== null) return true
+          else return false
+        }
+
+        createUserController(name, cpf, password, callback)
+      }
     } catch (error) {
-      throw error
+      console.log(error)
+      return false
     } finally {
       setIsLoadingUserStorage(false)
     }
   }
 
-  async function loadUserData() {
-    try {
-      // const userLogged = await storageUserGet();
-      // if (userLogged) {
-      //   setUser(user);
-      // }
-    } catch (error) {
-      throw error
-    } finally {
-      setIsLoadingUserStorage(false)
-    }
-  }
+  // async function loadUserData() {
+  //   try {
+  //     // const userLogged = await storageUserGet();
+  //     // if (userLogged) {
+  //     //   setUser(user);
+  //     // }
+  //   } catch (error) {
+  //     throw error
+  //   } finally {
+  //     setIsLoadingUserStorage(false)
+  //   }
+  // }
 
-  useEffect(() => {
-    loadUserData()
-  }, [])
+  // useEffect(() => {
+  //   loadUserData()
+  // }, [])
 
   return (
     <AuthContext.Provider
       value={{
         user,
         signIn,
+        signUp,
         isLoadingUserStorage,
-        signOut,
+        // signOut,
       }}
     >
       {children}

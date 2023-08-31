@@ -19,7 +19,7 @@ export function Routes() {
             {/* {
             user ? 
             {/* } */}
-            <AppRoutes />
+            <AuthRoutes />
           </NavigationContainer>
         </DimensionContextProvider>
       </AuthContextProvider>
