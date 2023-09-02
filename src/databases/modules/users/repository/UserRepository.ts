@@ -1,67 +1,61 @@
 /* eslint-disable n/no-callback-literal */
 import { db } from 'databases'
-import { User } from '../model/User'
+import { User } from '../model'
 
-export const createUser = async (
-  name: string,
-  cpf: string,
-  password: string,
-  callback: (userId: number | null) => void,
-) => {
+export async function createUser({
+  name,
+  cpf,
+  password,
+}: User): Promise<boolean> {
   try {
-    await new Promise((resolve) => {
+    return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
           'INSERT INTO users (name, cpf, password) VALUES (?, ?, ?)',
           [name, cpf, password],
           (_, result) => {
-            callback(result.insertId ?? null)
-            resolve(result.insertId)
+            if (result.insertId) resolve(true)
+            resolve(false)
+          },
+          (_, error) => {
+            throw new Error(`Erro no SQL ${error}`)
           },
         )
       })
-      console.log('salvo')
     })
   } catch (error) {
-    console.log(error)
-
-    return false
+    throw new Error(`Erro ao buscar o usuário ${error}`)
   }
 }
 
-export const getUserByCPF = async (
-  cpf: string,
-  callback: (user: User | boolean) => void,
-) => {
+export async function getUserByCPF(cpf: string): Promise<User | null> {
   try {
-    db.transaction((tx) => {
-      tx.executeSql(
-        'SELECT * FROM users WHERE cpf = ?',
-        [cpf],
-        (_, result) => {
-          if (result.rows.length > 0) {
-            const { id, name, cpf, password } = result.rows.item(0)
-            const user: User = {
-              id,
-              name,
-              cpf,
-              password,
+    return new Promise((resolve) => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          'SELECT * FROM users WHERE cpf = ?',
+          [cpf],
+          (_, result) => {
+            if (result.rows.length > 0) {
+              const { id, name, cpf, password } = result.rows.item(0)
+              const user: User = {
+                id,
+                name,
+                cpf,
+                password,
+              }
+              resolve(user)
+            } else {
+              resolve(null)
             }
-
-            callback(user)
-          } else {
-            callback(false)
-          }
-        },
-        (_, error) => {
-          console.error('Erro ao buscar o usuário', error)
-          return false
-          // Não retornando nada (não retornando erro ou valor)
-        },
-      )
+          },
+          (_, error) => {
+            throw new Error(`Erro no SQL ${error}`)
+          },
+        )
+      })
     })
   } catch (error) {
-    console.log(error)
-    return false
+    throw new Error(`Erro ao buscar o usuário ${error}`)
   }
 }

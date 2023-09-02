@@ -1,18 +1,18 @@
-import { User } from '../model/User'
+import { User } from '../model'
 import { createUser, getUserByCPF } from '../repository/UserRepository'
 
-export const createUserController = (
-  name: string,
-  cpf: string,
-  password: string,
-  callback: (userId: number | null) => void,
-) => {
-  createUser(name, cpf, password, callback)
+export async function createUserController(user: User): Promise<boolean> {
+  const response = await createUser(user)
+  if (response === false) {
+    return false
+  }
+  return true
 }
 
-export const getUserCPFController = (
-  cpf: string,
-  callback: (user: User | boolean) => void,
-) => {
-  getUserByCPF(cpf, callback)
+export const getUserByCPFController: typeof getUserByCPF = async (cpf) => {
+  const response = await getUserByCPF(cpf)
+  if (response === null) {
+    return null
+  }
+  return response
 }

@@ -97,7 +97,7 @@ export function SignUp() {
         />
         <Link title="Volar para o login" onPress={() => navigation.goBack()} />
       </Content>
-      <Logo source={require('../../../shared/assets/logo_ifsul.png')} />
+      {/* <Logo source={require('../../../shared/assets/logo_ifsul.png')} /> */}
     </Container>
   )
 }

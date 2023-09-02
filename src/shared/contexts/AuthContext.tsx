@@ -1,11 +1,14 @@
 import { FormDataProps } from '@modules/login/utils/FormValidator'
-import { createUserController } from 'databases/modules/users/controller/UserController'
+import {
+  createUserController,
+  getUserByCPFController,
+} from 'databases/modules/users/controller/UserController'
 import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
 
 export type AuthContextDataProps = {
   user: User
-  signIn: (email: string, password: string) => Promise<void>
+  signIn: ({ cpf, password }: User) => Promise<void>
   signOut: () => Promise<void>
   signUp: (user: FormDataProps) => Promise<boolean | undefined>
   isLoadingUserStorage: boolean
@@ -23,34 +26,33 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User>({} as User)
   const [isLoadingUserStorage, setIsLoadingUserStorage] = useState(true)
 
-  async function signIn(email: string, password: string) {
-    //   try {
-    //     // const { data } = await api.post('/sessions', { email, password });
-    //     // if (data.user) {
-    //     //   setUser(data.user);
-    //     //   storageUserSave(data.user)
-    //     // }
-    //   } catch (error) {
-    //     throw error
-    //   }
-  }
-
-  async function signUp({
-    cpf,
-    name,
-    password,
-    passwordConfirm,
-  }: FormDataProps) {
+  async function signIn({ cpf, password }: User) {
     try {
       setIsLoadingUserStorage(true)
-      if (password === passwordConfirm) {
-        const callback = (userId: number | null) => {
-          if (userId !== null) return true
-          else return false
-        }
 
-        createUserController(name, cpf, password, callback)
+      const user = await getUserByCPFController(cpf)
+
+      if (user?.password === password) {
+        setUser(user)
       }
+    } catch (error) {
+      throw new Error(`Erro ao fazer login ${error}`)
+    } finally {
+      setIsLoadingUserStorage(false)
+    }
+  }
+
+  async function signUp({ cpf, name, password }: FormDataProps) {
+    try {
+      setIsLoadingUserStorage(true)
+
+      const user: User = {
+        cpf,
+        name,
+        password,
+      }
+
+      await createUserController(user)
     } catch (error) {
       console.log(error)
       return false

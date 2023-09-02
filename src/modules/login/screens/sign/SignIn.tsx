@@ -7,17 +7,15 @@ import { getUserByCPF } from 'databases/modules/users/repository/UserRepository'
 
 export function SignIn() {
   const navigation = useNavigation()
-  async function handleSignIn() {
-    const callback = (user: User | boolean) => {
-      if (user !== false) console.log(user)
-      else console.log('Usuário não encontrado')
-    }
 
-    getUserByCPF('047.196.130-2', callback)
+  async function handleSignIn() {
+    const user = await getUserByCPF('047.196.130-2')
+    console.log(user)
   }
+
   return (
     <Container>
-      <Title>Além da Internet</Title>
+      {/* <Title>Além da Internet</Title>ß */}
       <Content>
         <SubTitle>Entre com seu CPF e Senha</SubTitle>
         <Input placeholder="CPF" />
@@ -28,7 +26,7 @@ export function SignIn() {
           onPress={() => navigation.navigate('signUp')}
         />
       </Content>
-      <Logo source={require('../../../shared/assets/logo_ifsul.png')} />
+      {/* <Logo source={require('../../../shared/assets/logo_ifsul.png')} /> */}
     </Container>
   )
 }
