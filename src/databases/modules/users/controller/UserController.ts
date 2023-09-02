@@ -2,26 +2,34 @@ import { User } from '../model'
 import { createUser, getUserByCPF } from '../repository/UserRepository'
 import * as Crypto from 'expo-crypto'
 
-export async function createUserController(user: User): Promise<boolean> {
-  const { password, cpf } = user
+export const createUserController: typeof createUser = async ({
+  cpf,
+  name,
+  password,
+}) => {
   const userExists = await getUserByCPF(cpf)
 
-  if (userExists !== null) {
-    const passwordHash = await Crypto.digestStringAsync(
-      Crypto.CryptoDigestAlgorithm.MD2,
-      password,
-    )
-    user.password = passwordHash
+  if (userExists) {
+    console.log('Usuário já existe')
 
-    const response = await createUser(user)
-    if (response === false) {
-      return false
-    }
-
-    return true
-  } else {
-    return false
+    return null
   }
+  console.log('Passou')
+
+  const passwordHash = await Crypto.digestStringAsync(
+    Crypto.CryptoDigestAlgorithm.MD2,
+    password,
+  )
+  password = passwordHash
+
+  const response = await createUser({ cpf, name, password })
+  console.log('response', response)
+
+  if (response === null) {
+    return null
+  }
+
+  return response
 }
 
 export const getUserByCPFController: typeof getUserByCPF = async (cpf) => {

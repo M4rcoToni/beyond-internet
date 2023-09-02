@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Button, Container, Input, SubTitle, Link } from '@shared/components'
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import Toast from 'react-native-toast-message'
 
 import { Content, Logo } from './styles'
 import { CPFMask } from '@shared/helpers/CpfMask'
@@ -27,7 +28,15 @@ export function SignUp() {
     password,
     passwordConfirm,
   }: FormDataProps) {
-    signUp({ cpf, name, password, passwordConfirm })
+    try {
+      await signUp({ cpf, name, password, passwordConfirm })
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1:
+          error instanceof Error ? error.message : 'Erro ao realizar cadastro',
+      })
+    }
   }
 
   return (
@@ -52,7 +61,7 @@ export function SignUp() {
           name="cpf"
           render={({ field: { onChange, value } }) => (
             <Input
-              placeholder="Informe o CPF"
+              placeholder="Informe seu CPF"
               onChangeText={(text) => {
                 const maskedText = CPFMask(text)
                 onChange(maskedText)
@@ -96,6 +105,7 @@ export function SignUp() {
           onPress={handleSubmit(handleSignUp)}
         />
         <Link title="Volar para o login" onPress={() => navigation.goBack()} />
+        <Toast />
       </Content>
       {/* <Logo source={require('../../../shared/assets/logo_ifsul.png')} /> */}
     </Container>

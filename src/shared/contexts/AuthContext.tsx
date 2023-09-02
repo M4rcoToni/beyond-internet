@@ -7,10 +7,10 @@ import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
 
 export type AuthContextDataProps = {
-  user: User
+  user: User | null
   signIn: (cpf: string, password: string) => Promise<void>
   signOut: () => Promise<void>
-  signUp: (user: FormDataProps) => Promise<boolean | undefined>
+  signUp: (user: FormDataProps) => Promise<void>
   isLoadingUserStorage: boolean
 }
 
@@ -51,16 +51,19 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     try {
       setIsLoadingUserStorage(true)
 
-      const user: User = {
-        cpf,
-        name,
-        password,
+      const user = await createUserController({ cpf, name, password })
+
+      if (user === null) {
+        throw new Error('O CPF informado já está cadastrado')
       }
 
-      await createUserController(user)
-    } catch (error) {
-      console.log(error)
-      return false
+      const userData = await getUserByCPFController(user.cpf)
+
+      if (!userData) {
+        throw new Error('Usuário não encontrado')
+      }
+
+      setUser(userData)
     } finally {
       setIsLoadingUserStorage(false)
     }

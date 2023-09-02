@@ -6,7 +6,7 @@ export async function createUser({
   name,
   cpf,
   password,
-}: User): Promise<boolean> {
+}: User): Promise<User | null> {
   try {
     return new Promise((resolve) => {
       db.transaction((tx) => {
@@ -14,8 +14,11 @@ export async function createUser({
           'INSERT INTO users (name, cpf, password) VALUES (?, ?, ?)',
           [name, cpf, password],
           (_, result) => {
-            if (result.insertId) resolve(true)
-            resolve(false)
+            if (result.rowsAffected > 0) {
+              resolve({ name, cpf, password })
+            } else {
+              resolve(null)
+            }
           },
           (_, error) => {
             throw new Error(`Erro no SQL ${error}`)
