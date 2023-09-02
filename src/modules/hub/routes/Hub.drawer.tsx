@@ -10,10 +10,17 @@ export default function HubDrawer() {
   const isLargeScreen = dimensions.width >= 768
   return (
     <Drawer.Navigator
+      drawerContent={(item) => {
+        return (
+          <View>
+            <SubTitle>Drawer{item.state.routeNames}</SubTitle>
+          </View>
+        )
+      }}
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'front',
-        drawerStyle: isLargeScreen ? { width: '25%' } : { width: '100%' },
-        overlayColor: 'transparent',
+        drawerStyle: isLargeScreen ? { width: '25%' } : { width: '90%' },
+        overlayColor: '#0000002b',
         headerRight: () => (
           <>
             <View style={{ width: 100, height: 20 }}>
@@ -23,7 +30,13 @@ export default function HubDrawer() {
         ),
       }}
     >
-      <Drawer.Screen name="Hub" component={Hub} />
+      <Drawer.Screen
+        name="Hub"
+        options={{
+          headerShown: true,
+        }}
+        component={Hub}
+      />
     </Drawer.Navigator>
   )
 }

@@ -1,28 +1,23 @@
 import React from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { useTheme } from 'styled-components/native'
 
 import { AuthRoutes } from './auth.routes'
 import { useAuth } from '../hooks/useAuth'
 import { AppRoutes } from './app.routes'
-import HubDrawer from '@modules/hub/routes/Hub.drawer'
-import { AuthContextProvider } from '@shared/contexts/AuthContext'
 import { DimensionContextProvider } from '@shared/contexts/DimensionsContext'
 
 export function Routes() {
+  const { user } = useAuth()
+  console.log(user, 'user routes')
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <AuthContextProvider>
-        <DimensionContextProvider>
-          <NavigationContainer>
-            {/* {
-            user ? 
-            {/* } */}
-            <AuthRoutes />
-          </NavigationContainer>
-        </DimensionContextProvider>
-      </AuthContextProvider>
+      <DimensionContextProvider>
+        <NavigationContainer>
+          {user ? <AppRoutes /> : <AuthRoutes />}
+        </NavigationContainer>
+      </DimensionContextProvider>
     </SafeAreaView>
   )
 }

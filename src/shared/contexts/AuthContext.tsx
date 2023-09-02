@@ -8,7 +8,7 @@ import { createContext, useEffect, useState } from 'react'
 
 export type AuthContextDataProps = {
   user: User
-  signIn: ({ cpf, password }: User) => Promise<void>
+  signIn: (cpf: string, password: string) => Promise<void>
   signOut: () => Promise<void>
   signUp: (user: FormDataProps) => Promise<boolean | undefined>
   isLoadingUserStorage: boolean
@@ -23,20 +23,25 @@ export const AuthContext = createContext<AuthContextDataProps>(
 )
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
-  const [user, setUser] = useState<User>({} as User)
+  const [user, setUser] = useState<User | null>(null)
   const [isLoadingUserStorage, setIsLoadingUserStorage] = useState(true)
 
-  async function signIn({ cpf, password }: User) {
+  async function signIn(cpf: string, password: string) {
     try {
       setIsLoadingUserStorage(true)
 
       const user = await getUserByCPFController(cpf)
 
-      if (user?.password === password) {
-        setUser(user)
+      if (!user) {
+        throw new Error('Usuário não encontrado')
       }
-    } catch (error) {
-      throw new Error(`Erro ao fazer login ${error}`)
+
+      if (user?.password !== password) {
+        throw new Error('Senha incorreta')
+      }
+
+      setUser(user)
+      console.log(user)
     } finally {
       setIsLoadingUserStorage(false)
     }
