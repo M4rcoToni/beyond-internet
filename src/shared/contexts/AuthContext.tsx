@@ -12,8 +12,8 @@ import * as Crypto from 'expo-crypto'
 export type AuthContextDataProps = {
   user: User | null
   signIn: (cpf: string, password: string) => Promise<void>
-  signOut: () => Promise<void>
   signUp: (user: FormDataProps) => Promise<void>
+  signOut: () => Promise<void>
   isLoadingUserStorage: boolean
 }
 
@@ -88,6 +88,21 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
+  async function signOut() {
+    try {
+      setIsLoadingUserStorage(true)
+
+      const res = await updateUserIsLoggedController(user?.cpf || '', 0)
+
+      if (!res) {
+        throw new Error('Erro no signOut')
+      }
+      setUser(null)
+    } finally {
+      setIsLoadingUserStorage(false)
+    }
+  }
+
   useEffect(() => {
     async function loadUserData() {
       try {
@@ -110,7 +125,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         signIn,
         signUp,
         isLoadingUserStorage,
-        // signOut,
+        signOut,
       }}
     >
       {children}

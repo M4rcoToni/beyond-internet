@@ -1,14 +1,15 @@
-import { ScrollView, View } from 'react-native'
-import { ClassCard } from '../components/ClassCard/ClassCard'
 import React from 'react'
+import { useAuth } from '@shared/hooks/useAuth'
+import { ClassCard } from '../components/ClassCard/ClassCard'
 import { Container, ScrollViewStyled } from './styles'
-import { getUserByCPFController } from 'databases/modules/users/controller/UserController'
 
 export function Hub() {
+  const { signOut, user } = useAuth()
+
   async function login() {
-    const res = await getUserByCPFController('047.196.130-20')
-    console.log(res)
+    await signOut(user?.cpf || '')
   }
+
   return (
     <ScrollViewStyled>
       <Container>
