@@ -2,9 +2,12 @@ import { FormDataProps } from '@modules/login/utils/FormValidator'
 import {
   createUserController,
   getUserByCPFController,
+  loadUserDataController,
+  updateUserIsLoggedController,
 } from 'databases/modules/users/controller/UserController'
 import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
+import * as Crypto from 'expo-crypto'
 
 export type AuthContextDataProps = {
   user: User | null
@@ -26,6 +29,17 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoadingUserStorage, setIsLoadingUserStorage] = useState(true)
 
+  async function login(cpf: string, isLogged: number) {
+    try {
+      const res = await updateUserIsLoggedController(cpf, isLogged)
+      if (!res) {
+        throw new Error('Erro no login')
+      }
+    } finally {
+      setIsLoadingUserStorage(false)
+    }
+  }
+
   async function signIn(cpf: string, password: string) {
     try {
       setIsLoadingUserStorage(true)
@@ -36,10 +50,15 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         throw new Error('Usuário não encontrado')
       }
 
-      if (user?.password !== password) {
+      const passwordHash = await Crypto.digestStringAsync(
+        Crypto.CryptoDigestAlgorithm.MD2,
+        password,
+      )
+
+      if (user?.password !== passwordHash) {
         throw new Error('Senha incorreta')
       }
-
+      await login(cpf, 1)
       setUser(user)
       console.log(user)
     } finally {
@@ -69,22 +88,20 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     }
   }
 
-  // async function loadUserData() {
-  //   try {
-  //     // const userLogged = await storageUserGet();
-  //     // if (userLogged) {
-  //     //   setUser(user);
-  //     // }
-  //   } catch (error) {
-  //     throw error
-  //   } finally {
-  //     setIsLoadingUserStorage(false)
-  //   }
-  // }
+  useEffect(() => {
+    async function loadUserData() {
+      try {
+        const userLogged = await loadUserDataController()
+        if (userLogged) {
+          setUser(userLogged)
+        }
+      } finally {
+        setIsLoadingUserStorage(false)
+      }
+    }
 
-  // useEffect(() => {
-  //   loadUserData()
-  // }, [])
+    loadUserData()
+  }, [])
 
   return (
     <AuthContext.Provider

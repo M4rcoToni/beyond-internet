@@ -1,5 +1,9 @@
-import { User } from '../model'
-import { createUser, getUserByCPF } from '../repository/UserRepository'
+import {
+  createUser,
+  getUserByCPF,
+  loadUserData,
+  updateUserIsLogged,
+} from '../repository/UserRepository'
 import * as Crypto from 'expo-crypto'
 
 export const createUserController: typeof createUser = async ({
@@ -10,11 +14,8 @@ export const createUserController: typeof createUser = async ({
   const userExists = await getUserByCPF(cpf)
 
   if (userExists) {
-    console.log('Usuário já existe')
-
     return null
   }
-  console.log('Passou')
 
   const passwordHash = await Crypto.digestStringAsync(
     Crypto.CryptoDigestAlgorithm.MD2,
@@ -38,4 +39,35 @@ export const getUserByCPFController: typeof getUserByCPF = async (cpf) => {
     return null
   }
   return response
+}
+
+export const updateUserIsLoggedController: typeof updateUserIsLogged = async (
+  cpf,
+  isLogged,
+) => {
+  try {
+    const updatedCpf = await updateUserIsLogged(cpf, isLogged)
+
+    if (updatedCpf === null) {
+      throw new Error(`No user found with CPF: ${cpf}`)
+    }
+
+    return updatedCpf
+  } catch (error) {
+    throw new Error(`Error in updateUserIsLoggedController: ${error}`)
+  }
+}
+
+export const loadUserDataController: typeof loadUserData = async () => {
+  try {
+    const user = await loadUserData()
+
+    if (user === null) {
+      throw new Error('No logged-in user found')
+    }
+
+    return user
+  } catch (error) {
+    throw new Error(`Error in loadUserDataController: ${error}`)
+  }
 }

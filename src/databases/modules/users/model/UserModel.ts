@@ -3,7 +3,7 @@ import * as SQLite from 'expo-sqlite'
 const db = SQLite.openDatabase('beyond.db')
 
 export async function initializeDatabase(): Promise<void> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS users
