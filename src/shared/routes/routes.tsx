@@ -9,7 +9,6 @@ import { DimensionContextProvider } from '@shared/contexts/DimensionsContext'
 
 export function Routes() {
   const { user } = useAuth()
-  console.log(user, 'user routes')
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
