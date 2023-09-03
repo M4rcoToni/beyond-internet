@@ -18,10 +18,15 @@ export default function App() {
     Poppins_400Regular,
     Poppins_700Bold,
   })
+  async function initializeApp() {
+    try {
+      await initializeDatabase()
+    } catch (error) {
+      console.error('Database initialization error: ', error)
+    }
+  }
 
-  useEffect(() => {
-    initializeDatabase()
-  }, [])
+  initializeApp()
 
   return (
     <ThemeProvider theme={theme}>
