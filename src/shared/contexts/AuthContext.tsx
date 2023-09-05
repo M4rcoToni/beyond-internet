@@ -51,7 +51,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       }
 
       const passwordHash = await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.MD2,
+        Crypto.CryptoDigestAlgorithm.SHA256,
         password,
       )
 
@@ -81,7 +81,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       if (!userData) {
         throw new Error('Usuário não encontrado')
       }
-
+      await login(cpf, 1)
       setUser(userData)
     } finally {
       setIsLoadingUserStorage(false)

@@ -18,7 +18,7 @@ export const createUserController: typeof createUser = async ({
   }
 
   const passwordHash = await Crypto.digestStringAsync(
-    Crypto.CryptoDigestAlgorithm.MD2,
+    Crypto.CryptoDigestAlgorithm.SHA256,
     password,
   )
   password = passwordHash

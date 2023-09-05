@@ -104,7 +104,7 @@ export function SignUp() {
           type="PRIMARY"
           onPress={handleSubmit(handleSignUp)}
         />
-        <Link title="Volar para o login" onPress={() => navigation.goBack()} />
+        <Link title="Voltar para o login" onPress={() => navigation.goBack()} />
         <Toast />
       </Content>
       {/* <Logo source={require('../../../shared/assets/logo_ifsul.png')} /> */}
