@@ -1,6 +1,6 @@
 import React from 'react'
 import { CardSubTitle, CardTitle, ClassBanner, Content } from './styles'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
 interface ClassCardProps {
   title: string
@@ -10,16 +10,13 @@ interface ClassCardProps {
 }
 export function ClassCard({ image, onPress, title, subTitle }: ClassCardProps) {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.7}
-      style={{
-        marginBottom: 20,
-      }}
-    >
+    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
       <Content>
         <ClassBanner
-          source={require('../../../../shared/assets/Empreendedorismo.jpg')}
+          alt="Empreendedorismo"
+          contentFit="cover"
+          transition={1000}
+          source={{ uri: image }}
         />
         <CardTitle>{title}</CardTitle>
         <CardSubTitle>{subTitle}</CardSubTitle>

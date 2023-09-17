@@ -10,8 +10,9 @@ import React from 'react'
 import 'react-native-gesture-handler'
 import theme from './src/shared/theme'
 import { Routes } from '@shared/routes/routes'
-import { initializeDatabase } from 'databases/modules/users/model/UserModel'
+
 import { AuthContextProvider } from '@shared/contexts/AuthContext'
+import { initializeDatabase } from 'databases/initializeDatabase'
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -20,7 +21,8 @@ export default function App() {
   })
   async function initializeApp() {
     try {
-      await initializeDatabase()
+      const init = await initializeDatabase()
+      console.log(init)
     } catch (error) {
       console.error('Database initialization error: ', error)
     }

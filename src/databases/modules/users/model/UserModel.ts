@@ -1,8 +1,8 @@
 import * as SQLite from 'expo-sqlite'
 
-const db = SQLite.openDatabase('beyond.db')
-
-export async function initializeDatabase(): Promise<void> {
+export async function initializeTableUsers(
+  db: SQLite.SQLiteDatabase,
+): Promise<void> {
   return new Promise((resolve) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -16,7 +16,7 @@ export async function initializeDatabase(): Promise<void> {
         )`,
         [],
         () => {
-          console.log('Table created successfully')
+          console.log('USERS: Table created!')
           resolve() // Resolve the promise when table creation is complete
         },
         (_, error) => {

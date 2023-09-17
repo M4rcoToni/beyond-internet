@@ -6,6 +6,7 @@ import { AuthRoutes } from './auth.routes'
 import { useAuth } from '../hooks/useAuth'
 import { AppRoutes } from './app.routes'
 import { DimensionContextProvider } from '@shared/contexts/DimensionsContext'
+import { StoragePermissionContextProvider } from '@shared/contexts/StoragePermissionContext'
 
 export function Routes() {
   const { user } = useAuth()
@@ -13,9 +14,11 @@ export function Routes() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <DimensionContextProvider>
-        <NavigationContainer>
-          {user ? <AppRoutes /> : <AuthRoutes />}
-        </NavigationContainer>
+        <StoragePermissionContextProvider>
+          <NavigationContainer>
+            {user ? <AppRoutes /> : <AuthRoutes />}
+          </NavigationContainer>
+        </StoragePermissionContextProvider>
       </DimensionContextProvider>
     </SafeAreaView>
   )
