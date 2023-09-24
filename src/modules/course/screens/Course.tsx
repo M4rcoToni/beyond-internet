@@ -9,7 +9,7 @@ type Content = {
   image: string
 }
 
-export function Class() {
+export function Course() {
   const { width } = useDimensions()
   const route = useRoute()
 
@@ -24,7 +24,7 @@ export function Class() {
             flexDirection: 'row',
           }
         }
-      ></Container>
+      />
     </Content>
   )
 }

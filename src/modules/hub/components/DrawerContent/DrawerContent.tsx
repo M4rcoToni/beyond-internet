@@ -10,6 +10,7 @@ import { Separator } from '@shared/components/Separator/Separator'
 import { useAuth } from '@shared/hooks/useAuth'
 import { DrawerHeader } from './DrawerHeader/DrawerHeader'
 import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 interface DrawerContentProps {
   item: DrawerContentComponentProps
@@ -17,6 +18,7 @@ interface DrawerContentProps {
 
 export function DrawerContent({ item }: DrawerContentProps) {
   const { user, signOut } = useAuth()
+  const { navigate } = useNavigation()
   console.log(item.state.index)
 
   return (
@@ -85,7 +87,7 @@ export function DrawerContent({ item }: DrawerContentProps) {
       ) : (
         <Button
           title="Voltar"
-          // onPress={signOut}
+          onPress={() => navigate('Hub')}
           style={{
             width: 90,
             height: 50,

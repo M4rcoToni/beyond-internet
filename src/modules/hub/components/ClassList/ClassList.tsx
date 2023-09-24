@@ -36,7 +36,7 @@ export function ClassList({
           subTitle={`${item.id} aulas`}
           image={item.files[4]}
           onPress={() => {
-            navigate('Class', { item })
+            navigate('Course', { item })
           }}
         />
       )}
