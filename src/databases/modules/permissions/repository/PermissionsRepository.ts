@@ -1,18 +1,18 @@
 import { db } from 'databases'
-import { Permissions } from '../model'
+import { Courses } from '../model/Permissions'
 
-export async function createPermission({
+export async function createCourse({
   courseId,
   directoryName,
   uri,
   files,
   granted,
-}: Permissions): Promise<Permissions | null> {
+}: Courses): Promise<Courses | null> {
   try {
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'INSERT INTO permissions (courseId, directoryName, uri, files, granted) VALUES (?, ?, ?, ?, ?)',
+          'INSERT INTO course (courseId, directoryName, uri, files, granted) VALUES (?, ?, ?, ?, ?)',
           [courseId, directoryName, uri, files, granted ? 1 : 0],
           (_, result) => {
             if (result.rowsAffected > 0) {
@@ -32,21 +32,21 @@ export async function createPermission({
   }
 }
 
-export async function listGrantedPermissions(): Promise<Permissions[] | null> {
+export async function listGrantedCourses(): Promise<Courses[] | null> {
   try {
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM permissions WHERE granted = 1',
+          'SELECT * FROM course WHERE granted = 1',
           [],
           (_, result) => {
-            const permissions = []
+            const course = []
             for (let i = 0; i < result.rows.length; i++) {
               const { id, courseId, directoryName, uri, files, granted } =
                 result.rows.item(i)
 
               const fileParsed = JSON.parse(files)
-              permissions.push({
+              course.push({
                 id,
                 courseId,
                 directoryName,
@@ -55,28 +55,25 @@ export async function listGrantedPermissions(): Promise<Permissions[] | null> {
                 granted,
               })
             }
-            console.log(
-              result,
-              'result SELECT * FROM permissions WHERE granted = 1',
-            )
-            if (permissions.length > 0) {
-              resolve(permissions)
+            console.log(result, 'result SELECT * FROM course WHERE granted = 1')
+            if (course.length > 0) {
+              resolve(course)
             } else {
               resolve(null)
             }
           },
           (_, error) => {
-            throw new Error(`Error listing permissions: ${error}`)
+            throw new Error(`Error listing course: ${error}`)
           },
         )
       })
     })
   } catch (error) {
-    throw new Error(`Error listing permissions: ${error}`)
+    throw new Error(`Error listing course: ${error}`)
   }
 }
 
-export async function updatePermission(
+export async function updateCourse(
   courseId: string,
   granted: boolean,
 ): Promise<string | null> {
@@ -84,7 +81,7 @@ export async function updatePermission(
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'UPDATE permissions SET granted = ? WHERE courseId = ?',
+          'UPDATE course SET granted = ? WHERE courseId = ?',
           [granted ? 1 : 0, courseId],
           (_, result) => {
             if (result.rowsAffected > 0) {
@@ -94,24 +91,22 @@ export async function updatePermission(
             }
           },
           (_, error) => {
-            throw new Error(`Error updating permission: ${error}`)
+            throw new Error(`Error updating course: ${error}`)
           },
         )
       })
     })
   } catch (error) {
-    throw new Error(`Error updating permission: ${error}`)
+    throw new Error(`Error updating course: ${error}`)
   }
 }
 
-export async function checkPermissionGranted(
-  courseId: string,
-): Promise<boolean> {
+export async function checkCourseGranted(courseId: string): Promise<boolean> {
   try {
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'SELECT * FROM permissions WHERE courseId = ? and granted = 1',
+          'SELECT * FROM course WHERE courseId = ? and granted = 1',
           [courseId],
           (_, result) => {
             if (result.rows.length > 0) {

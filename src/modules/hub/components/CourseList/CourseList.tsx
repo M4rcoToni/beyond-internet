@@ -3,10 +3,10 @@ import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { CourseEmpty } from './CourseEmpty/CourseEmpty'
 import { CourseCard } from '../CourseCard/CourseCard'
-import { Permissions } from '../../../../databases/modules/permissions/model/Permissions'
+import { Courses } from '../../../../databases/modules/permissions/model/Courses'
 
 interface CourseListProps {
-  data: Permissions[]
+  data: Courses[]
   refreshing: boolean
   onRefresh: () => void
   getCourse?: () => void

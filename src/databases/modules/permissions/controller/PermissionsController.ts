@@ -1,18 +1,18 @@
 import {
-  createPermission,
-  updatePermission,
-  checkPermissionGranted,
-  listGrantedPermissions,
+  createCourse,
+  listGrantedCourses,
+  updateCourse,
+  checkCourseGranted,
 } from '../repository/PermissionsRepository'
 
-export const createPermissionController: typeof createPermission = async ({
+export const createCourseController: typeof createCourse = async ({
   courseId,
   directoryName,
   uri,
   files,
   granted,
 }) => {
-  const response = await createPermission({
+  const response = await createCourse({
     courseId,
     directoryName,
     uri,
@@ -26,44 +26,47 @@ export const createPermissionController: typeof createPermission = async ({
   return response
 }
 
-export const listGrantedPermissionsController: typeof listGrantedPermissions =
+export const listGrantedCoursesController: typeof listGrantedCourses =
   async () => {
     try {
-      const permission = await listGrantedPermissions()
+      const permission = await listGrantedCourses()
 
       if (permission === null) {
         throw new Error(`No permission found for courseId`)
       }
-      console.log(permission, 'permission listGrantedPermissions')
+      console.log(permission, 'permission listGrantedCourses')
 
       return permission
     } catch (error) {
-      throw new Error(`Error in listGrantedPermissions: ${error}`)
+      throw new Error(`Error in listGrantedCourses: ${error}`)
     }
   }
 
-export const updateGrantedPermissionController: typeof updatePermission =
-  async (courseId, granted) => {
-    try {
-      const updatedCourseId = await updatePermission(courseId, granted)
+export const updateGrantedCourseController: typeof updateCourse = async (
+  courseId,
+  granted,
+) => {
+  try {
+    const updatedCourseId = await updateCourse(courseId, granted)
 
-      if (updatedCourseId === null) {
-        throw new Error(`No permission found for courseId: ${courseId}`)
-      }
-
-      return updatedCourseId
-    } catch (error) {
-      throw new Error(`Error in updatePermissionController: ${error}`)
+    if (updatedCourseId === null) {
+      throw new Error(`No permission found for courseId: ${courseId}`)
     }
-  }
 
-export const checkPermissionGrantedController: typeof checkPermissionGranted =
-  async (courseId) => {
-    try {
-      const isGranted = await checkPermissionGranted(courseId)
-
-      return isGranted
-    } catch (error) {
-      throw new Error(`Error in checkPermissionGrantedController: ${error}`)
-    }
+    return updatedCourseId
+  } catch (error) {
+    throw new Error(`Error in updateCourseController: ${error}`)
   }
+}
+
+export const checkCourseGrantedController: typeof checkCourseGranted = async (
+  courseId,
+) => {
+  try {
+    const isGranted = await checkCourseGranted(courseId)
+
+    return isGranted
+  } catch (error) {
+    throw new Error(`Error in checkCourseGrantedController: ${error}`)
+  }
+}

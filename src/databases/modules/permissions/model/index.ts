@@ -1,2 +1,2 @@
-export * from './Permissions'
-export * from './PermissionsModel'
+export * from './Courses'
+export * from './CoursesModel'

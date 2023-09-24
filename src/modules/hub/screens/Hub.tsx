@@ -5,7 +5,7 @@ import { useDimensions } from '@shared/hooks/useDimensions'
 import { useStorage } from '@shared/hooks/useStorage'
 import { CourseList } from '../components/CourseList/CourseList'
 
-export type Permissions = {
+export type Courses = {
   id?: string
   courseId: string
   directoryName: string
@@ -15,27 +15,27 @@ export type Permissions = {
 }
 
 export function Hub() {
-  const [content, setContent] = useState<Permissions[]>([])
+  const [content, setContent] = useState<Courses[]>([])
   const [refreshing, setRefreshing] = useState(false)
 
-  const { getDirectoryUri, listPermissions } = useStorage()
+  const { getDirectoryUri, listCourses } = useStorage()
   const { width } = useDimensions()
   async function getCourse() {
     await getDirectoryUri()
   }
 
-  const checkStoragePermission = useCallback(async () => {
-    const permissions = await listPermissions()
+  const checkStorageCourse = useCallback(async () => {
+    const permissions = await listCourses()
 
     if (permissions) {
       setContent(permissions)
       setRefreshing(false)
     }
-  }, [listPermissions])
+  }, [listCourses])
 
   useEffect(() => {
-    checkStoragePermission()
-  }, [checkStoragePermission])
+    checkStorageCourse()
+  }, [checkStorageCourse])
 
   return (
     <Content>
@@ -49,7 +49,7 @@ export function Hub() {
         <CourseList
           data={content}
           refreshing={refreshing}
-          onRefresh={checkStoragePermission}
+          onRefresh={checkStorageCourse}
           getCourse={getCourse}
         />
       </Container>

@@ -1,12 +1,12 @@
 import * as SQLite from 'expo-sqlite'
 
-export async function initializeTablePermissions(
+export async function initializeTableCourses(
   db: SQLite.SQLiteDatabase,
 ): Promise<void> {
   return new Promise((resolve) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `dro TABLE IF NOT EXISTS permissions
+        `CREATE TABLE IF NOT EXISTS course
         (
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             courseId      INTEGER NOT NULL,
@@ -17,11 +17,11 @@ export async function initializeTablePermissions(
         )`,
         [],
         () => {
-          console.log('PERMISSIONS: Table created!')
+          console.log('course: Table created!')
           resolve()
         },
         (_, error) => {
-          throw new Error(`Error creating table permissions: ${error}`)
+          throw new Error(`Error creating table course: ${error}`)
         },
       )
     })

@@ -1,13 +1,13 @@
 import * as SQLite from 'expo-sqlite'
 import { initializeTableUsers } from './modules/users/model'
-import { initializeTablePermissions } from './modules/permissions/model/PermissionsModel'
+import { initializeTableCourses } from './modules/permissions/model/PermissionsModel'
 
 export async function initializeDatabase() {
   const db = SQLite.openDatabase('beyond.db')
 
   const promises = [
     Promise.resolve(initializeTableUsers(db)),
-    Promise.resolve(initializeTablePermissions(db)),
+    Promise.resolve(initializeTableCourses(db)),
   ]
 
   Promise.all(promises)

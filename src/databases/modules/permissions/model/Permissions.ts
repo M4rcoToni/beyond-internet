@@ -1,4 +1,4 @@
-export type Permissions = {
+export type Courses = {
   id?: string
   courseId: string
   directoryName: string

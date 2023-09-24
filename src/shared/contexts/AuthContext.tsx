@@ -8,8 +8,8 @@ import {
 import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
 import * as Crypto from 'expo-crypto'
-import { updateGrantedPermissionController } from 'databases/modules/permissions/controller/PermissionsController'
 import { useStorage } from '@shared/hooks/useStorage'
+import { updateGrantedCourseController } from 'databases/modules/permissions/controller/PermissionsController'
 
 export type AuthContextDataProps = {
   user: User | null
@@ -97,7 +97,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
       const res = await updateUserIsLoggedController(user?.cpf || '', 0)
 
-      await updateGrantedPermissionController(permission.courseId, false)
+      await updateGrantedCourseController(permission.courseId, false)
 
       if (!res) {
         throw new Error('Erro no signOut')

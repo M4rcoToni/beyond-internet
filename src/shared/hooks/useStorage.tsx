@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { StoragePermissionContext } from '@shared/contexts/StoragePermissionContext'
+import { StorageCourseContext } from '@shared/contexts/StoragePermissionContext'
 
 export function useStorage() {
-  const context = useContext(StoragePermissionContext)
+  const context = useContext(StorageCourseContext)
 
   return context
 }

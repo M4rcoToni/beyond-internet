@@ -1,36 +1,35 @@
 import React, { createContext, useState, ReactNode } from 'react'
 import * as FileSystem from 'expo-file-system'
+import { Courses } from '@modules/hub/screens/Hub'
 import {
-  checkPermissionGrantedController,
-  createPermissionController,
-  updateGrantedPermissionController,
-  listGrantedPermissionsController,
+  checkCourseGrantedController,
+  createCourseController,
+  listGrantedCoursesController,
 } from 'databases/modules/permissions/controller/PermissionsController'
-import { Permissions } from 'databases/modules/permissions/model/Permissions'
-type StoragePermissionContextProps = {
-  storagePermissionGranted: boolean | null
+
+type StorageCourseContextProps = {
+  storageCourseGranted: boolean | null
   getDirectoryUri: () => Promise<void>
-  checkStoragePermission: () => Promise<void>
-  listPermissions: () => Promise<Permissions[] | null>
-  permission: Permissions
+  checkStorageCourse: () => Promise<void>
+  listCourses: () => Promise<Courses[] | null>
+  permission: Courses
 }
 
-type StoragePermissionContextProviderProps = {
+type StorageCourseContextProviderProps = {
   children: ReactNode
 }
 
-export const StoragePermissionContext =
-  createContext<StoragePermissionContextProps>(
-    {} as StoragePermissionContextProps,
-  )
+export const StorageCourseContext = createContext<StorageCourseContextProps>(
+  {} as StorageCourseContextProps,
+)
 
-export function StoragePermissionContextProvider({
+export function StorageCourseContextProvider({
   children,
-}: StoragePermissionContextProviderProps) {
-  const [storagePermissionGranted, setStoragePermissionGranted] = useState<
+}: StorageCourseContextProviderProps) {
+  const [storageCourseGranted, setStorageCourseGranted] = useState<
     boolean | null
   >(null)
-  const [permission, setPermission] = useState<Permissions>({} as Permissions)
+  const [permission, setCourse] = useState<Courses>({} as Courses)
 
   async function getDirectoryUri() {
     try {
@@ -52,15 +51,13 @@ export function StoragePermissionContextProvider({
           const contentJson = JSON.parse(content)
 
           // Verifique se já existe uma permissão no SQLite para este diretório
-          const isGranted = await checkPermissionGrantedController(
-            contentJson.id,
-          )
+          const isGranted = await checkCourseGrantedController(contentJson.id)
 
           if (!isGranted) {
             // Se não houver permissão no SQLite, crie uma nova
             const filesJson = JSON.stringify(files)
 
-            const result = await createPermissionController({
+            const result = await createCourseController({
               courseId: contentJson.id,
               directoryName: contentJson.name,
               uri,
@@ -68,7 +65,7 @@ export function StoragePermissionContextProvider({
               granted: true,
             })
 
-            setPermission({
+            setCourse({
               courseId: contentJson.id,
               directoryName: contentJson.name,
               uri,
@@ -76,44 +73,44 @@ export function StoragePermissionContextProvider({
               granted: true,
             })
 
-            console.log(result, 'createPermissionController')
+            console.log(result, 'createCourseController')
           }
 
-          setStoragePermissionGranted(isGranted)
+          setStorageCourseGranted(isGranted)
         }
       } else {
-        setStoragePermissionGranted(false)
+        setStorageCourseGranted(false)
       }
     } catch (error) {
       console.error('Error getting directory uri: ' + error)
-      setStoragePermissionGranted(false)
+      setStorageCourseGranted(false)
     }
   }
 
-  async function checkStoragePermission() {
+  async function checkStorageCourse() {
     // try {
     //   if (id !== null) {
-    //     const isGranted = await checkPermissionGrantedController(id)
+    //     const isGranted = await checkCourseGrantedController(id)
     //     if (isGranted !== null) {
-    //       setStoragePermissionGranted(isGranted)
+    //       setStorageCourseGranted(isGranted)
     //     } else {
-    //       const isUpdated = await updatePermissionController(id, true)
+    //       const isUpdated = await updateCourseController(id, true)
     //       if (isUpdated !== null) {
-    //         setStoragePermissionGranted(true)
+    //         setStorageCourseGranted(true)
     //       }
     //     }
     //   } else {
-    //     setStoragePermissionGranted(false)
+    //     setStorageCourseGranted(false)
     //   }
     // } catch (error) {
     //   console.error('Error checking storage permission:', error)
-    //   setStoragePermissionGranted(false)
+    //   setStorageCourseGranted(false)
     // }
   }
 
-  async function listPermissions() {
+  async function listCourses() {
     try {
-      const permissions = await listGrantedPermissionsController()
+      const permissions = await listGrantedCoursesController()
 
       if (permissions === null) {
         console.error('Zero permissions')
@@ -127,16 +124,16 @@ export function StoragePermissionContextProvider({
   }
 
   return (
-    <StoragePermissionContext.Provider
+    <StorageCourseContext.Provider
       value={{
-        storagePermissionGranted,
+        storageCourseGranted,
         getDirectoryUri,
-        checkStoragePermission,
-        listPermissions,
+        checkStorageCourse,
+        listCourses,
         permission,
       }}
     >
       {children}
-    </StoragePermissionContext.Provider>
+    </StorageCourseContext.Provider>
   )
 }
