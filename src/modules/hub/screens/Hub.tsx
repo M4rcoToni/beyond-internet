@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Container, Content } from './styles'
 
 import { useDimensions } from '@shared/hooks/useDimensions'
-import { ClassList } from '@modules/hub/components/ClassList/ClassList'
 import { useStorage } from '@shared/hooks/useStorage'
+import { CourseList } from '../components/CourseList/CourseList'
+
 export type Permissions = {
   id?: string
   courseId: string
@@ -45,7 +46,7 @@ export function Hub() {
           }
         }
       >
-        <ClassList
+        <CourseList
           data={content}
           refreshing={refreshing}
           onRefresh={checkStoragePermission}

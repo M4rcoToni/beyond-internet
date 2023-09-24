@@ -1,18 +1,24 @@
 import React from 'react'
-import { CardSubTitle, CardTitle, ClassBanner, Content } from './styles'
+import { CardSubTitle, CardTitle, Content, CourseBanner } from './styles'
 import { TouchableOpacity } from 'react-native'
 
-interface ClassCardProps {
+interface CourseCardProps {
   title: string
   subTitle: string
   image?: string
   onPress?: () => void
 }
-export function ClassCard({ image, onPress, title, subTitle }: ClassCardProps) {
+
+export function CourseCard({
+  image,
+  onPress,
+  title,
+  subTitle,
+}: CourseCardProps) {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
       <Content>
-        <ClassBanner
+        <CourseBanner
           alt="Empreendedorismo"
           contentFit="cover"
           transition={1000}

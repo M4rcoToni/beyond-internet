@@ -1,13 +1,13 @@
 import { View } from 'react-native'
-import Lamp from '@assets/folder.svg'
 import { Button, SubTitle } from '@shared/components'
 import { Divider } from './styles'
+import Lamp from '@assets/folder.svg'
 
-interface ClassEmptyProps {
+interface CourseEmptyProps {
   getCourse?: () => void
 }
 
-export function ClassEmpty({ getCourse }: ClassEmptyProps) {
+export function CourseEmpty({ getCourse }: CourseEmptyProps) {
   return (
     <View
       style={{

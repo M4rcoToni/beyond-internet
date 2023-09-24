@@ -11,7 +11,7 @@ export const Content = styled.View`
   height: 200px;
   background-color: ${theme.COLORS.WHITE};
 `
-export const ClassBanner = styled(Image)`
+export const CourseBanner = styled(Image)`
   width: 100%;
   height: 130px;
   border-radius: 10px 10px 0 0;

@@ -1,11 +1,11 @@
+import React from 'react'
 import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
-import { ClassCard } from '../ClassCard/ClassCard'
+import { useNavigation } from '@react-navigation/native'
+import { CourseEmpty } from './CourseEmpty/CourseEmpty'
+import { CourseCard } from '../CourseCard/CourseCard'
 import { Permissions } from '../../../../databases/modules/permissions/model/Permissions'
 
-import { ClassEmpty } from './ClassEmpty/ClassEmpty'
-import { useNavigation } from '@react-navigation/native'
-
-interface ClassListProps {
+interface CourseListProps {
   data: Permissions[]
   refreshing: boolean
   onRefresh: () => void
@@ -13,13 +13,13 @@ interface ClassListProps {
   style?: StyleProp<ViewStyle>
 }
 
-export function ClassList({
+export function CourseList({
   data,
   onRefresh,
   refreshing,
   getCourse,
   ...rest
-}: ClassListProps) {
+}: CourseListProps) {
   const { navigate } = useNavigation()
   return (
     <FlatList
@@ -31,7 +31,7 @@ export function ClassList({
       refreshing={refreshing}
       keyExtractor={(item) => item.courseId.toString()}
       renderItem={({ item }) => (
-        <ClassCard
+        <CourseCard
           title={item.directoryName}
           subTitle={`${item.id} aulas`}
           image={item.files[4]}
@@ -43,7 +43,7 @@ export function ClassList({
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
-      ListEmptyComponent={() => <ClassEmpty getCourse={getCourse} />}
+      ListEmptyComponent={() => <CourseEmpty getCourse={getCourse} />}
     />
   )
 }
