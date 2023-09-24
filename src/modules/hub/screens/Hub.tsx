@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ClassCard } from '../components/ClassCard/ClassCard'
-import { Container, FlatListStyled } from './styles'
-import { ActivityIndicator, FlatList, RefreshControl } from 'react-native'
-import { Button } from '@shared/components'
+import { Container, Content } from './styles'
 import { useStorage } from '../../../shared/hooks/useStorage'
 import { Permissions } from '../../../databases/modules/permissions/model/Permissions'
-import { loadUserData } from 'databases/modules/users/repository/UserRepository'
+import { ClassList } from '../components/ClassList/ClassList'
+import { useDimensions } from '@shared/hooks/useDimensions'
 
 type Content = {
   name: string
@@ -15,9 +13,10 @@ type Content = {
 
 export function Hub() {
   const [content, setContent] = useState<Permissions[]>([] as Permissions[])
-  const [refreshing, setRefreshing] = useState(true)
-  const { getDirectoryUri, listPermissions } = useStorage()
+  const [refreshing, setRefreshing] = useState(false)
 
+  const { getDirectoryUri, listPermissions } = useStorage()
+  const { width } = useDimensions()
   async function getCourse() {
     await getDirectoryUri()
   }
@@ -36,31 +35,30 @@ export function Hub() {
   }, [checkStoragePermission])
 
   return (
-    <Container>
-      <Button title="Abrir um Curso" onPress={getCourse}>
-        Sair
-      </Button>
-      {content ? (
-        <FlatList
-          data={content}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={checkStoragePermission}
-            />
+    <Content>
+      <Container
+        style={
+          width > 700 ?? {
+            flexDirection: 'row',
           }
-          keyExtractor={(item) => item.courseId}
-          renderItem={({ item }) => (
-            <ClassCard
-              title={item.directoryName}
-              subTitle={`${item.id} aulas`}
-              image={item.files[4]}
-            />
-          )}
+        }
+      >
+        <ClassList
+          data={[
+            {
+              id: '1',
+              courseId: '4',
+              directoryName: 'teste',
+              uri: 'teste',
+              files: 'teste',
+              granted: true,
+            },
+          ]}
+          refreshing={refreshing}
+          onRefresh={checkStoragePermission}
+          getCourse={getCourse}
         />
-      ) : (
-        <ActivityIndicator size="large" color="#4445" />
-      )}
-    </Container>
+      </Container>
+    </Content>
   )
 }

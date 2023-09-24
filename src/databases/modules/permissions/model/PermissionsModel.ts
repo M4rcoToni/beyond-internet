@@ -6,7 +6,7 @@ export async function initializeTablePermissions(
   return new Promise((resolve) => {
     db.transaction((tx) => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS permissions
+        `dro TABLE IF NOT EXISTS permissions
         (
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             courseId      INTEGER NOT NULL,

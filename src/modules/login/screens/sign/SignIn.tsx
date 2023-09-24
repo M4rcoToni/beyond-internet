@@ -75,6 +75,7 @@ export function SignIn() {
         <Button
           title="Entrar"
           type="PRIMARY"
+          style={{ height: 56 }}
           onPress={handleSubmit(handleSignIn)}
         />
         <Link

@@ -9,12 +9,12 @@ export const Content = styled.View`
   border: 1px solid ${theme.COLORS.GRAY_200};
   width: 230px;
   height: 200px;
+  background-color: ${theme.COLORS.WHITE};
 `
 export const ClassBanner = styled(Image)`
   width: 100%;
   height: 130px;
   border-radius: 10px 10px 0 0;
-  background-color: white;
 `
 
 export const CardTitle = styled.Text`

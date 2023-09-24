@@ -102,6 +102,7 @@ export function SignUp() {
         <Button
           title="Cadastre-se"
           type="PRIMARY"
+          style={{ height: 56 }}
           onPress={handleSubmit(handleSignUp)}
         />
         <Link title="Voltar para o login" onPress={() => navigation.goBack()} />

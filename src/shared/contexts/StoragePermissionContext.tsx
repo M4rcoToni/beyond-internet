@@ -6,12 +6,13 @@ import {
   updateGrantedPermissionController,
   listGrantedPermissionsController,
 } from 'databases/modules/permissions/controller/PermissionsController'
-
+import { Permissions } from 'databases/modules/permissions/model/Permissions'
 type StoragePermissionContextProps = {
   storagePermissionGranted: boolean | null
   getDirectoryUri: () => Promise<void>
   checkStoragePermission: () => Promise<void>
   listPermissions: () => Promise<Permissions[] | null>
+  permission: Permissions
 }
 
 type StoragePermissionContextProviderProps = {
@@ -29,6 +30,7 @@ export function StoragePermissionContextProvider({
   const [storagePermissionGranted, setStoragePermissionGranted] = useState<
     boolean | null
   >(null)
+  const [permission, setPermission] = useState<Permissions>({} as Permissions)
 
   async function getDirectoryUri() {
     try {
@@ -65,6 +67,15 @@ export function StoragePermissionContextProvider({
               files: filesJson,
               granted: true,
             })
+
+            setPermission({
+              courseId: contentJson.id,
+              directoryName: contentJson.name,
+              uri,
+              files: filesJson,
+              granted: true,
+            })
+
             console.log(result, 'createPermissionController')
           }
 
@@ -122,6 +133,7 @@ export function StoragePermissionContextProvider({
         getDirectoryUri,
         checkStoragePermission,
         listPermissions,
+        permission,
       }}
     >
       {children}

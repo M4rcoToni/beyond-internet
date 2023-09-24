@@ -12,10 +12,9 @@ export const ButtonStyled = styled(TouchableOpacity)<Props>`
   width: 100%;
   max-width: 400px;
 
-  min-height: 56px;
   max-height: 56px;
 
-  background-color: ${({ type }) =>
+  background-color: ${({ type }: Props) =>
     type === 'PRIMARY' ? theme.COLORS.GREEN_700 : theme.COLORS.GRAY_300};
   border-radius: 6px;
   justify-content: center;

@@ -1,16 +1,15 @@
 import styled from 'styled-components/native'
 import theme from '@shared/theme'
-import { FlatList } from 'react-native'
+import { View } from 'react-native'
 
-export const FlatListStyled = styled(FlatList)`
+export const Content = styled.View`
   flex: 1;
   background-color: ${theme.COLORS.WHITE};
+  align-items: center;
 `
-export const Container = styled.View`
-  flex: 1;
+
+export const Container = styled(View)`
   justify-content: center;
   gap: 10px;
-  flex-direction: row;
   flex-wrap: wrap;
-  background-color: ${theme.COLORS.WHITE};
 `

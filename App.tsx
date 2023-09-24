@@ -19,6 +19,7 @@ export default function App() {
     Poppins_400Regular,
     Poppins_700Bold,
   })
+
   async function initializeApp() {
     try {
       const init = await initializeDatabase()
@@ -32,7 +33,10 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar backgroundColor="transparent" translucent />
+      <StatusBar
+        backgroundColor="transparent"
+        // translucent
+      />
       <AuthContextProvider>
         {fontsLoaded ? <Routes /> : <ActivityIndicator />}
       </AuthContextProvider>
