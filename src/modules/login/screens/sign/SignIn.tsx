@@ -40,7 +40,7 @@ export function SignIn() {
     <Container>
       {/* <Title>Além da Internet</Title>ß */}
       <Content>
-        <SubTitle>Entre com seu CPF e Senha</SubTitle>
+        <SubTitle text="Entre com seu CPF e Senha" />
 
         <Controller
           control={control}

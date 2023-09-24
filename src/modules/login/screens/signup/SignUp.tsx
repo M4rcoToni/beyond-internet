@@ -43,7 +43,7 @@ export function SignUp() {
     <Container>
       {/* <Title>Além da Internet</Title> */}
       <Content>
-        <SubTitle>Realize seu cadastro</SubTitle>
+        <SubTitle text="Cadastre-se" />
         <Controller
           control={control}
           name="name"
