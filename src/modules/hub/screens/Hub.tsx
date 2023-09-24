@@ -1,18 +1,20 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Container, Content } from './styles'
-import { useStorage } from '../../../shared/hooks/useStorage'
-import { Permissions } from '../../../databases/modules/permissions/model/Permissions'
-import { ClassList } from '../components/ClassList/ClassList'
-import { useDimensions } from '@shared/hooks/useDimensions'
 
-type Content = {
-  name: string
-  classes: number
-  image: string
+import { useDimensions } from '@shared/hooks/useDimensions'
+import { ClassList } from '@modules/hub/components/ClassList/ClassList'
+import { useStorage } from '@shared/hooks/useStorage'
+export type Permissions = {
+  id?: string
+  courseId: string
+  directoryName: string
+  uri: string
+  files: string
+  granted: boolean
 }
 
 export function Hub() {
-  const [content, setContent] = useState<Permissions[]>([] as Permissions[])
+  const [content, setContent] = useState<Permissions[]>([])
   const [refreshing, setRefreshing] = useState(false)
 
   const { getDirectoryUri, listPermissions } = useStorage()
@@ -44,16 +46,7 @@ export function Hub() {
         }
       >
         <ClassList
-          data={[
-            {
-              id: '1',
-              courseId: '4',
-              directoryName: 'teste',
-              uri: 'teste',
-              files: 'teste',
-              granted: true,
-            },
-          ]}
+          data={content}
           refreshing={refreshing}
           onRefresh={checkStoragePermission}
           getCourse={getCourse}

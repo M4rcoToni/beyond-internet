@@ -7,5 +7,5 @@ interface SubTitleProps {
 }
 
 export function SubTitle({ size, text }: SubTitleProps) {
-  return <SubTitleStyled size={size}>{text}</SubTitleStyled>
+  return <SubTitleStyled size={size || 16}>{text}</SubTitleStyled>
 }

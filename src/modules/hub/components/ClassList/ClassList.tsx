@@ -3,6 +3,7 @@ import { ClassCard } from '../ClassCard/ClassCard'
 import { Permissions } from '../../../../databases/modules/permissions/model/Permissions'
 
 import { ClassEmpty } from './ClassEmpty/ClassEmpty'
+import { useNavigation } from '@react-navigation/native'
 
 interface ClassListProps {
   data: Permissions[]
@@ -19,6 +20,7 @@ export function ClassList({
   getCourse,
   ...rest
 }: ClassListProps) {
+  const { navigate } = useNavigation()
   return (
     <FlatList
       {...rest}
@@ -33,6 +35,9 @@ export function ClassList({
           title={item.directoryName}
           subTitle={`${item.id} aulas`}
           image={item.files[4]}
+          onPress={() => {
+            navigate('Class', { item })
+          }}
         />
       )}
       refreshControl={

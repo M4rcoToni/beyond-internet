@@ -14,7 +14,7 @@
         "shared/*"
       ],
       "@database/*": [
-        "database/*"
+        "database/modules/*"
       ],
       "@components/*": [
         "shared/components/*"

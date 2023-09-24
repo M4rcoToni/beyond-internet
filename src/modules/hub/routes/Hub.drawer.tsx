@@ -1,8 +1,9 @@
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { Hub } from '../screens/Hub'
 import { View, useWindowDimensions } from 'react-native'
 import { SubTitle } from '@shared/components'
 import { DrawerContent } from '../components/DrawerContent/DrawerContent'
+import { Class } from '@modules/course/screens/Course'
+import { Hub } from '../screens/Hub'
 
 const Drawer = createDrawerNavigator()
 
@@ -33,6 +34,15 @@ export default function HubDrawer() {
           headerTitle: 'Cursos',
         }}
         component={Hub}
+      />
+
+      <Drawer.Screen
+        name="Class"
+        options={{
+          headerShown: true,
+          headerTitle: 'Aulas',
+        }}
+        component={Class}
       />
     </Drawer.Navigator>
   )
