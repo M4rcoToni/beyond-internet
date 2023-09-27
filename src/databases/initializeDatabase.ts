@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite'
 import { initializeTableUsers } from './modules/users/model'
-import { initializeTableCourses } from './modules/permissions/model/PermissionsModel'
+import { initializeTableCourses } from './modules/course/model'
 
 export async function initializeDatabase() {
   const db = SQLite.openDatabase('beyond.db')

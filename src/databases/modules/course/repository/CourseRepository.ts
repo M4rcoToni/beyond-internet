@@ -1,22 +1,23 @@
 import { db } from 'databases'
-import { Courses } from '../model/Permissions'
+import { Courses } from '../model'
 
 export async function createCourse({
   courseId,
   directoryName,
   uri,
   files,
+  index,
   granted,
 }: Courses): Promise<Courses | null> {
   try {
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'INSERT INTO course (courseId, directoryName, uri, files, granted) VALUES (?, ?, ?, ?, ?)',
-          [courseId, directoryName, uri, files, granted ? 1 : 0],
+          'INSERT INTO course (courseId, directoryName, uri, files, granted, index) VALUES (?, ?, ?, ?, ?)',
+          [courseId, directoryName, uri, files, granted ? 1 : 0, index],
           (_, result) => {
             if (result.rowsAffected > 0) {
-              resolve({ courseId, directoryName, uri, files, granted })
+              resolve({ courseId, directoryName, uri, files, granted, index })
             } else {
               resolve(null)
             }
@@ -42,8 +43,15 @@ export async function listGrantedCourses(): Promise<Courses[] | null> {
           (_, result) => {
             const course = []
             for (let i = 0; i < result.rows.length; i++) {
-              const { id, courseId, directoryName, uri, files, granted } =
-                result.rows.item(i)
+              const {
+                id,
+                courseId,
+                directoryName,
+                uri,
+                files,
+                granted,
+                indexFile,
+              } = result.rows.item(i)
 
               const fileParsed = JSON.parse(files)
               course.push({
@@ -53,6 +61,7 @@ export async function listGrantedCourses(): Promise<Courses[] | null> {
                 uri,
                 files: fileParsed,
                 granted,
+                index: indexFile,
               })
             }
             console.log(result, 'result SELECT * FROM course WHERE granted = 1')

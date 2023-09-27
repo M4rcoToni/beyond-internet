@@ -5,7 +5,7 @@ import {
   checkCourseGrantedController,
   createCourseController,
   listGrantedCoursesController,
-} from 'databases/modules/permissions/controller/PermissionsController'
+} from 'databases/modules/course/controller/CourseController'
 
 type StorageCourseContextProps = {
   storageCourseGranted: boolean | null
@@ -63,6 +63,7 @@ export function StorageCourseContextProvider({
               uri,
               files: filesJson,
               granted: true,
+              index: contentJson,
             })
 
             setCourse({

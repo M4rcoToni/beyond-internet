@@ -9,7 +9,7 @@ import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
 import * as Crypto from 'expo-crypto'
 import { useStorage } from '@shared/hooks/useStorage'
-import { updateGrantedCourseController } from 'databases/modules/permissions/controller/PermissionsController'
+import { updateGrantedCourseController } from 'databases/modules/course/controller/CourseController'
 
 export type AuthContextDataProps = {
   user: User | null

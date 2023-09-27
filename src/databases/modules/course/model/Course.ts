@@ -4,5 +4,6 @@ export type Courses = {
   directoryName: string
   uri: string
   files: string
+  index: string
   granted: boolean
 }

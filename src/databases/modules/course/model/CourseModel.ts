@@ -13,6 +13,7 @@ export async function initializeTableCourses(
             directoryName TEXT NOT NULL,
             uri           TEXT NOT NULL,
             files         TEXT NOT NULL,
+            indexFile     TEXT NOT NULL,
             granted       INTEGER DEFAULT 0
         )`,
         [],

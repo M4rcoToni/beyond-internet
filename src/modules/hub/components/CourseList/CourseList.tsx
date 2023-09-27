@@ -3,7 +3,7 @@ import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { CourseEmpty } from './CourseEmpty/CourseEmpty'
 import { CourseCard } from '../CourseCard/CourseCard'
-import { Courses } from '../../../../databases/modules/permissions/model/Courses'
+import { Courses } from '@modules/hub/screens/Hub'
 
 interface CourseListProps {
   data: Courses[]

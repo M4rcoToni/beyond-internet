@@ -3,13 +3,14 @@ import {
   listGrantedCourses,
   updateCourse,
   checkCourseGranted,
-} from '../repository/PermissionsRepository'
+} from '../repository/CourseRepository'
 
 export const createCourseController: typeof createCourse = async ({
   courseId,
   directoryName,
   uri,
   files,
+  index,
   granted,
 }) => {
   const response = await createCourse({
@@ -17,6 +18,7 @@ export const createCourseController: typeof createCourse = async ({
     directoryName,
     uri,
     files,
+    index,
     granted,
   })
 
