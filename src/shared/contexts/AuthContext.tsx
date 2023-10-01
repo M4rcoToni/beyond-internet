@@ -95,6 +95,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     try {
       setIsLoadingUserStorage(true)
 
+      setUser(null)
+
       const res = await updateUserIsLoggedController(user?.cpf || '', 0)
 
       await updateGrantedCourseController(permission.courseId, false)
@@ -102,7 +104,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       if (!res) {
         throw new Error('Erro no signOut')
       }
-      setUser(null)
     } finally {
       setIsLoadingUserStorage(false)
     }

@@ -11,6 +11,7 @@ import { SectionContextProvider } from '@shared/contexts/CourseContext'
 
 export function Routes() {
   const { user } = useAuth()
+  console.log(user, 'user')
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
