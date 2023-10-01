@@ -1,9 +1,10 @@
-import React, { createContext, useState, ReactNode } from 'react'
+import React, { createContext, useState, ReactNode, useEffect } from 'react'
 import * as FileSystem from 'expo-file-system'
 import { Courses } from '@modules/hub/screens/Hub'
 import {
   checkCourseGrantedController,
   createCourseController,
+  deleteCourseController,
   listGrantedCoursesController,
 } from 'databases/modules/course/controller/CourseController'
 
@@ -11,6 +12,7 @@ type StorageCourseContextProps = {
   storageCourseGranted: boolean | null
   getDirectoryUri: () => Promise<void>
   checkStorageCourse: () => Promise<void>
+  deleteCourse: (id: string) => Promise<void>
   listCourses: () => Promise<Courses[] | null>
   permission: Courses
 }
@@ -41,7 +43,6 @@ export function StorageCourseContextProvider({
 
         const files =
           await FileSystem.StorageAccessFramework.readDirectoryAsync(uri)
-        console.log(files, 'files', typeof files)
 
         const filesContent = await FileSystem.getInfoAsync(files[2])
 
@@ -57,13 +58,13 @@ export function StorageCourseContextProvider({
             // Se não houver permissão no SQLite, crie uma nova
             const filesJson = JSON.stringify(files)
 
-            const result = await createCourseController({
+            await createCourseController({
               courseId: contentJson.id,
               directoryName: contentJson.name,
               uri,
               files: filesJson,
               granted: true,
-              index: contentJson,
+              index: JSON.stringify(contentJson),
             })
 
             setCourse({
@@ -72,9 +73,8 @@ export function StorageCourseContextProvider({
               uri,
               files: filesJson,
               granted: true,
+              index: contentJson,
             })
-
-            console.log(result, 'createCourseController')
           }
 
           setStorageCourseGranted(isGranted)
@@ -114,11 +114,26 @@ export function StorageCourseContextProvider({
       const permissions = await listGrantedCoursesController()
 
       if (permissions === null) {
-        console.error('Zero permissions')
-        return []
+        console.log('zero courses to list')
       }
 
+      setCourse(permissions[0])
       return permissions
+    } catch (error) {
+      console.error('Error listing permissions in context:', error)
+      return null
+    }
+  }
+
+  // delete course
+  async function deleteCourse(id: string) {
+    try {
+      const res = await deleteCourseController(id, false)
+
+      if (res === null) {
+        console.error('Zero permissions')
+      }
+      setCourse({} as Courses)
     } catch (error) {
       console.error('Error listing permissions:', error)
     }
@@ -132,6 +147,7 @@ export function StorageCourseContextProvider({
         checkStorageCourse,
         listCourses,
         permission,
+        deleteCourse,
       }}
     >
       {children}

@@ -7,6 +7,7 @@ interface CourseCardProps {
   subTitle: string
   image?: string
   onPress?: () => void
+  onLongPress?: () => void
 }
 
 export function CourseCard({
@@ -14,9 +15,14 @@ export function CourseCard({
   onPress,
   title,
   subTitle,
+  onLongPress,
 }: CourseCardProps) {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      onLongPress={onLongPress}
+    >
       <Content>
         <CourseBanner
           alt="Empreendedorismo"

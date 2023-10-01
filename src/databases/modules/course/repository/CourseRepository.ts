@@ -13,11 +13,33 @@ export async function createCourse({
     return new Promise((resolve) => {
       db.transaction((tx) => {
         tx.executeSql(
-          'INSERT INTO course (courseId, directoryName, uri, files, granted, index) VALUES (?, ?, ?, ?, ?)',
-          [courseId, directoryName, uri, files, granted ? 1 : 0, index],
+          `INSERT INTO course (courseId, directoryName, uri, files, indexFile, granted) VALUES (?, ?, ?, ?, ?, ?)`,
+          [courseId, directoryName, uri, files, index, granted ? 1 : 0],
           (_, result) => {
             if (result.rowsAffected > 0) {
-              resolve({ courseId, directoryName, uri, files, granted, index })
+              // Agora, após a inserção, buscamos o registro inserido
+
+              if (result.rows.length > 0) {
+                const {
+                  courseId,
+                  directoryName,
+                  uri,
+                  files,
+                  granted,
+                  indexFile,
+                } = result.rows.item(0)
+
+                resolve({
+                  courseId,
+                  directoryName,
+                  uri,
+                  files: JSON.parse(files),
+                  granted,
+                  index: indexFile,
+                })
+              } else {
+                resolve(null)
+              }
             } else {
               resolve(null)
             }
@@ -54,6 +76,7 @@ export async function listGrantedCourses(): Promise<Courses[] | null> {
               } = result.rows.item(i)
 
               const fileParsed = JSON.parse(files)
+              const indexParsed = JSON.parse(indexFile)
               course.push({
                 id,
                 courseId,
@@ -61,10 +84,10 @@ export async function listGrantedCourses(): Promise<Courses[] | null> {
                 uri,
                 files: fileParsed,
                 granted,
-                index: indexFile,
+                index: indexParsed,
               })
             }
-            console.log(result, 'result SELECT * FROM course WHERE granted = 1')
+
             if (course.length > 0) {
               resolve(course)
             } else {
@@ -72,7 +95,7 @@ export async function listGrantedCourses(): Promise<Courses[] | null> {
             }
           },
           (_, error) => {
-            throw new Error(`Error listing course: ${error}`)
+            throw new Error(`Error listing course in repository: ${error}`)
           },
         )
       })
@@ -107,6 +130,34 @@ export async function updateCourse(
     })
   } catch (error) {
     throw new Error(`Error updating course: ${error}`)
+  }
+}
+// create deleteCourseById
+
+export async function deleteCourseById(
+  courseId: string,
+): Promise<string | null> {
+  try {
+    return new Promise((resolve) => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          'DELETE FROM course WHERE courseId = ?',
+          [courseId],
+          (_, result) => {
+            if (result.rowsAffected > 0) {
+              resolve(courseId.toString())
+            } else {
+              resolve(null)
+            }
+          },
+          (_, error) => {
+            throw new Error(`Error deleting course: ${error}`)
+          },
+        )
+      })
+    })
+  } catch (error) {
+    throw new Error(`Error deleting course: ${error}`)
   }
 }
 

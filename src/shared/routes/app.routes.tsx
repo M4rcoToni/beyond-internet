@@ -4,6 +4,7 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
+import { SectionContextProvider } from '@shared/contexts/CourseContext'
 
 type AppRoutes = {
   Hub: undefined
@@ -15,14 +16,14 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AppRoutes() {
   return (
-    <Navigator
-      screenOptions={{
-        headerShown: false,
-        animation: 'fade',
-      }}
-    >
-      <Screen name="Hub" component={HubDrawer} />
-      <Screen name="Course" component={Course} />
-    </Navigator>
+    <SectionContextProvider>
+      <Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Screen name="Root" component={HubDrawer} />
+      </Navigator>
+    </SectionContextProvider>
   )
 }

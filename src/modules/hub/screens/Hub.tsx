@@ -4,6 +4,9 @@ import { Container, Content } from './styles'
 import { useDimensions } from '@shared/hooks/useDimensions'
 import { useStorage } from '@shared/hooks/useStorage'
 import { CourseList } from '../components/CourseList/CourseList'
+import { CourseType, Section } from '@modules/course/screens/CourseType'
+import { useSection } from '@shared/hooks/useSection'
+import { useNavigation } from '@react-navigation/native'
 
 export type Courses = {
   id?: string
@@ -12,14 +15,17 @@ export type Courses = {
   uri: string
   files: string
   granted: boolean
+  index: CourseType
 }
 
 export function Hub() {
   const [content, setContent] = useState<Courses[]>([])
   const [refreshing, setRefreshing] = useState(false)
-
+  const { handleSelectSection } = useSection()
+  const { navigate } = useNavigation()
   const { getDirectoryUri, listCourses } = useStorage()
   const { width } = useDimensions()
+
   async function getCourse() {
     await getDirectoryUri()
   }
@@ -33,9 +39,16 @@ export function Hub() {
     }
   }, [listCourses])
 
+  async function onCoursePress(course: Section) {
+    await handleSelectSection(course)
+    navigate('Course')
+  }
+  console.log(content, 'content')
+
   useEffect(() => {
     checkStorageCourse()
-  }, [checkStorageCourse])
+    console.log(' useEffect')
+  }, [])
 
   return (
     <Content>
@@ -51,6 +64,7 @@ export function Hub() {
           refreshing={refreshing}
           onRefresh={checkStorageCourse}
           getCourse={getCourse}
+          onCoursePress={onCoursePress}
         />
       </Container>
     </Content>

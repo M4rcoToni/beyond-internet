@@ -4,15 +4,18 @@ import { SubTitle } from '@shared/components'
 import { DrawerContent } from '../components/DrawerContent/DrawerContent'
 import { Hub } from '../screens/Hub'
 import { Course } from '@modules/course/screens/Course'
+import { useStorage } from '@shared/hooks/useStorage'
 
 const Drawer = createDrawerNavigator()
 
 export default function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
+
+  const { permission } = useStorage()
   return (
     <Drawer.Navigator
-      drawerContent={(item) => <DrawerContent item={item} />}
+      drawerContent={(item) => <DrawerContent drawer={item} />}
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'front',
         drawerStyle: isLargeScreen ? { width: '25%' } : { width: '90%' },
@@ -40,7 +43,7 @@ export default function HubDrawer() {
         name="Course"
         options={{
           headerShown: true,
-          headerTitle: 'Aulas',
+          headerTitle: permission.index?.name ? permission.index.name : 'Aulas',
         }}
         component={Course}
       />

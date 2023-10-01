@@ -12,9 +12,7 @@ export function DrawerHeader({ user }: DrawerHeaderProps) {
       <Container>
         <Photo
           size={140}
-          uri={
-            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-          }
+          uri={'https://avatars.githubusercontent.com/u/94496614?v=4'}
         />
         <Title>{user?.name}</Title>
         <SubTitle>{user?.cpf}</SubTitle>

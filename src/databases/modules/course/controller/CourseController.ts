@@ -1,8 +1,9 @@
 import {
-  createCourse,
   listGrantedCourses,
   updateCourse,
   checkCourseGranted,
+  deleteCourseById,
+  createCourse,
 } from '../repository/CourseRepository'
 
 export const createCourseController: typeof createCourse = async ({
@@ -18,13 +19,15 @@ export const createCourseController: typeof createCourse = async ({
     directoryName,
     uri,
     files,
-    index,
     granted,
+    index,
   })
+  console.log('response', response)
 
   if (response === null) {
-    return null
+    throw new Error(`Failed to create course: ${courseId}`)
   }
+
   return response
 }
 
@@ -36,7 +39,6 @@ export const listGrantedCoursesController: typeof listGrantedCourses =
       if (permission === null) {
         throw new Error(`No permission found for courseId`)
       }
-      console.log(permission, 'permission listGrantedCourses')
 
       return permission
     } catch (error) {
@@ -50,6 +52,20 @@ export const updateGrantedCourseController: typeof updateCourse = async (
 ) => {
   try {
     const updatedCourseId = await updateCourse(courseId, granted)
+
+    if (updatedCourseId === null) {
+      throw new Error(`No permission found for courseId: ${courseId}`)
+    }
+
+    return updatedCourseId
+  } catch (error) {
+    throw new Error(`Error in updateCourseController: ${error}`)
+  }
+}
+
+export const deleteCourseController: typeof updateCourse = async (courseId) => {
+  try {
+    const updatedCourseId = await deleteCourseById(courseId)
 
     if (updatedCourseId === null) {
       throw new Error(`No permission found for courseId: ${courseId}`)

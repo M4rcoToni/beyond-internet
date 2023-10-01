@@ -67,6 +67,7 @@ export function SignIn() {
               placeholder="Senha"
               onChangeText={onChange}
               value={value}
+              secureTextEntry
               errorMessage={errors.password?.message}
             />
           )}

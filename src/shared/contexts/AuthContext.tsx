@@ -63,7 +63,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
       }
       await login(cpf, 1)
       setUser(user)
-      console.log(user)
+      // console.log(user)
     } finally {
       setIsLoadingUserStorage(false)
     }

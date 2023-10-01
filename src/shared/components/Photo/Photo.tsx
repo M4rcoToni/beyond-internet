@@ -18,7 +18,6 @@ export function Photo({ size, uri, ...rest }: PhotoProps) {
       alt="Profile photo"
       contentFit="contain"
       source={{ uri }}
-      blurRadius={0.5}
     />
   )
 }

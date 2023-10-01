@@ -7,49 +7,49 @@
       "title": "Algebra",
       "description": "seccion de alebra y sus aplicaciones",
       "images": [
-        "/Imagenes_de_cursos/lgebra.png"
+        "%2Flgebra.png"
       ],
       "videos": [],
       "pdfs": [],
       "tests": [
         {
           "id": 1,
-          "titulo": "Prueba flipante Algebra",
-          "preguntas": []
+          "title": "Prueba flipante Algebra",
+          "questions": []
         }
       ]
     },
     {
       "id": 2,
-      "titulo": "Multiplicacion",
-      "descripcion": "Seccion de informacion sobre multiplicacion",
-      "imagenes": [
-        "C:/Users/Rafa/Desktop/Imagenes_de_cursos/multiplicacion.png"
+      "title": "Multiplicacion",
+      "description": "Seccion de informacion sobre multiplicacion",
+      "images": [
+        "%2Fmultiplicacion.png"
       ],
       "videos": [],
       "pdfs": [],
-      "pruebas": [
+      "test": [
         {
           "id": 2,
-          "titulo": "Prueba flipante Multiplicacion",
-          "preguntas": []
+          "title": "Prueba flipante Multiplicacion",
+          "questions": []
         }
       ]
     },
     {
       "id": 3,
-      "titulo": "Probabilidad",
-      "descripcion": "Actividades relacionadas a probabilidad",
-      "imagenes": [
-        "C:/Users/Rafa/Desktop/Imagenes_de_cursos/probabilidad.png"
+      "title": "Probabilidad",
+      "description": "Actividades relacionadas a probabilidad",
+      "images": [
+        "%2Fprobabilidad.png"
       ],
       "videos": [],
       "pdfs": [],
-      "pruebas": [
+      "test": [
         {
           "id": 3,
-          "titulo": "Prueba flipante Provbabilidad",
-          "preguntas": []
+          "title": "Prueba flipante Provbabilidad",
+          "questions": []
         }
       ]
     }
