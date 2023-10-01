@@ -28,9 +28,8 @@ export function CourseList({
       {...rest}
       data={data}
       horizontal
-      shouldRasterizeIOS
-      renderToHardwareTextureAndroid
       refreshing={refreshing}
+      onRefresh={onRefresh}
       keyExtractor={(item) => item.courseId.toString()}
       renderItem={({ item, index }) => (
         <CourseCard
@@ -53,9 +52,9 @@ export function CourseList({
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       ListEmptyComponent={() => <CourseEmpty getCourse={getCourse} />}
-      ListFooterComponent={() => (
-        <Button title="Adicionar curso" onPress={getCourse} />
-      )}
+      // ListFooterComponent={() => (
+      //   <Button title="Adicionar curso" onPress={getCourse} />
+      // )}
     />
   )
 }

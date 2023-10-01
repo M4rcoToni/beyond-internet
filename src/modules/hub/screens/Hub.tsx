@@ -22,9 +22,10 @@ export function Hub() {
   const [content, setContent] = useState<Courses[]>([])
   const [refreshing, setRefreshing] = useState(false)
   const { handleSelectSection } = useSection()
-  const { navigate } = useNavigation()
+  const navigation = useNavigation()
   const { getDirectoryUri, listCourses } = useStorage()
   const { width } = useDimensions()
+  const [isLoading, setIsLoading] = useState(false)
 
   async function getCourse() {
     await getDirectoryUri()
@@ -40,10 +41,11 @@ export function Hub() {
   }, [listCourses])
 
   async function onCoursePress(course: Section) {
+    setIsLoading(true)
     await handleSelectSection(course)
-    navigate('Course')
+    setIsLoading(false)
+    navigation.navigate('Course')
   }
-  console.log(content, 'content')
 
   useEffect(() => {
     checkStorageCourse()
@@ -51,22 +53,24 @@ export function Hub() {
   }, [])
 
   return (
-    <Content>
-      <Container
-        style={
-          width > 700 ?? {
-            flexDirection: 'row',
+    <>
+      <Content>
+        <Container
+          style={
+            width > 700 ?? {
+              flexDirection: 'row',
+            }
           }
-        }
-      >
-        <CourseList
-          data={content}
-          refreshing={refreshing}
-          onRefresh={checkStorageCourse}
-          getCourse={getCourse}
-          onCoursePress={onCoursePress}
-        />
-      </Container>
-    </Content>
+        >
+          <CourseList
+            data={content}
+            refreshing={refreshing}
+            onRefresh={checkStorageCourse}
+            getCourse={getCourse}
+            onCoursePress={onCoursePress}
+          />
+        </Container>
+      </Content>
+    </>
   )
 }

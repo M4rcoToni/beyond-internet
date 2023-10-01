@@ -22,7 +22,6 @@ export const createCourseController: typeof createCourse = async ({
     granted,
     index,
   })
-  console.log('response', response)
 
   if (response === null) {
     throw new Error(`Failed to create course: ${courseId}`)

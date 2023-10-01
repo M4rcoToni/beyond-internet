@@ -2,20 +2,27 @@ import React from 'react'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@shared/components'
 import { Section } from '@modules/course/screens/CourseType'
+import { useSection } from '@shared/hooks/useSection'
 
 interface CourseContentProps {
   sections: Section[]
   courseName: string
   onPressBackButton: () => void
-  onSessionPress: (section: Section) => void
+  closeDrawer: () => void
 }
 
 export function CourseContent({
   sections,
   courseName,
   onPressBackButton,
-  onSessionPress,
+  closeDrawer,
 }: CourseContentProps) {
+  const { handleSelectSection } = useSection()
+
+  async function handleSelectSectionAndCloseDrawer(item: Section) {
+    await handleSelectSection(item)
+    closeDrawer()
+  }
   return (
     <>
       <FlatList
@@ -44,7 +51,7 @@ export function CourseContent({
             }}
           >
             <TouchableOpacity
-              onPress={() => onSessionPress(item)}
+              onPress={() => handleSelectSectionAndCloseDrawer(item)}
               style={{
                 flex: 1,
                 flexDirection: 'row',

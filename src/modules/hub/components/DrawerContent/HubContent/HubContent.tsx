@@ -4,6 +4,8 @@ import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 import { User } from 'databases/modules/users/model'
 import { Feather } from '@expo/vector-icons'
+import { usePermissions } from 'expo-av/build/Audio'
+import { useStorage } from '@shared/hooks/useStorage'
 
 interface HubContentProps {
   signOut: () => void
@@ -11,6 +13,7 @@ interface HubContentProps {
 }
 
 export function HubContent({ signOut, user }: HubContentProps) {
+  const { getDirectoryUri } = useStorage()
   return (
     <>
       <FlatList
@@ -33,11 +36,16 @@ export function HubContent({ signOut, user }: HubContentProps) {
             name: 'Certificados',
             icon: 'check-square',
           },
+          {
+            name: 'Abrir um curso',
+            icon: 'plus-square',
+            onPress: () => getDirectoryUri(),
+          },
         ]}
         renderItem={({ item }) => (
           <>
             <TouchableOpacity
-              onPress={() => {}}
+              onPress={item.onPress}
               style={{
                 flex: 1,
                 flexDirection: 'row',

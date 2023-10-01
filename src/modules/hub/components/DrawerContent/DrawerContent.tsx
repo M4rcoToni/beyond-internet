@@ -9,32 +9,32 @@ import { HubContent } from './HubContent/HubContent'
 import { useStorage } from '@shared/hooks/useStorage'
 import { CourseContent } from '@modules/course/components/CourseContent/CourseContent'
 import { useSection } from '@shared/hooks/useSection'
+import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 
 interface DrawerContentProps {
-  drawer: DrawerContentComponentProps
+  drawer: DrawerNavigationHelpers
+  screen: number
 }
 
-export function DrawerContent({ drawer }: DrawerContentProps) {
+export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   const { user, signOut } = useAuth()
   const navigation = useNavigation()
   const { permission } = useStorage()
-  const { handleSelectSection } = useSection()
 
-  async function handleSessionPress() {
-    await handleSelectSection(permission.index.sections[0])
-    drawer.navigation.closeDrawer()
+  function closeDrawer() {
+    drawer.closeDrawer()
   }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {drawer.state.index === 0 ? (
+      {screen === 0 ? (
         <HubContent signOut={signOut} user={user} />
       ) : (
         <CourseContent
           sections={permission.index.sections}
           courseName={permission.index.name}
           onPressBackButton={() => navigation.navigate('Hub')}
-          onSessionPress={handleSessionPress}
+          closeDrawer={closeDrawer}
         />
       )}
     </SafeAreaView>

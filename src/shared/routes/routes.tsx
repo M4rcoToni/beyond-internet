@@ -4,9 +4,10 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { AuthRoutes } from './auth.routes'
 import { useAuth } from '../hooks/useAuth'
-import { AppRoutes } from './app.routes'
 import { DimensionContextProvider } from '@shared/contexts/DimensionsContext'
 import { StorageCourseContextProvider } from '@shared/contexts/StoragePermissionContext'
+import HubDrawer from '@modules/hub/routes/Hub.drawer'
+import { SectionContextProvider } from '@shared/contexts/CourseContext'
 
 export function Routes() {
   const { user } = useAuth()
@@ -15,9 +16,11 @@ export function Routes() {
     <SafeAreaView style={{ flex: 1 }}>
       <DimensionContextProvider>
         <StorageCourseContextProvider>
-          <NavigationContainer>
-            {user ? <AppRoutes /> : <AuthRoutes />}
-          </NavigationContainer>
+          <SectionContextProvider>
+            <NavigationContainer>
+              {user ? <HubDrawer /> : <AuthRoutes />}
+            </NavigationContainer>
+          </SectionContextProvider>
         </StorageCourseContextProvider>
       </DimensionContextProvider>
     </SafeAreaView>
