@@ -1,9 +1,9 @@
 import { Section } from '@modules/course/screens/CourseType'
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export type sectionContextDataProps = {
   section: Section
-  handleSelectSection: (section: Section) => Promise<void>
+  handleSelectSection: (section: Section) => void
 }
 
 type sectionContextProviderProps = {
@@ -19,9 +19,10 @@ export function SectionContextProvider({
 }: sectionContextProviderProps) {
   const [section, setSection] = useState<Section>({} as Section)
 
-  async function handleSelectSection(section: Section) {
+  function handleSelectSection(section: Section) {
     setSection(section)
   }
+
   return (
     <SectionContext.Provider
       value={{

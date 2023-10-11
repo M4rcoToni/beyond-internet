@@ -19,7 +19,7 @@ interface DrawerContentProps {
 export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   const { user, signOut } = useAuth()
   const navigation = useNavigation()
-  const { permission } = useStorage()
+  const { permission, index } = useStorage()
 
   function closeDrawer() {
     drawer.closeDrawer()
@@ -31,8 +31,8 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
         <HubContent signOut={signOut} user={user} />
       ) : (
         <CourseContent
-          sections={permission.index.sections}
-          courseName={permission.index.name}
+          sections={permission[index].index.sections}
+          courseName={permission[index].index.name}
           onPressBackButton={() => navigation.navigate('Hub')}
           closeDrawer={closeDrawer}
         />

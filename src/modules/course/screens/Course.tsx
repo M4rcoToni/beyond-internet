@@ -21,7 +21,7 @@ export function Course() {
   const { permission } = useStorage()
   // console.log(section, 'test')
 
-  // const { item } = route.params as { item: sections }
+  const { index } = route.params as { index: number }
 
   return (
     <Container>
@@ -30,7 +30,7 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: permission.files[3] + section.images[0],
+          uri: permission[index].files[3] + section.images[0],
         }}
         style={{ width: 200, height: 200, alignSelf: 'center' }}
       />

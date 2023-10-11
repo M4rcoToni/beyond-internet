@@ -16,7 +16,7 @@ export default function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
 
-  const { permission } = useStorage()
+  const { permission, index } = useStorage()
   return (
     <Drawer.Navigator
       drawerContent={(item) => (
@@ -27,6 +27,7 @@ export default function HubDrawer() {
         drawerStyle: isLargeScreen ? { width: '25%' } : { width: '90%' },
         overlayColor: '#0000002b',
         // drawerPosition: 'right',
+        drawerStatusBarAnimation: 'slide',
         headerRight: () => (
           <>
             <View style={{ width: 100, height: 20 }}>
@@ -49,7 +50,9 @@ export default function HubDrawer() {
         name="Course"
         options={() => ({
           headerShown: true,
-          headerTitle: permission.index?.name ? permission.index.name : 'Aulas',
+          headerTitle: permission[index].index?.name
+            ? permission[index].index.name
+            : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
           gestureResponseDistance: {

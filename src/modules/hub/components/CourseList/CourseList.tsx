@@ -11,7 +11,7 @@ interface CourseListProps {
   refreshing: boolean
   onRefresh: () => void
   getCourse?: () => void
-  onCoursePress?: (section: Section) => void
+  onCoursePress: (section: Section, index: number) => void
   style?: StyleProp<ViewStyle>
 }
 
@@ -27,7 +27,7 @@ export function CourseList({
     <FlatList
       {...rest}
       data={data}
-      horizontal
+      // horizontal
       refreshing={refreshing}
       onRefresh={onRefresh}
       keyExtractor={(item) => item.courseId.toString()}
@@ -36,13 +36,7 @@ export function CourseList({
           title={item.index.name}
           subTitle={`${item.index.sections.length} aulas`}
           image={item.files[4]}
-          onPress={
-            onCoursePress
-              ? () => {
-                  onCoursePress(item.index.sections[index])
-                }
-              : undefined
-          }
+          onPress={() => onCoursePress(item.index.sections[index], index)}
           // onLongPress={() => {
           //   deleteCourse(item.courseId)
           // }}

@@ -14,7 +14,9 @@ type StorageCourseContextProps = {
   checkStorageCourse: () => Promise<void>
   deleteCourse: (id: string) => Promise<void>
   listCourses: () => Promise<Courses[] | null>
-  permission: Courses
+  permission: Courses[]
+  index: number
+  setPermissionIndex: (index: number) => void
 }
 
 type StorageCourseContextProviderProps = {
@@ -31,7 +33,8 @@ export function StorageCourseContextProvider({
   const [storageCourseGranted, setStorageCourseGranted] = useState<
     boolean | null
   >(null)
-  const [permission, setCourse] = useState<Courses>({} as Courses)
+  const [permission, setCourse] = useState<Courses[]>([] as Courses[])
+  const [index, setIndex] = useState<number>(0)
 
   async function getDirectoryUri() {
     try {
@@ -44,40 +47,43 @@ export function StorageCourseContextProvider({
         const files =
           await FileSystem.StorageAccessFramework.readDirectoryAsync(uri)
 
-        const filesContent = await FileSystem.getInfoAsync(files[2])
+        const index = files.find((file) => file.includes('index.json'))
+        if (index) {
+          const filesContent = await FileSystem.getInfoAsync(index)
 
-        if (filesContent.exists) {
-          const content = await FileSystem.readAsStringAsync(filesContent.uri)
+          if (filesContent.exists) {
+            const content = await FileSystem.readAsStringAsync(filesContent.uri)
 
-          const contentJson = JSON.parse(content)
+            const contentJson = JSON.parse(content)
 
-          // Verifique se já existe uma permissão no SQLite para este diretório
-          const isGranted = await checkCourseGrantedController(contentJson.id)
+            // Verifique se já existe uma permissão no SQLite para este diretório
+            const isGranted = await checkCourseGrantedController(contentJson.id)
 
-          if (!isGranted) {
-            // Se não houver permissão no SQLite, crie uma nova
-            const filesJson = JSON.stringify(files)
+            if (!isGranted) {
+              // Se não houver permissão no SQLite, crie uma nova
+              const filesJson = JSON.stringify(files)
 
-            await createCourseController({
-              courseId: contentJson.id,
-              directoryName: contentJson.name,
-              uri,
-              files: filesJson,
-              granted: true,
-              index: JSON.stringify(contentJson),
-            })
+              await createCourseController({
+                courseId: contentJson.id,
+                directoryName: contentJson.name,
+                uri,
+                files: filesJson,
+                granted: true,
+                index: JSON.stringify(contentJson),
+              })
 
-            setCourse({
-              courseId: contentJson.id,
-              directoryName: contentJson.name,
-              uri,
-              files: filesJson,
-              granted: true,
-              index: contentJson,
-            })
+              setCourse({
+                courseId: contentJson.id,
+                directoryName: contentJson.name,
+                uri,
+                files: filesJson,
+                granted: true,
+                index: contentJson,
+              })
+            }
+
+            setStorageCourseGranted(isGranted)
           }
-
-          setStorageCourseGranted(isGranted)
         }
       } else {
         setStorageCourseGranted(false)
@@ -116,8 +122,9 @@ export function StorageCourseContextProvider({
       if (permissions === null) {
         console.log('zero courses to list')
       }
-
-      setCourse(permissions[0])
+      if (permission) {
+        setCourse(permissions)
+      }
       return permissions
     } catch (error) {
       console.error('Error listing permissions in context:', error)
@@ -139,6 +146,11 @@ export function StorageCourseContextProvider({
     }
   }
 
+  // setpermission index
+  function setPermissionIndex(index: number) {
+    setIndex(index)
+  }
+
   return (
     <StorageCourseContext.Provider
       value={{
@@ -148,6 +160,8 @@ export function StorageCourseContextProvider({
         listCourses,
         permission,
         deleteCourse,
+        index,
+        setPermissionIndex,
       }}
     >
       {children}

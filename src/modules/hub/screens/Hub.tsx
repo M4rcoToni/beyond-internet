@@ -19,12 +19,14 @@ export type Courses = {
 }
 
 export function Hub() {
-  const [content, setContent] = useState<Courses[]>([])
-  const [refreshing, setRefreshing] = useState(false)
-  const { handleSelectSection } = useSection()
   const navigation = useNavigation()
   const { getDirectoryUri, listCourses } = useStorage()
   const { width } = useDimensions()
+  const { handleSelectSection } = useSection()
+  const { setPermissionIndex } = useStorage()
+
+  const [content, setContent] = useState<Courses[]>([])
+  const [refreshing, setRefreshing] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   async function getCourse() {
@@ -40,11 +42,14 @@ export function Hub() {
     }
   }, [listCourses])
 
-  async function onCoursePress(course: Section) {
+  async function onCoursePress(course: Section, index: number) {
     setIsLoading(true)
+    console.log(course, 'onCoursePress')
+
     await handleSelectSection(course)
     setIsLoading(false)
-    navigation.navigate('Course')
+    setPermissionIndex(index)
+    navigation.navigate('Course', { index })
   }
 
   useEffect(() => {
