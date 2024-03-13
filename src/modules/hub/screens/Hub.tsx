@@ -19,43 +19,13 @@ export type Courses = {
 }
 
 export function Hub() {
-  const navigation = useNavigation()
-  const { getDirectoryUri, listCourses } = useStorage()
+  const { getDirectoryUri, listCourses, deleteCourse, setPermissionIndex, onCoursePress, permission } = useStorage()
   const { width } = useDimensions()
-  const { handleSelectSection } = useSection()
-  const { setPermissionIndex } = useStorage()
-
-  const [content, setContent] = useState<Courses[]>([])
-  const [refreshing, setRefreshing] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
 
   async function getCourse() {
     await getDirectoryUri()
   }
 
-  const checkStorageCourse = useCallback(async () => {
-    const permissions = await listCourses()
-
-    if (permissions) {
-      setContent(permissions)
-      setRefreshing(false)
-    }
-  }, [listCourses])
-
-  async function onCoursePress(course: Section, index: number) {
-    setIsLoading(true)
-    console.log(course, 'onCoursePress')
-
-    await handleSelectSection(course)
-    setIsLoading(false)
-    setPermissionIndex(index)
-    navigation.navigate('Course', { index })
-  }
-
-  useEffect(() => {
-    checkStorageCourse()
-    console.log(' useEffect')
-  }, [])
 
   return (
     <>
@@ -68,11 +38,12 @@ export function Hub() {
           }
         >
           <CourseList
-            data={content}
-            refreshing={refreshing}
-            onRefresh={checkStorageCourse}
+            data={permission}
+            refreshing={false}
+            onRefresh={listCourses}
             getCourse={getCourse}
             onCoursePress={onCoursePress}
+            deleteCourse={deleteCourse}
           />
         </Container>
       </Content>

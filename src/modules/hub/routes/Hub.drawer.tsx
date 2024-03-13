@@ -28,6 +28,7 @@ export default function HubDrawer() {
         overlayColor: '#0000002b',
         // drawerPosition: 'right',
         drawerStatusBarAnimation: 'slide',
+
         headerRight: () => (
           <>
             <View style={{ width: 100, height: 20 }}>
@@ -50,15 +51,17 @@ export default function HubDrawer() {
         name="Course"
         options={() => ({
           headerShown: true,
-          headerTitle: permission[index].index?.name
-            ? permission[index].index.name
-            : 'Aulas',
+          headerTitle:
+            index &&
+              permission[index].index?.name
+              ? permission[index].index.name
+              : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
           gestureResponseDistance: {
             horizontal: 100,
           },
-          shouldPreventDefaultGesture: true, // Impede que o usuário abra o drawer durante a renderização
+          shouldPreventDefaultGesture: true,
         })}
         component={MemoizedCourse}
       />

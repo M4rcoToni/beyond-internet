@@ -17,29 +17,16 @@ export async function createCourse({
           [courseId, directoryName, uri, files, index, granted ? 1 : 0],
           (_, result) => {
             if (result.rowsAffected > 0) {
-              // Agora, após a inserção, buscamos o registro inserido
 
-              if (result.rows.length > 0) {
-                const {
-                  courseId,
-                  directoryName,
-                  uri,
-                  files,
-                  granted,
-                  indexFile,
-                } = result.rows.item(0)
+              resolve({
+                courseId,
+                directoryName,
+                uri,
+                files: JSON.parse(files),
+                granted,
+                index,
+              })
 
-                resolve({
-                  courseId,
-                  directoryName,
-                  uri,
-                  files: JSON.parse(files),
-                  granted,
-                  index: indexFile,
-                })
-              } else {
-                resolve(null)
-              }
             } else {
               resolve(null)
             }

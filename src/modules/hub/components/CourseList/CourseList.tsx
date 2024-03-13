@@ -11,6 +11,7 @@ interface CourseListProps {
   refreshing: boolean
   onRefresh: () => void
   getCourse?: () => void
+  deleteCourse: (courseId: string) => void
   onCoursePress: (section: Section, index: number) => void
   style?: StyleProp<ViewStyle>
 }
@@ -21,11 +22,15 @@ export function CourseList({
   refreshing,
   getCourse,
   onCoursePress,
+  deleteCourse,
   ...rest
 }: CourseListProps) {
   return (
     <FlatList
       {...rest}
+      contentContainerStyle={{
+        flex: 1
+      }}
       data={data}
       // horizontal
       refreshing={refreshing}
@@ -37,18 +42,18 @@ export function CourseList({
           subTitle={`${item.index.sections.length} aulas`}
           image={item.files[4]}
           onPress={() => onCoursePress(item.index.sections[index], index)}
-          // onLongPress={() => {
-          //   deleteCourse(item.courseId)
-          // }}
+          onLongPress={() => {
+            deleteCourse(item.courseId)
+          }}
         />
       )}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       ListEmptyComponent={() => <CourseEmpty getCourse={getCourse} />}
-      // ListFooterComponent={() => (
-      //   <Button title="Adicionar curso" onPress={getCourse} />
-      // )}
+    // ListFooterComponent={() => (
+    //   <Button title="Adicionar curso" onPress={getCourse} />
+    // )}
     />
   )
 }

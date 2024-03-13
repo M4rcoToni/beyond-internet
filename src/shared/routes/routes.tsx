@@ -15,15 +15,15 @@ export function Routes() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <DimensionContextProvider>
-        <StorageCourseContextProvider>
+      <NavigationContainer>
+        <DimensionContextProvider>
           <SectionContextProvider>
-            <NavigationContainer>
+            <StorageCourseContextProvider>
               {user ? <HubDrawer /> : <AuthRoutes />}
-            </NavigationContainer>
+            </StorageCourseContextProvider>
           </SectionContextProvider>
-        </StorageCourseContextProvider>
-      </DimensionContextProvider>
+        </DimensionContextProvider>
+      </NavigationContainer>
     </SafeAreaView>
   )
 }

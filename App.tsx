@@ -28,6 +28,9 @@ export default function App() {
       console.error('Database initialization error: ', error)
     }
   }
+  if (!fontsLoaded) {
+    return < ActivityIndicator />
+  }
 
   initializeApp()
 
@@ -35,10 +38,10 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar
         backgroundColor="transparent"
-        // translucent
+      // translucent
       />
       <AuthContextProvider>
-        {fontsLoaded ? <Routes /> : <ActivityIndicator />}
+        <Routes />
       </AuthContextProvider>
     </ThemeProvider>
   )

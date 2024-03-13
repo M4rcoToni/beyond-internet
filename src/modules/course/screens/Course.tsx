@@ -22,6 +22,9 @@ export function Course() {
   // console.log(section, 'test')
 
   const { index } = route.params as { index: number }
+  // console.log('2', permission[index].files[1] + section.images[0]);
+  console.log(permission[0].files[3] + section.images[0]);
+
 
   return (
     <Container>
@@ -30,7 +33,7 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: permission[index].files[3] + section.images[0],
+          uri: permission[index].files[3] + '%2Falgebra.png',
         }}
         style={{ width: 200, height: 200, alignSelf: 'center' }}
       />

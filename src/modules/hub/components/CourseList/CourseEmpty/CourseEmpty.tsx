@@ -4,7 +4,7 @@ import { Divider } from './styles'
 import Lamp from '@assets/folder.svg'
 
 interface CourseEmptyProps {
-  getCourse?: () => void
+  getCourse?: () => Promise<void>
 }
 
 export function CourseEmpty({ getCourse }: CourseEmptyProps) {
@@ -14,7 +14,6 @@ export function CourseEmpty({ getCourse }: CourseEmptyProps) {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 40,
       }}
     >
       <SubTitle size={22} text="Nenhum curso encontrado" />
