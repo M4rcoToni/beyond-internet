@@ -1,4 +1,10 @@
-import React, { createContext, useState, ReactNode, useEffect, useCallback } from 'react'
+import React, {
+  createContext,
+  useState,
+  ReactNode,
+  useEffect,
+  useCallback,
+} from 'react'
 import * as FileSystem from 'expo-file-system'
 import { Courses } from '@modules/hub/screens/Hub'
 import {
@@ -20,7 +26,7 @@ type StorageCourseContextProps = {
   permission: Courses[]
   index: number
   setPermissionIndex: (index: number) => void
-  isLoading: boolean;
+  isLoading: boolean
   onCoursePress: (course: Section, index: number) => void
 }
 
@@ -57,17 +63,17 @@ export function StorageCourseContextProvider({
           await FileSystem.StorageAccessFramework.readDirectoryAsync(uri)
 
         const index = files.find((file) => {
-          console.log(file.indexOf('.json'));
+          console.log(file.indexOf('.json'))
           if (file.indexOf('.json') !== -1) {
             return file
           }
-
+          return null
         })
-        console.log(index);
+        console.log(index)
 
         if (index) {
           const filesContent = await FileSystem.getInfoAsync(index)
-          console.log(filesContent.exists);
+          console.log(filesContent.exists)
 
           if (filesContent.exists) {
             const content = await FileSystem.readAsStringAsync(filesContent.uri)
@@ -76,7 +82,7 @@ export function StorageCourseContextProvider({
 
             // Verifique se já existe uma permissão no SQLite para este diretório
             const isGranted = await checkCourseGrantedController(contentJson.id)
-            console.log(isGranted, 'isGRANTED');
+            console.log(isGranted, 'isGRANTED')
 
             if (!isGranted) {
               // Se não houver permissão no SQLite, crie uma nova
@@ -91,22 +97,23 @@ export function StorageCourseContextProvider({
                 index: JSON.stringify(contentJson),
               })
 
-              setCourse([{
-                courseId: contentJson.id,
-                directoryName: contentJson.name,
-                uri,
-                files: filesJson,
-                granted: true,
-                index: contentJson,
-              }])
-
+              setCourse([
+                {
+                  courseId: contentJson.id,
+                  directoryName: contentJson.name,
+                  uri,
+                  files: filesJson,
+                  granted: true,
+                  index: contentJson,
+                },
+              ])
             }
 
             setStorageCourseGranted(isGranted)
           }
         }
       } else {
-        console.log('index not found');
+        console.log('index not found')
 
         setStorageCourseGranted(false)
       }
@@ -116,15 +123,7 @@ export function StorageCourseContextProvider({
     }
   }
 
-  const checkStorageCourse = useCallback(async () => {
-    const permissions = await listCourses()
-
-    if (permissions) {
-      setCourse(permissions)
-    }
-  }, [listCourses])
-
-  async function listCourses() {
+  const listCourses = useCallback(async () => {
     try {
       const permissions = await listGrantedCoursesController()
 
@@ -139,7 +138,15 @@ export function StorageCourseContextProvider({
       console.error('Error listing permissions in context:', error)
       return null
     }
-  }
+  }, [permission])
+
+  const checkStorageCourse = useCallback(async () => {
+    const permissions = await listCourses()
+
+    if (permissions) {
+      setCourse(permissions)
+    }
+  }, [listCourses])
 
   // delete course
   async function deleteCourse(id: string) {
@@ -170,10 +177,9 @@ export function StorageCourseContextProvider({
     navigation.navigate('Course', { index })
   }
 
-
   useEffect(() => {
     checkStorageCourse()
-  }, [])
+  }, [checkStorageCourse])
 
   return (
     <StorageCourseContext.Provider

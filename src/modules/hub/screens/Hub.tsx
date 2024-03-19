@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import { Container, Content } from './styles'
 
 import { useDimensions } from '@shared/hooks/useDimensions'
 import { useStorage } from '@shared/hooks/useStorage'
 import { CourseList } from '../components/CourseList/CourseList'
-import { CourseType, Section } from '@modules/course/screens/CourseType'
-import { useSection } from '@shared/hooks/useSection'
-import { useNavigation } from '@react-navigation/native'
+import { CourseType } from '@modules/course/screens/CourseType'
 
 export type Courses = {
   id?: string
@@ -19,13 +17,19 @@ export type Courses = {
 }
 
 export function Hub() {
-  const { getDirectoryUri, listCourses, deleteCourse, setPermissionIndex, onCoursePress, permission } = useStorage()
+  const {
+    getDirectoryUri,
+    listCourses,
+    deleteCourse,
+    setPermissionIndex,
+    onCoursePress,
+    permission,
+  } = useStorage()
   const { width } = useDimensions()
 
   async function getCourse() {
     await getDirectoryUri()
   }
-
 
   return (
     <>
