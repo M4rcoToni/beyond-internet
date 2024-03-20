@@ -10,7 +10,7 @@ interface Link {
 export function Link({ onPress, title }: Link) {
   return (
     <LinkStyled onPress={onPress}>
-      <SubTitle>{title}</SubTitle>
+      <SubTitle text={title} />
     </LinkStyled>
   )
 }

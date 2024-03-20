@@ -1,0 +1,57 @@
+{
+  "id": 5,
+  "name": "Matematica",
+  "sections": [
+    {
+      "id": 1,
+      "title": "Algebra",
+      "description": "seccion de alebra y sus aplicaciones",
+      "images": [
+        "%2Flgebra.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 1,
+          "title": "Prueba flipante Algebra",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Multiplicacion",
+      "description": "Seccion de informacion sobre multiplicacion",
+      "images": [
+        "%2Fmultiplicacion.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "test": [
+        {
+          "id": 2,
+          "title": "Prueba flipante Multiplicacion",
+          "questions": []
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Probabilidad",
+      "description": "Actividades relacionadas a probabilidad",
+      "images": [
+        "%2Fprobabilidad.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "test": [
+        {
+          "id": 3,
+          "title": "Prueba flipante Provbabilidad",
+          "questions": []
+        }
+      ]
+    }
+  ]
+}

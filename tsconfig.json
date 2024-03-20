@@ -14,8 +14,17 @@
         "shared/*"
       ],
       "@database/*": [
-        "database/*"
-      ]
+        "database/modules/*"
+      ],
+      "@components/*": [
+        "shared/components/*"
+      ],
+      "@assets/*": [
+        "shared/assets/*"
+      ],
+      "@hooks/*": [
+        "shared/hooks/*"
+      ],
     }
   }
 }

@@ -1,0 +1,7 @@
+export type User = {
+  id?: string
+  name: string
+  cpf: string
+  password: string
+  isLogged?: boolean
+}

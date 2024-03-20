@@ -1,5 +1,4 @@
-import { SignIn } from '@modules/signin/screens/SignIn'
-import { SignUp } from '@modules/signup/screens/SignUp'
+import { SignIn, SignUp } from '@modules/login/screens'
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
@@ -8,7 +7,6 @@ import {
 type AuthRoutes = {
   signIn: undefined
   signUp: undefined
-  hub: undefined
 }
 
 export type AuthNavigatorRouterProps = NativeStackNavigationProp<AuthRoutes>

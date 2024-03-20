@@ -1,15 +1,60 @@
-import { ScrollView, View } from 'react-native'
-import { ClassCard } from '../components/ClassCard/ClassCard'
-import React from 'react'
-import { Container, ScrollViewStyled } from './styles'
+import React, { useEffect } from 'react'
+import { Container, Content } from './styles'
+
+import { useDimensions } from '@shared/hooks/useDimensions'
+import { useStorage } from '@shared/hooks/useStorage'
+import { CourseList } from '../components/CourseList/CourseList'
+import { CourseType } from '@modules/course/screens/CourseType'
+
+export type Courses = {
+  id?: string
+  courseId: string
+  directoryName: string
+  uri: string
+  files: string
+  granted: boolean
+  index: CourseType
+}
 
 export function Hub() {
+  const {
+    getDirectoryUri,
+    listCourses,
+    deleteCourse,
+    setPermissionIndex,
+    onCoursePress,
+    checkStorageCourse,
+    course,
+  } = useStorage()
+  const { width } = useDimensions()
+
+  async function getCourse() {
+    await getDirectoryUri()
+  }
+  useEffect(() => {
+    checkStorageCourse()
+  }, [])
+
   return (
-    <ScrollViewStyled>
-      <Container>
-        <ClassCard title="Empreendedorismo" subTitle="6 semestre" />
-        <ClassCard title="Empreendedorismo" subTitle="6 semestre" />
-      </Container>
-    </ScrollViewStyled>
+    <>
+      <Content>
+        <Container
+          style={
+            width > 700 ?? {
+              flexDirection: 'row',
+            }
+          }
+        >
+          <CourseList
+            data={course}
+            refreshing={false}
+            onRefresh={listCourses}
+            getCourse={getCourse}
+            onCoursePress={onCoursePress}
+            deleteCourse={deleteCourse}
+          />
+        </Container>
+      </Content>
+    </>
   )
 }

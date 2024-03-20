@@ -1,4 +1,4 @@
-import { TouchableOpacityProps } from 'react-native'
+import { StyleProp, TouchableOpacityProps } from 'react-native'
 
 import { Title } from '../Title/Title'
 import { ButtonTypeStyleProps, ButtonStyled } from './ButtonStyled'
@@ -8,9 +8,9 @@ type Props = TouchableOpacityProps & {
   type?: ButtonTypeStyleProps
 }
 
-export function Button({ title, type = 'PRIMARY', ...rest }: Props) {
+export function Button({ title, type = 'PRIMARY', style, ...rest }: Props) {
   return (
-    <ButtonStyled type={type} {...rest}>
+    <ButtonStyled type={type} {...rest} style={style}>
       <Title>{title}</Title>
     </ButtonStyled>
   )

@@ -2,10 +2,10 @@ import React, { createContext, useEffect, useState, useCallback } from 'react'
 import { useWindowDimensions } from 'react-native'
 
 export type DimensionContextDataProps = {
-  width: number | null
-  height: number | null
-  scale: number | null
-  fontScale: number | null
+  width: number
+  height: number
+  scale: number
+  fontScale: number
 }
 
 type DimensionContextProviderProps = {
@@ -19,9 +19,9 @@ export const DimensionContext = createContext<DimensionContextDataProps>(
 export function DimensionContextProvider({
   children,
 }: DimensionContextProviderProps) {
-  const [width, setWidth] = useState<number | null>(null)
-  const [height, setHeight] = useState<number | null>(null)
-  const [scale, setScale] = useState<number | null>(null)
+  const [width, setWidth] = useState<number>(0)
+  const [height, setHeight] = useState<number>(0)
+  const [scale, setScale] = useState<number>(0)
   const dimensions = useWindowDimensions()
 
   const GetWidthDimensions = useCallback(() => {
