@@ -4,7 +4,6 @@ import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 import { User } from 'databases/modules/users/model'
 import { Feather } from '@expo/vector-icons'
-import { usePermissions } from 'expo-av/build/Audio'
 import { useStorage } from '@shared/hooks/useStorage'
 
 interface HubContentProps {
@@ -14,6 +13,7 @@ interface HubContentProps {
 
 export function HubContent({ signOut, user }: HubContentProps) {
   const { getDirectoryUri } = useStorage()
+
   return (
     <>
       <FlatList

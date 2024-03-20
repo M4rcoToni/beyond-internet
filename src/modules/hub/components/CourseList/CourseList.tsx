@@ -29,7 +29,7 @@ export function CourseList({
     <FlatList
       {...rest}
       contentContainerStyle={{
-        flex: 1
+        flex: 1,
       }}
       data={data}
       // horizontal
@@ -40,7 +40,7 @@ export function CourseList({
         <CourseCard
           title={item.index.name}
           subTitle={`${item.index.sections.length} aulas`}
-          image={item.files[4]}
+          image={item.files[2]}
           onPress={() => onCoursePress(item.index.sections[index], index)}
           onLongPress={() => {
             deleteCourse(item.courseId)
@@ -51,9 +51,9 @@ export function CourseList({
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       ListEmptyComponent={() => <CourseEmpty getCourse={getCourse} />}
-    // ListFooterComponent={() => (
-    //   <Button title="Adicionar curso" onPress={getCourse} />
-    // )}
+      // ListFooterComponent={() => (
+      //   <Button title="Adicionar curso" onPress={getCourse} />
+      // )}
     />
   )
 }

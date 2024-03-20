@@ -30,7 +30,7 @@ export const AuthContext = createContext<AuthContextDataProps>(
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoadingUserStorage, setIsLoadingUserStorage] = useState(true)
-  const { permission } = useStorage()
+  const { course } = useStorage()
 
   async function login(cpf: string, isLogged: number) {
     try {
@@ -99,7 +99,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
       const res = await updateUserIsLoggedController(user?.cpf || '', 0)
 
-      await updateGrantedCourseController(permission.courseId, false)
+      await updateGrantedCourseController(course[0].courseId, false)
 
       if (!res) {
         throw new Error('Erro no signOut')

@@ -29,7 +29,7 @@ export default function App() {
     }
   }
   if (!fontsLoaded) {
-    return < ActivityIndicator />
+    return <ActivityIndicator />
   }
 
   initializeApp()
@@ -38,7 +38,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar
         backgroundColor="transparent"
-      // translucent
+        // translucent
       />
       <AuthContextProvider>
         <Routes />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Content } from './styles'
 
 import { useDimensions } from '@shared/hooks/useDimensions'
@@ -23,13 +23,17 @@ export function Hub() {
     deleteCourse,
     setPermissionIndex,
     onCoursePress,
-    permission,
+    checkStorageCourse,
+    course,
   } = useStorage()
   const { width } = useDimensions()
 
   async function getCourse() {
     await getDirectoryUri()
   }
+  useEffect(() => {
+    checkStorageCourse()
+  }, [])
 
   return (
     <>
@@ -42,7 +46,7 @@ export function Hub() {
           }
         >
           <CourseList
-            data={permission}
+            data={course}
             refreshing={false}
             onRefresh={listCourses}
             getCourse={getCourse}

@@ -23,7 +23,7 @@ type StorageCourseContextProps = {
   checkStorageCourse: () => Promise<void>
   deleteCourse: (id: string) => Promise<void>
   listCourses: () => Promise<Courses[] | null>
-  permission: Courses[]
+  course: Courses[]
   index: number
   setPermissionIndex: (index: number) => void
   isLoading: boolean
@@ -44,7 +44,7 @@ export function StorageCourseContextProvider({
   const [storageCourseGranted, setStorageCourseGranted] = useState<
     boolean | null
   >(null)
-  const [permission, setCourse] = useState<Courses[]>([] as Courses[])
+  const [course, setCourse] = useState<Courses[]>([] as Courses[])
   const [index, setIndex] = useState<number>(0)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -125,28 +125,36 @@ export function StorageCourseContextProvider({
 
   const listCourses = useCallback(async () => {
     try {
-      const permissions = await listGrantedCoursesController()
+      const storageCourses = await listGrantedCoursesController()
 
-      if (permissions === null) {
+      if (storageCourses === null) {
         console.log('zero courses to list')
       }
-      if (permission) {
-        setCourse(permissions)
+      if (course) {
+        setCourse(storageCourses)
       }
-      return permissions
+      return storageCourses
     } catch (error) {
       console.error('Error listing permissions in context:', error)
       return null
     }
-  }, [permission])
+  }, [course])
 
   const checkStorageCourse = useCallback(async () => {
     const permissions = await listCourses()
+    console.log(permissions, 'permissions')
 
     if (permissions) {
-      setCourse(permissions)
+      const courseAlreadySaved = permissions.find((permission) => {
+        if (course.includes(permission)) {
+          return permission
+        }
+      })
+      if (!courseAlreadySaved) {
+        setCourse(permissions)
+      }
     }
-  }, [listCourses])
+  }, [course, listCourses])
 
   // delete course
   async function deleteCourse(id: string) {
@@ -179,7 +187,7 @@ export function StorageCourseContextProvider({
 
   useEffect(() => {
     checkStorageCourse()
-  }, [checkStorageCourse])
+  }, [])
 
   return (
     <StorageCourseContext.Provider
@@ -189,7 +197,7 @@ export function StorageCourseContextProvider({
         checkStorageCourse,
         listCourses,
         isLoading,
-        permission,
+        course,
         deleteCourse,
         index,
         setPermissionIndex,

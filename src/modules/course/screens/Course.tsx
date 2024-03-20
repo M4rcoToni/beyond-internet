@@ -18,14 +18,10 @@ type Courses = {
 export function Course() {
   const { section } = useSection()
   const route = useRoute()
-  const { permission } = useStorage()
-  // console.log(section, 'test')
+  const { course } = useStorage()
 
   const { index } = route.params as { index: number }
-  // console.log('2', permission[index].files[1] + section.images[0]);
-  console.log(permission[0].files[3] + section.images[0]);
-
-
+  // p0w3rc0d3#@lph@#$%
   return (
     <Container>
       <SubTitle size={20} text={section.title} />
@@ -33,7 +29,7 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: permission[index].files[3] + '%2Falgebra.png',
+          uri: course[index].files[3] + section.images[0],
         }}
         style={{ width: 200, height: 200, alignSelf: 'center' }}
       />
