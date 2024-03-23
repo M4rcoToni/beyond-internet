@@ -4,26 +4,26 @@
     "strict": true,
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": [
-        "modules/*"
+      "@ui/*": [
+        "ui/*"
       ],
-      "@config/*": [
-        "config/*"
+      "@screens/*": [
+        "ui/screens/*"
       ],
-      "@shared/*": [
-        "shared/*"
+      "@routes/*": [
+        "ui/routes/*"
+      ],
+      "@components/*": [
+        "ui/components/*"
       ],
       "@database/*": [
         "database/modules/*"
       ],
-      "@components/*": [
-        "shared/components/*"
-      ],
       "@assets/*": [
-        "shared/assets/*"
+        "ui/assets/*"
       ],
-      "@hooks/*": [
-        "shared/hooks/*"
+      "@data/*": [
+        "data/*"
       ],
     }
   }

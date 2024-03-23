@@ -8,10 +8,9 @@ import {
 } from '@expo-google-fonts/poppins'
 import React from 'react'
 import 'react-native-gesture-handler'
-import theme from './src/shared/theme'
-import { Routes } from '@shared/routes/routes'
-
-import { AuthContextProvider } from '@shared/contexts/AuthContext'
+import { Routes } from '@ui/routes'
+import theme from '@ui/theme'
+import { AuthContextProvider } from 'data/contexts/AuthContext'
 import { initializeDatabase } from 'databases/initializeDatabase'
 
 export default function App() {
@@ -36,10 +35,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar
-        backgroundColor="transparent"
-        // translucent
-      />
+      <StatusBar backgroundColor="transparent" translucent />
       <AuthContextProvider>
         <Routes />
       </AuthContextProvider>

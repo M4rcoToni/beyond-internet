@@ -10,13 +10,31 @@ module.exports = function (api) {
           extensions: ['.ts', '.tsx'],
           root: ['./src'],
           alias: {
-            '@shared': './src/shared',
-            '@config': './src/config',
-            '@modules': './src/modules',
+            // "@ui/*": [
+            //   "ui/*"
+            // ],
+            // "@screens/*": [
+            //   "ui/screens/*"
+            // ],
+            // "@routes/*": [
+            //   "ui/routes/*"
+            // ],
+            // "@components/*": [
+            //   "ui/components/*"
+            // ],
+            // "@database/*": [
+            //   "database/modules/*"
+            // ],
+            // "@assets/*": [
+            //   "ui/assets/*"
+            // ],
+            '@ui': './src/ui',
+            '@screens': './src/ui/screens',
+            '@routes': './src/ui/routes',
+            '@components': './src/ui/components',
             '@database': './src/database/modules',
-            '@components': './src/shared/components',
-            '@assets': './src/shared/assets',
-            '@hooks': './src/shared/hooks',
+            '@assets': './src/ui/assets',
+            '@data': './src/data',
           },
         },
       ],

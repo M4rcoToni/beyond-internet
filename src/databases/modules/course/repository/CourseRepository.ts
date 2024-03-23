@@ -17,7 +17,6 @@ export async function createCourse({
           [courseId, directoryName, uri, files, index, granted ? 1 : 0],
           (_, result) => {
             if (result.rowsAffected > 0) {
-
               resolve({
                 courseId,
                 directoryName,
@@ -26,7 +25,6 @@ export async function createCourse({
                 granted,
                 index,
               })
-
             } else {
               resolve(null)
             }
