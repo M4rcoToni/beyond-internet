@@ -10,10 +10,16 @@ import { CPFMask } from 'data/helpers/CpfMask'
 import { useAuth } from 'data/hooks/useAuth'
 import { LoginFormDataProps, signInSchema } from 'data/utils/FormValidator'
 import { ScrollView } from 'react-native'
+import { useSignInViewModel } from './useSignInViewModel'
+import { AuthService } from '@data/services/auth'
+import { AuthRepository } from '@data/repositories/auth'
 
 export function SignIn() {
   const navigation = useNavigation()
-  const { signIn } = useAuth()
+
+  const { handleSignIn } = useSignInViewModel(
+    new AuthRepository(new AuthService()),
+  )
 
   const {
     control,
@@ -22,18 +28,6 @@ export function SignIn() {
   } = useForm<LoginFormDataProps>({
     resolver: yupResolver(signInSchema),
   })
-
-  async function handleSignIn({ cpf, password }: LoginFormDataProps) {
-    try {
-      await signIn(cpf, password)
-    } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1:
-          error instanceof Error ? error.message : 'Erro ao realizar login',
-      })
-    }
-  }
 
   return (
     <Container>
@@ -60,6 +54,7 @@ export function SignIn() {
                 }}
                 maxLength={14}
                 value={value}
+                keyboardType="numeric"
                 errorMessage={errors.cpf?.message}
               />
             )}
