@@ -2,7 +2,7 @@ import { Separator, Button, SubTitle } from '@ui/components'
 import React from 'react'
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
-import { User } from 'databases/modules/users/model'
+import { User } from '../../../../../sqlite/modules/users/model'
 import { Feather } from '@expo/vector-icons'
 import { useStorage } from '@shared/hooks/useStorage'
 

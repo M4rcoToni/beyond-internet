@@ -11,7 +11,7 @@ import 'react-native-gesture-handler'
 import { Routes } from '@ui/routes'
 import theme from '@ui/theme'
 import { AuthContextProvider } from 'data/contexts/AuthContext'
-import { initializeDatabase } from 'databases/initializeDatabase'
+import { initializeDatabase } from './sqlite/initializeDatabase'
 
 export default function App() {
   const [fontsLoaded] = useFonts({

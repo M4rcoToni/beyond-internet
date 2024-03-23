@@ -35,6 +35,7 @@ module.exports = function (api) {
             '@database': './src/database/modules',
             '@assets': './src/ui/assets',
             '@data': './src/data',
+            '@sqlite': './sqlite',
           },
         },
       ],

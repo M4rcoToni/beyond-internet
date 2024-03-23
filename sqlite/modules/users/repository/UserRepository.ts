@@ -1,5 +1,5 @@
 /* eslint-disable n/no-callback-literal */
-import { db } from 'databases'
+import { db } from '../../..'
 import { User } from '../model'
 
 export async function createUser({

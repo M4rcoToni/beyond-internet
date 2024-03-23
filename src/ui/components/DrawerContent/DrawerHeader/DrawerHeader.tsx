@@ -1,5 +1,5 @@
 import { Photo, Separator } from '@ui/components'
-import { User } from 'databases/modules/users/model'
+import { User } from '../../../../../sqlite/modules/users/model'
 import { Container, Title, SubTitle } from './styles'
 
 interface DrawerHeaderProps {

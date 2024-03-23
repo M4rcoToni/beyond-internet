@@ -1,4 +1,4 @@
-import { User } from 'databases/modules/users/model'
+import { User } from '../../../../../sqlite/modules/users/model'
 import { Result } from '../../../result/index'
 
 export interface IAuthRepository {

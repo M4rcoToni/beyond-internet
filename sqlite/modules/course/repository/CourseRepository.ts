@@ -1,4 +1,4 @@
-import { db } from 'databases'
+import { db } from '../../..'
 import { Courses } from '../model'
 
 export async function createCourse({

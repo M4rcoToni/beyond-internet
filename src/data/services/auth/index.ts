@@ -3,7 +3,8 @@ import { Result } from '@data/result'
 import {
   getUserByCPFController,
   updateUserIsLoggedController,
-} from 'databases/modules/users/controller/UserController'
+} from '@sqlite/modules/users/controller/UserController'
+
 import * as Crypto from 'expo-crypto'
 
 export class AuthService implements IAuthService {

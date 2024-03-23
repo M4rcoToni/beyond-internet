@@ -11,10 +11,10 @@ import {
   createCourseController,
   deleteCourseController,
   listGrantedCoursesController,
-} from 'databases/modules/course/controller/CourseController'
+} from '../../../sqlite/modules/course/controller/CourseController'
 import { useNavigation } from '@react-navigation/native'
 import { Section } from '@ui/screens/course/CourseType'
-import { Courses } from 'databases/modules/course/model'
+import { Courses } from '../../../sqlite/modules/course/model'
 import { useSection } from '../hooks/useSection'
 
 type StorageCourseContextProps = {

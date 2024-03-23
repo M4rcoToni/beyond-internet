@@ -1,14 +1,14 @@
-import {
-  createUserController,
-  getUserByCPFController,
-  loadUserDataController,
-  updateUserIsLoggedController,
-} from 'databases/modules/users/controller/UserController'
-import { User } from 'databases/modules/users/model/User'
 import { createContext, useEffect, useState } from 'react'
 import * as Crypto from 'expo-crypto'
-import { updateGrantedCourseController } from 'databases/modules/course/controller/CourseController'
 import { FormDataProps } from '@data/utils/FormValidator'
+import { User } from '@sqlite/modules/users/model'
+import {
+  updateUserIsLoggedController,
+  getUserByCPFController,
+  createUserController,
+  loadUserDataController,
+} from '@sqlite/modules/users/controller/UserController'
+import { updateGrantedCourseController } from '@sqlite/modules/course/controller/CourseController'
 
 export type AuthContextDataProps = {
   user: User | null
