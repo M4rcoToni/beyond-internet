@@ -1,26 +1,37 @@
-import { CreateUserDTO } from '../interfaces/IUserInterface'
-import { UserModel } from '../model'
+import {
+  CreateUserDTO,
+  IUserService,
+  UserDTO,
+} from '../interfaces/IUserInterface'
 import { UserRepository } from '../repository'
 
-export class UserService {
+export class UserService implements IUserService {
   private userRepository: UserRepository
 
   constructor(userRepository: UserRepository) {
     this.userRepository = userRepository
   }
 
-  async createUser(payload: CreateUserDTO): Promise<UserModel | null> {
-    return this.userRepository.createUser(payload)
+  update(id: number, data: Partial<CreateUserDTO>): Promise<UserDTO | null> {
+    return this.userRepository.update(id, data)
   }
 
-  async findById(id: number): Promise<UserModel | null> {
+  create(payload: CreateUserDTO): Promise<UserDTO | null> {
+    return this.userRepository.create(payload)
+  }
+
+  findById(id: number): Promise<UserDTO | null> {
     return this.userRepository.findById(id)
   }
 
-  async findByField(
+  findByField(
     field: keyof CreateUserDTO,
     value: string,
-  ): Promise<UserModel | null> {
+  ): Promise<UserDTO | null> {
     return this.userRepository.findByField(field, value)
+  }
+
+  hashPassword(password: string): Promise<string> {
+    return this.userRepository.hashPassword(password)
   }
 }

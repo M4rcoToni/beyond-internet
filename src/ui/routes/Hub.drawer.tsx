@@ -4,7 +4,6 @@ import { Course } from '@ui/screens/course/Course'
 import { Hub } from '@ui/screens/hub/Hub'
 import React from 'react'
 import { View, useWindowDimensions } from 'react-native'
-import { useStorage } from '../../data/hooks/useStorage'
 
 const Drawer = createDrawerNavigator()
 const MemoizedCourse = React.memo(Course)
@@ -14,11 +13,12 @@ export default function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
 
-  const { permission, index } = useStorage()
+  // const { permission, index } = useStorage()
   return (
     <Drawer.Navigator
       drawerContent={(item) => (
-        <MemoizedDrawer drawer={item.navigation} screen={item.state.index} />
+        // <MemoizedDrawer drawer={item.navigation} screen={item.state.index} />
+        <View />
       )}
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'front',
@@ -45,7 +45,7 @@ export default function HubDrawer() {
         component={Hub}
       />
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Course"
         options={() => ({
           headerShown: true,
@@ -61,7 +61,7 @@ export default function HubDrawer() {
           shouldPreventDefaultGesture: true,
         })}
         component={MemoizedCourse}
-      />
+      /> */}
     </Drawer.Navigator>
   )
 }

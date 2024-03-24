@@ -1,5 +1,4 @@
-import { CreateUserDTO } from '../interfaces/IUserInterface'
-import { UserModel } from '../model'
+import { CreateUserDTO, UserDTO } from '../interfaces/IUserInterface'
 import { UserService } from '../service'
 
 export class UserController {
@@ -9,16 +8,16 @@ export class UserController {
     this.userService = userService
   }
 
-  async createUser(payload: CreateUserDTO): Promise<UserModel | null> {
+  async createUser(payload: CreateUserDTO): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.createUser(payload)
+      const user = await this.userService.create(payload)
       return user
     } catch (error) {
       throw new Error()
     }
   }
 
-  async findById(id: number): Promise<UserModel | null> {
+  async findById(id: number): Promise<UserDTO | null> {
     try {
       const user = await this.userService.findById(id)
       return user
@@ -30,10 +29,19 @@ export class UserController {
   async findByField(
     field: keyof CreateUserDTO,
     value: string,
-  ): Promise<UserModel | null> {
+  ): Promise<UserDTO | null> {
     try {
       const user = await this.userService.findByField(field, value)
       return user
+    } catch (error) {
+      throw new Error()
+    }
+  }
+
+  async hashPassword(password: string): Promise<string> {
+    try {
+      const passwordHash = await this.userService.hashPassword(password)
+      return passwordHash
     } catch (error) {
       throw new Error()
     }

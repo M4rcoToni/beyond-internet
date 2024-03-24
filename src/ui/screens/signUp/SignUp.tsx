@@ -5,18 +5,23 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Toast from 'react-native-toast-message'
 
-import { Content, Logo } from './styles'
+import { Content } from './styles'
 import { Image } from 'expo-image'
 
 import { SubTitle, Input, Button, Link, Container } from '@ui/components'
-import { useAuth } from 'data/hooks/useAuth'
 import { FormDataProps, signUpSchema } from '@data/utils/FormValidator'
-import { CPFMask } from 'data/helpers/CpfMask'
 import { ScrollView } from 'react-native'
+import { CPFMask } from '@data/utils/CpfMask'
+import { useSignUpViewModel } from './useSignUpViewModel'
+import { AuthRepository } from '@data/repositories/auth'
+import { AuthService } from '@data/services/auth'
 
 export function SignUp() {
   const navigation = useNavigation()
-  const { signUp } = useAuth()
+  const { handleSignUp } = useSignUpViewModel(
+    new AuthRepository(new AuthService()),
+  )
+
   const {
     control,
     handleSubmit,
@@ -24,25 +29,6 @@ export function SignUp() {
   } = useForm<FormDataProps>({
     resolver: yupResolver(signUpSchema),
   })
-
-  async function handleSignUp({
-    cpf,
-    name,
-    password,
-    passwordConfirm,
-  }: FormDataProps) {
-    try {
-      await signUp({ cpf, name, password, passwordConfirm })
-    } catch (error) {
-      console.log('error', error)
-
-      Toast.show({
-        type: 'error',
-        text1:
-          error instanceof Error ? error.message : 'Erro ao realizar cadastro',
-      })
-    }
-  }
 
   return (
     <Container>

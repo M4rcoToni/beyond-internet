@@ -1,9 +1,9 @@
 import { Photo, Separator } from '@ui/components'
-import { User } from '../../../../../sqlite/modules/users/model'
 import { Container, Title, SubTitle } from './styles'
+import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 
 interface DrawerHeaderProps {
-  user: User | null
+  user: UserDTO | null
 }
 
 export function DrawerHeader({ user }: DrawerHeaderProps) {

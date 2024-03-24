@@ -2,18 +2,17 @@ import { Separator, Button, SubTitle } from '@ui/components'
 import React from 'react'
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
-import { User } from '../../../../../sqlite/modules/users/model'
+import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
+// import { User } from '../../../../../sqlite/modules/users/model'
 import { Feather } from '@expo/vector-icons'
-import { useStorage } from '@shared/hooks/useStorage'
+// import { useStorage } from '@shared/hooks/useStorage'
 
 interface HubContentProps {
   signOut: () => void
-  user: User | null
+  user: UserDTO | null
 }
 
 export function HubContent({ signOut, user }: HubContentProps) {
-  const { getDirectoryUri } = useStorage()
-
   return (
     <>
       <FlatList
@@ -39,13 +38,13 @@ export function HubContent({ signOut, user }: HubContentProps) {
           {
             name: 'Abrir um curso',
             icon: 'plus-square',
-            onPress: () => getDirectoryUri(),
+            // onPress: () => getDirectoryUri(),
           },
         ]}
         renderItem={({ item }) => (
           <>
             <TouchableOpacity
-              onPress={item.onPress}
+              // onPress={item.onPress}
               style={{
                 flex: 1,
                 flexDirection: 'row',

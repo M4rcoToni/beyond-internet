@@ -4,15 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Toast from 'react-native-toast-message'
 import { Controller, useForm } from 'react-hook-form'
 import { Image } from 'expo-image'
-import { Content, Title } from './styles'
+import { Content } from './styles'
 import { SubTitle, Input, Container, Button, Link } from '@ui/components'
-import { CPFMask } from 'data/helpers/CpfMask'
-import { useAuth } from 'data/hooks/useAuth'
 import { LoginFormDataProps, signInSchema } from 'data/utils/FormValidator'
 import { ScrollView } from 'react-native'
 import { useSignInViewModel } from './useSignInViewModel'
 import { AuthService } from '@data/services/auth'
 import { AuthRepository } from '@data/repositories/auth'
+import { CPFMask } from '@data/utils/CpfMask'
 
 export function SignIn() {
   const navigation = useNavigation()
