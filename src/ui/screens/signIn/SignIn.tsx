@@ -17,7 +17,7 @@ import { AuthRepository } from '@data/repositories/auth'
 export function SignIn() {
   const navigation = useNavigation()
 
-  const { handleSignIn } = useSignInViewModel(
+  const { handleSignIn, loading } = useSignInViewModel(
     new AuthRepository(new AuthService()),
   )
 
@@ -77,6 +77,7 @@ export function SignIn() {
           <Button
             title="Entrar"
             type="PRIMARY"
+            isLoading={loading}
             style={{ height: 56 }}
             onPress={handleSubmit(handleSignIn)}
           />

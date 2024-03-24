@@ -21,8 +21,7 @@ export default function App() {
 
   async function initializeApp() {
     try {
-      const init = await initializeDatabase()
-      console.log(init)
+      await initializeDatabase()
     } catch (error) {
       console.error('Database initialization error: ', error)
     }

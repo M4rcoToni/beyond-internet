@@ -18,7 +18,6 @@ export async function initializeTableCourses(
         )`,
         [],
         () => {
-          console.log('course: Table created!')
           resolve()
         },
         (_, error) => {

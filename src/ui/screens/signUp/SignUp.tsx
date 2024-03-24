@@ -34,6 +34,8 @@ export function SignUp() {
     try {
       await signUp({ cpf, name, password, passwordConfirm })
     } catch (error) {
+      console.log('error', error)
+
       Toast.show({
         type: 'error',
         text1:

@@ -1,6 +1,6 @@
 import { Result } from '@data/result'
-import { User } from '../../../../../sqlite/modules/users/model'
+import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 
 export interface IAuthService {
-  login: (cpf: string, password: string) => Promise<Result<User | null>>
+  login: (cpf: string, password: string) => Promise<Result<UserDTO | null>>
 }

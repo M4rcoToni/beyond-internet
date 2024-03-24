@@ -1,7 +1,7 @@
 import { IAuthRepository } from '@data/interfaces/repositories/auth'
 import { IAuthService } from '@data/interfaces/services/auth'
 import { Result } from '@data/result'
-import { User } from '../../../../sqlite/modules/users/model'
+import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 
 export class AuthRepository implements IAuthRepository {
   // eslint-disable-next-line no-useless-constructor
@@ -9,7 +9,7 @@ export class AuthRepository implements IAuthRepository {
   async login(
     cpf: string,
     password: string,
-  ): Promise<Result<User | null> | undefined> {
+  ): Promise<Result<UserDTO | null> | undefined> {
     try {
       return await this.authService.login(cpf, password)
     } catch (error) {

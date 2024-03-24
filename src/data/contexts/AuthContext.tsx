@@ -1,14 +1,8 @@
 import { createContext, useEffect, useState } from 'react'
 import * as Crypto from 'expo-crypto'
 import { FormDataProps } from '@data/utils/FormValidator'
-import { User } from '@sqlite/modules/users/model'
-import {
-  updateUserIsLoggedController,
-  getUserByCPFController,
-  createUserController,
-  loadUserDataController,
-} from '@sqlite/modules/users/controller/UserController'
-import { updateGrantedCourseController } from '@sqlite/modules/course/controller/CourseController'
+
+import { updateGrantedCourseController } from '../../../sqlite/modules/course/controller/CourseController'
 
 export type AuthContextDataProps = {
   user: User | null
@@ -33,10 +27,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   async function login(cpf: string, isLogged: number) {
     try {
-      const res = await updateUserIsLoggedController(cpf, isLogged)
-      if (!res) {
-        throw new Error('Erro no login')
-      }
+      // const res = await updateUserIsLoggedController(cpf, isLogged)
+      // if (!res) {
+      //   throw new Error('Erro no login')
+      // }
     } finally {
       setIsLoadingUserStorage(false)
     }
@@ -44,25 +38,20 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   async function signIn(cpf: string, password: string) {
     try {
-      setIsLoadingUserStorage(true)
-
-      const user = await getUserByCPFController(cpf)
-
-      if (!user) {
-        throw new Error('Usuário não encontrado')
-      }
-
-      const passwordHash = await Crypto.digestStringAsync(
-        Crypto.CryptoDigestAlgorithm.SHA256,
-        password,
-      )
-
-      if (user?.password !== passwordHash) {
-        throw new Error('Senha incorreta')
-      }
-      await login(cpf, 1)
-      setUser(user)
-      // console.log(user)
+      // setIsLoadingUserStorage(true)
+      // const user = await getUserByCPFController(cpf)
+      // if (!user) {
+      //   throw new Error('Usuário não encontrado')
+      // }
+      // const passwordHash = await Crypto.digestStringAsync(
+      //   Crypto.CryptoDigestAlgorithm.SHA256,
+      //   password,
+      // )
+      // if (user?.password !== passwordHash) {
+      //   throw new Error('Senha incorreta')
+      // }
+      // await login(cpf, 1)
+      // setUser(user)
     } finally {
       setIsLoadingUserStorage(false)
     }
@@ -72,19 +61,20 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     try {
       setIsLoadingUserStorage(true)
 
-      const user = await createUserController({ cpf, name, password })
+      // const user = await createUserController({ cpf, name, password })
+      // console.log('user', user)
 
-      if (user === null) {
-        throw new Error('O CPF informado já está cadastrado')
-      }
+      // if (user === null) {
+      //   throw new Error('O CPF informado já está cadastrado')
+      // }
 
-      const userData = await getUserByCPFController(user.cpf)
+      // const userData = await getUserByCPFController(user.cpf)
 
-      if (!userData) {
-        throw new Error('Usuário não encontrado')
-      }
-      await login(cpf, 1)
-      setUser(userData)
+      // if (!userData) {
+      //   throw new Error('Usuário não encontrado')
+      // }
+      // await login(cpf, 1)
+      // setUser(userData)
     } finally {
       setIsLoadingUserStorage(false)
     }
@@ -92,17 +82,13 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   async function signOut() {
     try {
-      setIsLoadingUserStorage(true)
-
-      setUser(null)
-
-      const res = await updateUserIsLoggedController(user?.cpf || '', 0)
-
-      await updateGrantedCourseController(course[0].courseId, false)
-
-      if (!res) {
-        throw new Error('Erro no signOut')
-      }
+      // setIsLoadingUserStorage(true)
+      // setUser(null)
+      // const res = await updateUserIsLoggedController(user?.cpf || '', 0)
+      // await updateGrantedCourseController(course[0].courseId, false)
+      // if (!res) {
+      //   throw new Error('Erro no signOut')
+      // }
     } finally {
       setIsLoadingUserStorage(false)
     }
@@ -111,10 +97,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   useEffect(() => {
     async function loadUserData() {
       try {
-        const userLogged = await loadUserDataController()
-        if (userLogged) {
-          setUser(userLogged)
-        }
+        // const userLogged = await loadUserDataController()
+        // if (userLogged) {
+        //   setUser(userLogged)
+        // }
       } finally {
         setIsLoadingUserStorage(false)
       }
