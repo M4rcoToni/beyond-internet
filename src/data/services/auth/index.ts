@@ -1,4 +1,4 @@
-import { IAuthService } from '@data/interfaces/services/auth'
+import { IAuthService } from '@data/interfaces/auth'
 import { Result } from '@data/result'
 
 import { db } from '@sqlite/index'
@@ -39,5 +39,15 @@ export class AuthService implements IAuthService {
     const passwordHash = await userService.hashPassword(password)
 
     return passwordHash
+  }
+
+  async first() {
+    const userService = new UserController(
+      new UserService(new UserRepository(db, 'users')),
+    )
+
+    const user = await userService.first()
+
+    return user
   }
 }

@@ -12,6 +12,8 @@ import { Routes } from '@ui/routes'
 import theme from '@ui/theme'
 import { AuthContextProvider } from 'data/contexts/AuthContext'
 import { initializeDatabase } from './sqlite/initializeDatabase'
+import * as SplashScreen from 'expo-splash-screen'
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [fontsLoaded] = useFonts({

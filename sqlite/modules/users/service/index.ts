@@ -34,4 +34,8 @@ export class UserService implements IUserService {
   hashPassword(password: string): Promise<string> {
     return this.userRepository.hashPassword(password)
   }
+
+  first(): Promise<UserDTO | null> {
+    return this.userRepository.first()
+  }
 }

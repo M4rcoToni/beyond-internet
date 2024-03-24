@@ -102,4 +102,17 @@ export class UserRepository
     const passwordHash = await UserModel.hashPassword(password)
     return passwordHash
   }
+
+  async first(): Promise<UserDTO | null> {
+    let user: UserDTO | null = {} as UserDTO
+    await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      const sql = `SELECT * FROM ${this.tableName} WHERE isLogged = 1`
+      const result = await tx.executeSqlAsync(sql, [])
+
+      if ('rows' in result) {
+        user = result.rows[0] as UserDTO
+      }
+    })
+    return user || null
+  }
 }

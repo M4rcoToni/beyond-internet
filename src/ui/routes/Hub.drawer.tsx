@@ -1,9 +1,10 @@
-import { DrawerContent, createDrawerNavigator } from '@react-navigation/drawer'
 import { SubTitle } from '@ui/components'
 import { Course } from '@ui/screens/course/Course'
 import { Hub } from '@ui/screens/hub/Hub'
 import React from 'react'
 import { View, useWindowDimensions } from 'react-native'
+import { DrawerContent } from '../components/DrawerContent/DrawerContent'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 
 const Drawer = createDrawerNavigator()
 const MemoizedCourse = React.memo(Course)
@@ -17,14 +18,12 @@ export default function HubDrawer() {
   return (
     <Drawer.Navigator
       drawerContent={(item) => (
-        // <MemoizedDrawer drawer={item.navigation} screen={item.state.index} />
-        <View />
+        <MemoizedDrawer drawer={item.navigation} screen={item.state.index} />
       )}
       screenOptions={{
         drawerType: isLargeScreen ? 'permanent' : 'front',
         drawerStyle: isLargeScreen ? { width: '25%' } : { width: '90%' },
         overlayColor: '#0000002b',
-        // drawerPosition: 'right',
         drawerStatusBarAnimation: 'slide',
 
         headerRight: () => (
@@ -34,6 +33,7 @@ export default function HubDrawer() {
             </View>
           </>
         ),
+        headerLeft: () => null,
       }}
     >
       <Drawer.Screen

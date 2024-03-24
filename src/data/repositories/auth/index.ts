@@ -1,5 +1,4 @@
-import { IAuthRepository } from '@data/interfaces/repositories/auth'
-import { IAuthService } from '@data/interfaces/services/auth'
+import { IAuthRepository, IAuthService } from '@data/interfaces/auth'
 import { Result } from '@data/result'
 import {
   CreateUserDTO,
@@ -33,6 +32,14 @@ export class AuthRepository implements IAuthRepository {
       return await this.authService.hashPassword(password)
     } catch (error) {
       throw new Result(false, undefined, new Error('Erro ao criar hash'))
+    }
+  }
+
+  async first(): Promise<UserDTO | null> {
+    try {
+      return await this.authService.first()
+    } catch (error) {
+      throw new Result(false, undefined, new Error('Erro ao buscar usuário'))
     }
   }
 }

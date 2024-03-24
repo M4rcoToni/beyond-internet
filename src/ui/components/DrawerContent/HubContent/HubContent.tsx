@@ -24,10 +24,6 @@ export function HubContent({ signOut, user }: HubContentProps) {
             icon: 'folder',
           },
           {
-            name: 'Perfil',
-            icon: 'user',
-          },
-          {
             name: 'Provas',
             icon: 'file-text',
           },

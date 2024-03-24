@@ -7,9 +7,14 @@ import HubDrawer from './Hub.drawer'
 import { AuthRoutes } from './auth.routes'
 import { SectionContextProvider } from '../../data/contexts/SectionContext'
 import { useAuth } from '@data/contexts/AuthContext'
+import * as SplashScreen from 'expo-splash-screen'
 
 export function Routes() {
-  const { user } = useAuth()
+  const { user, loadingUser } = useAuth()
+
+  if (!loadingUser) {
+    SplashScreen.hideAsync()
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

@@ -46,4 +46,13 @@ export class UserController {
       throw new Error()
     }
   }
+
+  async first(): Promise<UserDTO | null> {
+    try {
+      const user = await this.userService.first()
+      return user
+    } catch (error) {
+      throw new Error()
+    }
+  }
 }
