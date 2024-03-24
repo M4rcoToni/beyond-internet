@@ -104,7 +104,7 @@ export class UserRepository
   }
 
   async first(): Promise<UserDTO | null> {
-    let user: UserDTO | null = {} as UserDTO
+    let user: UserDTO | null = null
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const sql = `SELECT * FROM ${this.tableName} WHERE isLogged = 1`
       const result = await tx.executeSqlAsync(sql, [])

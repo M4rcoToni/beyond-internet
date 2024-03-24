@@ -18,7 +18,7 @@ export async function initializeDatabase() {
 
   Promise.allSettled(promises)
     .then(() => {
-      console.log('Tabelas criadas')
+      console.log('Database inicializado com sucesso!')
       return true
     })
     .catch((error) => {
