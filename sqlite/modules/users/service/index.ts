@@ -38,4 +38,8 @@ export class UserService implements IUserService {
   first(): Promise<UserDTO | null> {
     return this.userRepository.first()
   }
+
+  login(cpf: string, password: string): Promise<UserDTO | null> {
+    return this.userRepository.login(cpf, password)
+  }
 }

@@ -6,6 +6,9 @@ import { useStorage } from '@data/hooks/useStorage'
 import { useNavigation } from '@react-navigation/native'
 import { CourseContent } from '../CourseContent/CourseContent'
 import { HubContent } from './HubContent/HubContent'
+import { useDrawerContentViewModel } from './useDrawerContentViewModel'
+import { AuthRepository } from '@data/repositories/auth'
+import { AuthService } from '@data/services/auth'
 
 interface DrawerContentProps {
   drawer: DrawerNavigationHelpers
@@ -13,7 +16,9 @@ interface DrawerContentProps {
 }
 
 export function DrawerContent({ drawer, screen }: DrawerContentProps) {
-  const { user } = useAuth()
+  const { user, handleLogout } = useDrawerContentViewModel(
+    new AuthRepository(new AuthService()),
+  )
   const navigation = useNavigation()
   const { course, index } = useStorage()
 
@@ -24,7 +29,7 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {/* {screen === 0 ? ( */}
-      <HubContent signOut={() => {}} user={user} />
+      <HubContent signOut={handleLogout} user={user} />
       {/* // ) : (
       //   <CourseContent
       //     sections={course[index].index.sections}

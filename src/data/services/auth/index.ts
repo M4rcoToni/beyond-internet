@@ -2,18 +2,15 @@ import { IAuthService } from '@data/interfaces/auth'
 import { Result } from '@data/result'
 
 import { db } from '@sqlite/index'
-import { UserController } from '@sqlite/modules/users/controller'
 import { CreateUserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 import { UserRepository } from '@sqlite/modules/users/repository'
 import { UserService } from '@sqlite/modules/users/service'
 
 export class AuthService implements IAuthService {
-  async login(cpf: string, password: string) {
-    const userService = new UserController(
-      new UserService(new UserRepository(db, 'users')),
-    )
+  private userService = new UserService(new UserRepository(db, 'users'))
 
-    const user = await userService.findByField('cpf', cpf)
+  async login(cpf: string, password: string) {
+    const user = await this.userService.login(cpf, password)
     if (!user) {
       throw new Error()
     }
@@ -22,31 +19,25 @@ export class AuthService implements IAuthService {
   }
 
   async createUser(payload: CreateUserDTO) {
-    const userService = new UserController(
-      new UserService(new UserRepository(db, 'users')),
-    )
-
-    const user = await userService.createUser(payload)
+    const user = await this.userService.create(payload)
 
     return user
   }
 
   async hashPassword(password: string) {
-    const userService = new UserController(
-      new UserService(new UserRepository(db, 'users')),
-    )
-
-    const passwordHash = await userService.hashPassword(password)
+    const passwordHash = await this.userService.hashPassword(password)
 
     return passwordHash
   }
 
   async first() {
-    const userService = new UserController(
-      new UserService(new UserRepository(db, 'users')),
-    )
+    const user = await this.userService.first()
 
-    const user = await userService.first()
+    return user
+  }
+
+  async update(id: number, data: Partial<CreateUserDTO>) {
+    const user = await this.userService.update(id, data)
 
     return user
   }

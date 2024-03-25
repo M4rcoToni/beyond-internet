@@ -17,6 +17,18 @@ export class UserController {
     }
   }
 
+  async update(
+    id: number,
+    data: Partial<CreateUserDTO>,
+  ): Promise<UserDTO | null> {
+    try {
+      const user = await this.userService.update(id, data)
+      return user
+    } catch (error) {
+      throw new Error()
+    }
+  }
+
   async findById(id: number): Promise<UserDTO | null> {
     try {
       const user = await this.userService.findById(id)

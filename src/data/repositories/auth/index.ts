@@ -27,6 +27,17 @@ export class AuthRepository implements IAuthRepository {
     }
   }
 
+  async update(
+    id: number,
+    data: Partial<CreateUserDTO>,
+  ): Promise<UserDTO | null> {
+    try {
+      return await this.authService.update(id, data)
+    } catch (error) {
+      throw new Result(false, undefined, new Error('Erro ao atualizar usuário'))
+    }
+  }
+
   async hashPassword(password: string): Promise<string> {
     try {
       return await this.authService.hashPassword(password)

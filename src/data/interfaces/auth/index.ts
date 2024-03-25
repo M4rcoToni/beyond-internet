@@ -12,6 +12,8 @@ export interface IAuthRepository {
 
   createUser: (payload: CreateUserDTO) => Promise<UserDTO | null>
 
+  update: (id: number, data: Partial<CreateUserDTO>) => Promise<UserDTO | null>
+
   hashPassword: (password: string) => Promise<string>
 
   first: () => Promise<UserDTO | null>
@@ -21,6 +23,8 @@ export interface IAuthService {
   login: (cpf: string, password: string) => Promise<Result<UserDTO | null>>
 
   createUser: (payload: CreateUserDTO) => Promise<UserDTO | null>
+
+  update: (id: number, data: Partial<CreateUserDTO>) => Promise<UserDTO | null>
 
   hashPassword: (password: string) => Promise<string>
 

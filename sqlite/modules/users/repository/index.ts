@@ -6,6 +6,7 @@ import {
 } from '../interfaces/IUserInterface'
 import { UserModel } from '../model'
 import { BaseRepository } from '@sqlite/modules/common/BaseRepository'
+import * as Crypto from 'expo-crypto'
 
 export class UserRepository
   extends BaseRepository<UserModel>
@@ -114,5 +115,33 @@ export class UserRepository
       }
     })
     return user || null
+  }
+
+  async login(cpf: string, password: string): Promise<UserDTO | null> {
+    const user = await this.findByField('cpf', cpf)
+
+    if (!user) {
+      throw new Error()
+    }
+
+    const hash = await UserModel.hashPassword(password)
+    let userPassword = ''
+
+    await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      const sql = `SELECT password FROM ${this.tableName} WHERE cpf = ?`
+      const result = await tx.executeSqlAsync(sql, [cpf])
+
+      if ('rows' in result) {
+        userPassword = result.rows[0].password
+      }
+    })
+
+    const passwordMatch = hash === userPassword
+
+    if (!passwordMatch) {
+      throw new Error()
+    }
+
+    return user
   }
 }

@@ -22,10 +22,10 @@ export function Button({
 }: Props) {
   return (
     <ButtonStyled type={type} {...rest} style={style}>
-      {!isLoading ? (
-        <Title>{title}</Title>
-      ) : (
+      {isLoading ? (
         <ActivityIndicator size="small" color="#fff" />
+      ) : (
+        <Title>{title}</Title>
       )}
     </ButtonStyled>
   )

@@ -26,6 +26,7 @@ export interface IUserRepository {
   ): Promise<UserDTO | null>
   hashPassword(password: string): Promise<string>
   first(): Promise<UserDTO | null>
+  login(cpf: string, password: string): Promise<UserDTO | null>
 }
 
 export interface IUserService {
@@ -38,4 +39,5 @@ export interface IUserService {
   ): Promise<UserDTO | null>
   hashPassword(password: string): Promise<string>
   first(): Promise<UserDTO | null>
+  login(cpf: string, password: string): Promise<UserDTO | null>
 }

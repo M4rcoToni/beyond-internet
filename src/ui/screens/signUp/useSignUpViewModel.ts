@@ -35,7 +35,9 @@ export function useSignUpViewModel(authRepository: AuthRepository) {
       })
 
       if (user) {
-        setUserData(user)
+        setTimeout(() => {
+          setUserData(user)
+        }, 600)
       }
     } catch (error) {
       Toast.show({

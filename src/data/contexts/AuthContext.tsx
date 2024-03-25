@@ -13,7 +13,7 @@ import { AuthService } from '@data/services/auth'
 export type AuthContextDataProps = {
   user: UserDTO | null
   loadingUser: boolean
-  setUserData: (user: UserDTO) => void
+  setUserData: (user: UserDTO | null) => void
 }
 
 type AuthContextProviderProps = {
@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [loadingUser, setLoadingUser] = useState(true)
   const userRepository = new AuthRepository(new AuthService())
 
-  const setUserData = useCallback((user: UserDTO) => {
+  const setUserData = useCallback((user: UserDTO | null) => {
     setUser(user)
   }, [])
 
