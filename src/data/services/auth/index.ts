@@ -7,6 +7,7 @@ import { UserRepository } from '@sqlite/modules/users/repository'
 import { UserService } from '@sqlite/modules/users/service'
 
 export class AuthService implements IAuthService {
+  // change to controller class
   private userService = new UserService(new UserRepository(db, 'users'))
 
   async login(cpf: string, password: string) {

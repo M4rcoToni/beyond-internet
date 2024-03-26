@@ -8,7 +8,9 @@ type Props = {
   type: ButtonTypeStyleProps
 }
 
-export const ButtonStyled = styled(TouchableOpacity)<Props>`
+export const ButtonStyled = styled(TouchableOpacity).attrs({
+  activeOpacity: 0.7,
+})<Props>`
   width: 100%;
   max-width: 400px;
 
