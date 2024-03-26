@@ -8,7 +8,7 @@ export class UserController {
     this.userService = userService
   }
 
-  async createUser(payload: CreateUserDTO): Promise<UserDTO | null> {
+  async create(payload: CreateUserDTO): Promise<UserDTO | null> {
     try {
       const user = await this.userService.create(payload)
       return user
@@ -62,6 +62,15 @@ export class UserController {
   async first(): Promise<UserDTO | null> {
     try {
       const user = await this.userService.first()
+      return user
+    } catch (error) {
+      throw new Error()
+    }
+  }
+
+  async login(cpf: string, password: string): Promise<UserDTO | null> {
+    try {
+      const user = await this.userService.login(cpf, password)
       return user
     } catch (error) {
       throw new Error()
