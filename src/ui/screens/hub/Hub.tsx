@@ -5,6 +5,10 @@ import { CourseList } from '@ui/components/CourseList/CourseList'
 import { CourseType } from '../course/CourseType'
 import { useDimensions } from '../../../data/hooks/useDimensions'
 import { useStorage } from '@data/contexts/StoragePermissionContext'
+import { useHubViewModel } from './useHubViewModel'
+import { CoursesService } from '@data/services/course'
+import { CoursesRepository } from '@data/repositories/course'
+import Toast from 'react-native-toast-message'
 
 export type Courses = {
   id?: string
@@ -28,12 +32,12 @@ export function Hub() {
   } = useStorage()
   const { width } = useDimensions()
 
-  async function getCourse() {
-    await getDirectoryUri()
-  }
-  useEffect(() => {
-    checkStorageCourse()
-  }, [])
+  // const { handleSignIn, loading } = useSignInViewModel(
+  //   new AuthRepository(new AuthService()),
+  // )
+  const { handleOnGetCourse } = useHubViewModel(
+    new CoursesRepository(new CoursesService()),
+  )
 
   return (
     <>
@@ -49,12 +53,13 @@ export function Hub() {
             data={course}
             refreshing={false}
             onRefresh={listCourses}
-            getCourse={getCourse}
+            getCourse={handleOnGetCourse}
             onCoursePress={onCoursePress}
             deleteCourse={deleteCourse}
           />
         </Container>
       </Content>
+      <Toast />
     </>
   )
 }

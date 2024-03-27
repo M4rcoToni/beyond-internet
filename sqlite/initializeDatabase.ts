@@ -26,17 +26,25 @@ export async function initializeDatabase() {
       return false
     })
     .then(async (result) => {
-      await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-        // show all columns from the users table
-        await tx.executeSqlAsync('PRAGMA table_info(users);').then((result) => {
-          console.log(result)
-        })
-      })
+      // await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      //   // show all columns from the users table
+      //   await tx.executeSqlAsync('PRAGMA table_info(users);').then((result) => {
+      //     console.log(result)
+      //   })
+      // })
 
       // select all users
       await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
         await tx.executeSqlAsync('SELECT * FROM users;').then((result) => {
           console.log(result)
+        })
+      })
+
+      // select all courses
+      await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+        await tx.executeSqlAsync('SELECT * FROM course;').then((result) => {
+          console.log(result.rows[0].granted)
+          console.log(result.rows[1].granted)
         })
       })
 

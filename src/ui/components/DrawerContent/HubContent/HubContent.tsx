@@ -5,6 +5,9 @@ import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 // import { User } from '../../../../../sqlite/modules/users/model'
 import { Feather } from '@expo/vector-icons'
+import { useDrawerContentViewModel } from '../useDrawerContentViewModel'
+import { CoursesRepository } from '@data/repositories/course'
+import { CoursesService } from '@data/services/course'
 // import { useStorage } from '@shared/hooks/useStorage'
 
 interface HubContentProps {
@@ -13,6 +16,10 @@ interface HubContentProps {
 }
 
 export function HubContent({ signOut, user }: HubContentProps) {
+  const { handleOnGetCourse } = useDrawerContentViewModel(
+    undefined,
+    new CoursesRepository(new CoursesService()),
+  )
   return (
     <>
       <FlatList
@@ -40,7 +47,9 @@ export function HubContent({ signOut, user }: HubContentProps) {
         renderItem={({ item }) => (
           <>
             <TouchableOpacity
-              // onPress={item.onPress}
+              onPress={
+                item.name === 'Abrir um curso' ? handleOnGetCourse : () => {}
+              }
               style={{
                 flex: 1,
                 flexDirection: 'row',

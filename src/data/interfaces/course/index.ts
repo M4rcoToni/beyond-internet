@@ -1,16 +1,15 @@
-import { Result } from '@data/result'
-import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
-export interface ICourseRepository {
-  requestPermission: () => Promise<Result<string | null>>
-  openCourse: () => Promise<Result<UserDTO | null>>
-  createCourse: () => Promise<Result<UserDTO | null>>
-  getCourseById: (id: string) => Promise<Result<UserDTO | null>>
+export interface ICoursesRepository {
+  requestPermission: () => Promise<string>
+  openCourse: () => Promise<CourseDTO | null>
+  createCourse: () => Promise<CourseDTO | null>
+  getCourseById: (id: string) => Promise<CourseDTO | null>
 }
 
-export interface ICourseService {
-  requestPermission: () => Promise<Result<string | null>>
-  openCourse: () => Promise<Result<UserDTO | null>>
-  createCourse: () => Promise<Result<UserDTO | null>>
-  getCourseById: (id: string) => Promise<Result<UserDTO | null>>
+export interface ICoursesService {
+  requestPermission: () => Promise<string>
+  openCourse: () => Promise<CourseDTO | null>
+  createCourse: () => Promise<CourseDTO | null>
+  getCourseById: (id: string) => Promise<CourseDTO | null>
 }

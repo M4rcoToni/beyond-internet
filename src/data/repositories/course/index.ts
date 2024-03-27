@@ -1,30 +1,57 @@
-import { ICourseRepository, ICourseService } from '@data/interfaces/course'
+import { ICoursesRepository, ICoursesService } from '@data/interfaces/course'
 import { Result } from '@data/result'
-import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
-export class CourseRepository implements ICourseRepository {
+export class CoursesRepository implements ICoursesRepository {
   // eslint-disable-next-line no-useless-constructor
-  constructor(private readonly courseService: ICourseService) {}
-  async openCourse(): Promise<Result<UserDTO | null>> {
+  constructor(private readonly courseService: ICoursesService) {}
+  async openCourse(): Promise<CourseDTO | null> {
     try {
       return await this.courseService.openCourse()
     } catch (error) {
-      throw new Result(false, undefined, new Error('Erro ao abrir curso'))
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao abrir curso',
+        ),
+      )
     }
   }
 
-  async requestPermission(): Promise<Result<string | null>> {
+  async requestPermission(): Promise<string> {
     try {
       return await this.courseService.requestPermission()
     } catch (error) {
       throw new Result(
         false,
         undefined,
-        new Error('Erro ao solicitar permissão'),
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao solicitar permissão',
+        ),
       )
     }
   }
 
-  createCourse: () => Promise<Result<UserDTO | null>>
-  getCourseById: (id: string) => Promise<Result<UserDTO | null>>
+  async createCourse(): Promise<CourseDTO | null> {
+    try {
+      return await this.courseService.createCourse()
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao criar curso',
+        ),
+      )
+    }
+  }
+
+  getCourseById: (id: string) => Promise<CourseDTO | null>
 }
