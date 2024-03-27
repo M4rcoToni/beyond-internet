@@ -3,8 +3,8 @@ import { Container, Content } from './styles'
 
 import { CourseList } from '@ui/components/CourseList/CourseList'
 import { CourseType } from '../course/CourseType'
-import { useStorage } from '../../../data/hooks/useStorage'
 import { useDimensions } from '../../../data/hooks/useDimensions'
+import { useStorage } from '@data/contexts/StoragePermissionContext'
 
 export type Courses = {
   id?: string

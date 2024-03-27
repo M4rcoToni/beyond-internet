@@ -4,7 +4,7 @@ import { Image } from 'expo-image'
 import { SubTitle } from '@ui/components'
 import { Container } from '../hub/styles'
 import { useSection } from '../../../data/hooks/useSection'
-import { useStorage } from '../../../data/hooks/useStorage'
+import { useStorage } from '@data/contexts/StoragePermissionContext'
 
 type Courses = {
   id?: string | undefined
@@ -21,7 +21,6 @@ export function Course() {
   const { course } = useStorage()
 
   const { index } = route.params as { index: number }
-  // p0w3rc0d3#@lph@#$%
   return (
     <Container>
       <SubTitle size={20} text={section.title} />

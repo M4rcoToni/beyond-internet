@@ -4,6 +4,7 @@ import React, {
   ReactNode,
   useEffect,
   useCallback,
+  useContext,
 } from 'react'
 import * as FileSystem from 'expo-file-system'
 import {
@@ -207,4 +208,10 @@ export function StorageCourseContextProvider({
       {children}
     </StorageCourseContext.Provider>
   )
+}
+
+export function useStorage() {
+  const context = useContext(StorageCourseContext)
+
+  return context
 }
