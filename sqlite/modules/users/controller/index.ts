@@ -10,8 +10,7 @@ export class UserController {
 
   async create(payload: CreateUserDTO): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.create(payload)
-      return user
+      return await this.userService.create(payload)
     } catch (error) {
       throw new Error()
     }
@@ -22,8 +21,7 @@ export class UserController {
     data: Partial<CreateUserDTO>,
   ): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.update(id, data)
-      return user
+      return await this.userService.update(id, data)
     } catch (error) {
       throw new Error()
     }
@@ -31,8 +29,7 @@ export class UserController {
 
   async findById(id: number): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.findById(id)
-      return user
+      return await this.userService.findById(id)
     } catch (error) {
       throw new Error()
     }
@@ -43,8 +40,7 @@ export class UserController {
     value: string,
   ): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.findByField(field, value)
-      return user
+      return await this.userService.findByField(field, value)
     } catch (error) {
       throw new Error()
     }
@@ -52,8 +48,7 @@ export class UserController {
 
   async hashPassword(password: string): Promise<string> {
     try {
-      const passwordHash = await this.userService.hashPassword(password)
-      return passwordHash
+      return await this.userService.hashPassword(password)
     } catch (error) {
       throw new Error()
     }
@@ -61,8 +56,7 @@ export class UserController {
 
   async first(): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.first()
-      return user
+      return await this.userService.first()
     } catch (error) {
       throw new Error()
     }
@@ -70,8 +64,7 @@ export class UserController {
 
   async login(cpf: string, password: string): Promise<UserDTO | null> {
     try {
-      const user = await this.userService.login(cpf, password)
-      return user
+      return await this.userService.login(cpf, password)
     } catch (error) {
       throw new Error()
     }

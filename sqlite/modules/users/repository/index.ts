@@ -6,7 +6,6 @@ import {
 } from '../interfaces/IUserInterface'
 import { UserModel } from '../model'
 import { BaseRepository } from '@sqlite/modules/common/BaseRepository'
-import * as Crypto from 'expo-crypto'
 
 export class UserRepository
   extends BaseRepository<UserModel>
