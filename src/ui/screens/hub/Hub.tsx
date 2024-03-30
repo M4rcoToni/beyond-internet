@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { Container, Content } from './styles'
 
 import { CourseList } from '@ui/components/CourseList/CourseList'
 import { CourseType } from '../course/CourseType'
 import { useDimensions } from '../../../data/hooks/useDimensions'
-import { useStorage } from '@data/contexts/StoragePermissionContext'
 import { useHubViewModel } from './useHubViewModel'
 import { CoursesService } from '@data/services/course'
 import { CoursesRepository } from '@data/repositories/course'
@@ -21,23 +20,19 @@ export type Courses = {
 }
 
 export function Hub() {
-  const {
-    getDirectoryUri,
-    listCourses,
-    deleteCourse,
-    setPermissionIndex,
-    onCoursePress,
-    checkStorageCourse,
-    course,
-  } = useStorage()
   const { width } = useDimensions()
 
-  // const { handleSignIn, loading } = useSignInViewModel(
-  //   new AuthRepository(new AuthService()),
-  // )
-  const { handleOnGetCourse } = useHubViewModel(
-    new CoursesRepository(new CoursesService()),
-  )
+  const {
+    handleOnGetCourse,
+    handleOnListCourses,
+    courses,
+    handleOnDeleteCourse,
+    handleOnCoursePress,
+  } = useHubViewModel(new CoursesRepository(new CoursesService()))
+
+  useLayoutEffect(() => {
+    handleOnListCourses()
+  }, [])
 
   return (
     <>
@@ -50,12 +45,12 @@ export function Hub() {
           }
         >
           <CourseList
-            data={course}
+            data={courses}
             refreshing={false}
-            onRefresh={listCourses}
+            onRefresh={handleOnListCourses}
             getCourse={handleOnGetCourse}
-            onCoursePress={onCoursePress}
-            deleteCourse={deleteCourse}
+            onCoursePress={handleOnCoursePress}
+            deleteCourse={handleOnDeleteCourse}
           />
         </Container>
       </Content>

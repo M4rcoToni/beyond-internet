@@ -5,6 +5,7 @@ import { CourseController } from '@sqlite/modules/course/controller'
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { CourseRepository } from '@sqlite/modules/course/repository'
 import { CourseService } from '@sqlite/modules/course/service'
+import { CourseType } from '@ui/screens/course/CourseType'
 import * as FileSystem from 'expo-file-system'
 
 export class CoursesService implements ICoursesService {
@@ -44,13 +45,11 @@ export class CoursesService implements ICoursesService {
     const files = await FileSystem.StorageAccessFramework.readDirectoryAsync(
       uri,
     )
-
-    const index = files.find((file) => {
-      if (file.indexOf('.json') !== -1) {
-        return file
-      }
+    const foundIndex = files.find((file) => file.indexOf('.json') !== -1)
+    if (!foundIndex) {
       throw new Result(false, null, new Error('Curso não encontrado!'))
-    })
+    }
+    const index = foundIndex
 
     if (index) {
       const filesContent = await FileSystem.getInfoAsync(index)
@@ -66,8 +65,8 @@ export class CoursesService implements ICoursesService {
           directoryName: contentJson.name,
           uri,
           files: filesJson,
-          index: JSON.stringify(contentJson),
-          granted: true,
+          indexFile: contentJson,
+          granted: 1,
         } as unknown as CourseDTO
       }
     }
@@ -81,7 +80,10 @@ export class CoursesService implements ICoursesService {
       throw new Result(false, null, new Error('Erro ao abrir o curso!'))
     }
 
-    const createdCourse = await this.courseController.create(course)
+    const createdCourse = await this.courseController.create({
+      ...course,
+      indexFile: JSON.stringify(course.indexFile),
+    })
 
     if (!createdCourse) {
       throw new Result(false, null, new Error('Erro curso já cadastrado!'))
@@ -98,5 +100,31 @@ export class CoursesService implements ICoursesService {
     }
 
     return course
+  }
+
+  async listCourses(): Promise<CourseDTO[]> {
+    const courses = await this.courseController.list()
+
+    const formattedCourses = courses.map((item) => ({
+      ...item,
+      files: JSON.parse(String(item.files)),
+      indexFile: JSON.parse(String(item.indexFile)) as CourseType,
+    }))
+
+    if (!formattedCourses) {
+      throw new Result(false, null, new Error('Cursos não encontrados!'))
+    }
+
+    return formattedCourses
+  }
+
+  async deleteCourse(id: string): Promise<boolean> {
+    const deletedCourse = await this.courseController.delete(id)
+
+    if (!deletedCourse) {
+      throw new Result(false, null, new Error('Erro ao deletar curso!'))
+    }
+
+    return true
   }
 }

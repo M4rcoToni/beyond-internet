@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import { CourseEmpty } from './CourseEmpty/CourseEmpty'
 import { CourseCard } from '../CourseCard/CourseCard'
-import { Courses } from '@modules/hub/screens/Hub'
 import { Button } from '@ui/components'
-import { Section } from '@modules/course/screens/CourseType'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { CourseType, Section } from '@ui/screens/course/CourseType'
 
 interface CourseListProps {
-  data: Courses[]
+  data: CourseDTO[]
   refreshing: boolean
   onRefresh: () => void
   getCourse?: () => void
@@ -32,28 +32,24 @@ export function CourseList({
         flex: 1,
       }}
       data={data}
-      // horizontal
       refreshing={refreshing}
-      onRefresh={onRefresh}
+      // onRefresh={onRefresh}
       keyExtractor={(item) => item.courseId.toString()}
       renderItem={({ item, index }) => (
         <CourseCard
-          title={item.index.name}
-          subTitle={`${item.index.sections.length} aulas`}
-          image={item.files[2]}
-          onPress={() => onCoursePress(item.index.sections[index], index)}
+          title={item?.indexFile.name}
+          subTitle={`${item?.indexFile?.sections?.length} aulas`}
+          image={item.files[0]}
+          onPress={() => onCoursePress(item?.indexFile.sections[index], index)}
           onLongPress={() => {
             deleteCourse(item.courseId)
           }}
         />
       )}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
+      // refreshControl={
+      //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      // }
       ListEmptyComponent={() => <CourseEmpty getCourse={getCourse} />}
-      // ListFooterComponent={() => (
-      //   <Button title="Adicionar curso" onPress={getCourse} />
-      // )}
     />
   )
 }

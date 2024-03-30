@@ -18,8 +18,8 @@ export class CourseRepository
 
     const courseAlreadyExists = await this.findById(payload.courseId)
 
-    if (!courseAlreadyExists) {
-      throw new Error()
+    if (courseAlreadyExists) {
+      throw new Error('courseAlreadyExists')
     }
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
@@ -55,6 +55,35 @@ export class CourseRepository
       }
     })
 
-    return user || null
+    return user
+  }
+
+  async list(): Promise<CourseDTO[]> {
+    const courses: CourseDTO[] = []
+
+    await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      const result = await tx.executeSqlAsync(`SELECT * FROM ${this.tableName}`)
+
+      if ('rows' in result) {
+        for (let i = 0; i < result.rows.length; i++) {
+          courses.push(result.rows[i] as CourseDTO)
+        }
+      }
+    })
+
+    return courses
+  }
+
+  async delete(id: string): Promise<boolean> {
+    let deleted = false
+    await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      await tx.executeSqlAsync(
+        `DELETE FROM ${this.tableName} WHERE courseId = ?`,
+        [id],
+      )
+      deleted = true
+    })
+
+    return deleted
   }
 }

@@ -7,8 +7,8 @@ export async function initializeDatabase() {
 
   // prune the database
   // db.transaction((tx) => {
-  //   tx.executeSql('DROP TABLE IF EXISTS users;')
-  //   tx.executeSql('DROP TABLE IF EXISTS courses;')
+  //   //   tx.executeSql('DROP TABLE IF EXISTS users;')
+  //   tx.executeSql('DROP TABLE IF EXISTS course;')
   // })
 
   const promises = [
@@ -43,8 +43,7 @@ export async function initializeDatabase() {
       // select all courses
       await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
         await tx.executeSqlAsync('SELECT * FROM course;').then((result) => {
-          console.log(result.rows[0].granted)
-          console.log(result.rows[1].granted)
+          console.log(result)
         })
       })
 

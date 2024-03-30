@@ -1,26 +1,19 @@
 import { useRoute } from '@react-navigation/native'
-import { CourseType } from './CourseType'
 import { Image } from 'expo-image'
-import { SubTitle } from '@ui/components'
-import { Container } from '../hub/styles'
-import { useSection } from '../../../data/hooks/useSection'
-import { useStorage } from '@data/contexts/StoragePermissionContext'
+import { SubTitle, Container } from '@ui/components'
+import { useSection } from '@data/contexts/SectionContext'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
-type Courses = {
-  id?: string | undefined
-  courseId: string
-  directoryName: string
-  uri: string
-  files: string
-  granted: boolean
-  index: CourseType
-}
 export function Course() {
   const { section } = useSection()
   const route = useRoute()
-  const { course } = useStorage()
 
-  const { index } = route.params as { index: number }
+  const { index, courses } = route.params as {
+    index: number
+    courses: CourseDTO[]
+  }
+  console.log('index', courses[index].files[3] + section.images[1])
+
   return (
     <Container>
       <SubTitle size={20} text={section.title} />
@@ -28,9 +21,14 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: course[index].files[3] + section.images[0],
+          uri: courses[index].files[3] + section.images[index],
         }}
-        style={{ width: 200, height: 200, alignSelf: 'center' }}
+        style={{
+          width: 200,
+          height: 200,
+          alignSelf: 'center',
+          backgroundColor: 'red',
+        }}
       />
     </Container>
   )

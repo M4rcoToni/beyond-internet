@@ -3,12 +3,15 @@ import { AuthRepository } from '@data/repositories/auth'
 import Toast from 'react-native-toast-message'
 import { useAuth } from '@data/contexts/AuthContext'
 import { CoursesRepository } from '@data/repositories/course'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { useState } from 'react'
 
 export function useDrawerContentViewModel(
   authRepository?: AuthRepository,
   courseRepository?: CoursesRepository,
 ) {
   const { user, setUserData } = useAuth()
+  const [courses, setCourses] = useState<CourseDTO[]>([])
 
   async function handleLogout() {
     try {
@@ -24,8 +27,7 @@ export function useDrawerContentViewModel(
 
   const handleOnGetCourse = async () => {
     try {
-      const response = await courseRepository?.createCourse()
-      return response
+      await courseRepository?.createCourse()
     } catch (error) {
       console.log('error', error)
 

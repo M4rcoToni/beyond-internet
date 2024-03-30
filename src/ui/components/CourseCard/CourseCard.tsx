@@ -22,10 +22,11 @@ export function CourseCard({
       onPress={onPress}
       activeOpacity={0.7}
       onLongPress={onLongPress}
+      delayLongPress={500}
     >
       <Content>
         <CourseBanner
-          alt="Empreendedorismo"
+          alt="course banner"
           contentFit="cover"
           transition={1000}
           source={{ uri: image }}

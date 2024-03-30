@@ -4,7 +4,7 @@ import { Divider } from './styles'
 import Lamp from '@assets/folder.svg'
 
 interface CourseEmptyProps {
-  getCourse?: () => Promise<void>
+  getCourse?: () => void
 }
 
 export function CourseEmpty({ getCourse }: CourseEmptyProps) {

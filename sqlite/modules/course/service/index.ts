@@ -23,4 +23,12 @@ export class CourseService implements ICourseService {
   async findById(id: string): Promise<CourseDTO | null> {
     return await this.courseRepository.findById(id)
   }
+
+  async list() {
+    return await this.courseRepository.list()
+  }
+
+  async delete(id: string) {
+    return await this.courseRepository.delete(id)
+  }
 }

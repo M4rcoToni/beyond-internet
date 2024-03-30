@@ -3,18 +3,23 @@ import { Course } from '@ui/screens/course/Course'
 import { Hub } from '@ui/screens/hub/Hub'
 import React from 'react'
 import { View, useWindowDimensions } from 'react-native'
-import { DrawerContent } from '../components/DrawerContent/DrawerContent'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+import { DrawerContent } from '@ui/components/DrawerContent/DrawerContent'
+import { useDrawerViewModel } from './useDrawerViewModel'
+import { CoursesRepository } from '@data/repositories/course'
+import { CoursesService } from '@data/services/course'
 
 const Drawer = createDrawerNavigator()
 const MemoizedCourse = React.memo(Course)
 const MemoizedDrawer = React.memo(DrawerContent)
 
-export default function HubDrawer() {
+export function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
 
-  // const { permission, index } = useStorage()
+  const { index, section, courses } = useDrawerViewModel(
+    new CoursesRepository(new CoursesService()),
+  )
   return (
     <Drawer.Navigator
       drawerContent={(item) => (
@@ -45,13 +50,13 @@ export default function HubDrawer() {
         component={Hub}
       />
 
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="Course"
         options={() => ({
           headerShown: true,
           headerTitle:
-            index && permission[index].index?.name
-              ? permission[index].index.name
+            index && courses[index].indexFile?.name
+              ? courses[index].indexFile.name
               : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
@@ -61,7 +66,7 @@ export default function HubDrawer() {
           shouldPreventDefaultGesture: true,
         })}
         component={MemoizedCourse}
-      /> */}
+      />
     </Drawer.Navigator>
   )
 }

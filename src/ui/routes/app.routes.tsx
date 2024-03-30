@@ -2,8 +2,8 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
-import HubDrawer from './Hub.drawer'
 import { SectionContextProvider } from '../../data/contexts/SectionContext'
+import { HubDrawer } from './Drawer/Drawer'
 
 type AppRoutes = {
   Hub: undefined

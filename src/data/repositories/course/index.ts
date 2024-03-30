@@ -53,5 +53,51 @@ export class CoursesRepository implements ICoursesRepository {
     }
   }
 
-  getCourseById: (id: string) => Promise<CourseDTO | null>
+  getCourseById(id: string): Promise<CourseDTO | null> {
+    try {
+      return this.courseService.getCourseById(id)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao buscar curso',
+        ),
+      )
+    }
+  }
+
+  async listCourses(): Promise<CourseDTO[]> {
+    try {
+      return this.courseService.listCourses()
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao listar cursos',
+        ),
+      )
+    }
+  }
+
+  async deleteCourse(id: string): Promise<boolean> {
+    try {
+      return this.courseService.deleteCourse(id)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao deletar curso',
+        ),
+      )
+    }
+  }
 }

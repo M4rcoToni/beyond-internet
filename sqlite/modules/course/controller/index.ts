@@ -34,4 +34,20 @@ export class CourseController {
       throw new Error()
     }
   }
+
+  async list(): Promise<CourseDTO[]> {
+    try {
+      return await this.courseService.list()
+    } catch (error) {
+      throw new Error()
+    }
+  }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      return await this.courseService.delete(id)
+    } catch (error) {
+      throw new Error()
+    }
+  }
 }
