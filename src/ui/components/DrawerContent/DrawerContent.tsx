@@ -27,6 +27,7 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
       {screen === 0 ? (
         <HubContent signOut={handleLogout} user={user} />
       ) : (
+        // TODO: Fix this with provider
         // <CourseContent
         //   sections={course[index].index.sections}
         //   courseName={course[index].index.name}
