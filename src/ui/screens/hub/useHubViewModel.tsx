@@ -60,6 +60,7 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
                 type: 'success',
                 text1: 'Curso deletado com sucesso',
               })
+            handleOnListCourses()
           },
         },
       ])

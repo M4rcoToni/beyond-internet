@@ -12,14 +12,13 @@ export class CourseRepository
   implements ICourseRepository
 {
   async create(payload: CreateCourseDTO): Promise<CourseDTO | null> {
-    let insertedId: string | undefined
     const granted = payload.granted ? 1 : 0
     payload.granted = granted
 
     const courseAlreadyExists = await this.findById(payload.courseId)
 
     if (courseAlreadyExists) {
-      throw new Error('courseAlreadyExists')
+      return null
     }
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
@@ -31,13 +30,12 @@ export class CourseRepository
         ', ',
       )}) VALUES (${fields.map(() => '?').join(', ')})`
 
-      const res = await tx.executeSqlAsync(sql, values)
-      if ('insertId' in res) {
-        insertedId = String(res.insertId)
-      }
+      await tx.executeSqlAsync(sql, values)
     })
 
-    return this.findById(insertedId || '')
+    const course = await this.findById(payload.courseId || '')
+
+    return course
   }
 
   update: (id: string, data: CourseDTO) => Promise<CourseDTO | null>
@@ -46,7 +44,7 @@ export class CourseRepository
     let user: CourseDTO | null = null
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const result = await tx.executeSqlAsync(
-        `SELECT * FROM ${this.tableName} WHERE id = ?`,
+        `SELECT * FROM ${this.tableName} WHERE courseId = ?`,
         [id],
       )
 

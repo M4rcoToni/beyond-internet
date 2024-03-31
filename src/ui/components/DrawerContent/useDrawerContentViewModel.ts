@@ -5,12 +5,14 @@ import { useAuth } from '@data/contexts/AuthContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { useState } from 'react'
+import { useNavigation, DrawerActions } from '@react-navigation/native'
 
 export function useDrawerContentViewModel(
   authRepository?: AuthRepository,
   courseRepository?: CoursesRepository,
 ) {
   const { user, setUserData } = useAuth()
+  const navigation = useNavigation()
   const [courses, setCourses] = useState<CourseDTO[]>([])
 
   async function handleLogout() {
@@ -28,6 +30,7 @@ export function useDrawerContentViewModel(
   const handleOnGetCourse = async () => {
     try {
       await courseRepository?.createCourse()
+      navigation.dispatch(DrawerActions.closeDrawer())
     } catch (error) {
       console.log('error', error)
 
