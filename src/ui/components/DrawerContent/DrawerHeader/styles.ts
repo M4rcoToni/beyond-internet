@@ -1,7 +1,8 @@
 import styled from 'styled-components/native'
 import theme from '@ui/theme'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-export const Container = styled.View`
+export const Container = styled(SafeAreaView)`
   flex: 1;
   justify-content: 'center';
   align-items: 'center';
@@ -22,4 +23,12 @@ export const SubTitle = styled.Text`
   font-size: ${theme.FONT_SIZE.MD}px;
   font-family: ${theme.FONT_FAMILY.REGULAR};
   color: ${theme.COLORS.BLACK};
+`
+
+export const PictureContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: lightgray;
+  border-radius: 50px;
 `

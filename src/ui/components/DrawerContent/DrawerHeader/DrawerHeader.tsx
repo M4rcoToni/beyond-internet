@@ -1,6 +1,7 @@
-import { Photo, Separator } from '@ui/components'
-import { Container, Title, SubTitle } from './styles'
+import { Separator } from '@ui/components'
+import { Container, Title, SubTitle, PictureContainer } from './styles'
 import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
+import { Feather } from '@expo/vector-icons'
 
 interface DrawerHeaderProps {
   user: UserDTO | null
@@ -10,10 +11,9 @@ export function DrawerHeader({ user }: DrawerHeaderProps) {
   return (
     <>
       <Container>
-        <Photo
-          size={140}
-          uri={'https://avatars.githubusercontent.com/u/94496614?v=4'}
-        />
+        <PictureContainer>
+          <Feather name="user" size={80} color="black" />
+        </PictureContainer>
         <Title>{user?.name}</Title>
         <SubTitle>{user?.cpf}</SubTitle>
       </Container>
