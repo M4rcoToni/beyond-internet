@@ -2,8 +2,8 @@ import {
   NativeStackNavigationProp,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
-import { SectionContextProvider } from '../../data/contexts/SectionContext'
 import { HubDrawer } from './Drawer/Drawer'
+import { CourseContextProvider } from '@data/contexts/CourseContext'
 
 type AppRoutes = {
   Hub: undefined
@@ -15,7 +15,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AppRoutes() {
   return (
-    <SectionContextProvider>
+    <CourseContextProvider>
       <Navigator
         screenOptions={{
           headerShown: false,
@@ -23,6 +23,6 @@ export function AppRoutes() {
       >
         <Screen name="Root" component={HubDrawer} />
       </Navigator>
-    </SectionContextProvider>
+    </CourseContextProvider>
   )
 }

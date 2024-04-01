@@ -1,23 +1,23 @@
-import { useSection } from '@data/contexts/SectionContext'
-import { CoursesRepository } from '@data/repositories/course'
-import { Result } from '@data/result'
-import { useNavigation } from '@react-navigation/native'
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
-import { useState } from 'react'
 import { Alert } from 'react-native'
 import Toast from 'react-native-toast-message'
+import { useNavigation } from '@react-navigation/native'
+
+import { useCourse } from '@data/contexts/CourseContext'
+import { CoursesRepository } from '@data/repositories/course'
+import { Result } from '@data/result'
+import { Section } from '../course/CourseType'
 
 export function useHubViewModel(courseRepository: CoursesRepository) {
-  const [courses, setCourses] = useState<CourseDTO[]>([])
   const { navigate } = useNavigation()
-  const { handleSelectSection } = useSection()
+  const { handleSelectSection, handleSetIndex, handleSetCourses, courses } =
+    useCourse()
 
   const handleOnListCourses = async () => {
     try {
       const response = await courseRepository.listCourses()
 
       if (response) {
-        setCourses(response)
+        handleSetCourses(response)
       }
     } catch (error) {
       console.log('error', error)
@@ -75,8 +75,9 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
     }
   }
 
-  const handleOnCoursePress = (section: any, index: number) => {
-    handleSelectSection(section, index)
+  const handleOnCoursePress = (section: Section, index: number) => {
+    handleSelectSection(section)
+    handleSetIndex(index)
     navigate('Course', { index, courses })
   }
 

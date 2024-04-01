@@ -5,10 +5,10 @@ import * as SplashScreen from 'expo-splash-screen'
 
 import { useAuth } from '@data/contexts/AuthContext'
 import { DimensionContextProvider } from '@data/contexts/DimensionsContext'
-import { SectionContextProvider } from '@data/contexts/SectionContext'
 
 import { AuthRoutes } from './auth.routes'
 import { HubDrawer } from './Drawer/Drawer'
+import { CourseContextProvider } from '@data/contexts/CourseContext'
 
 export function Routes() {
   const { user, loadingUser } = useAuth()
@@ -21,9 +21,9 @@ export function Routes() {
     <SafeAreaView style={{ flex: 1 }}>
       <NavigationContainer>
         <DimensionContextProvider>
-          <SectionContextProvider>
+          <CourseContextProvider>
             {user ? <HubDrawer /> : <AuthRoutes />}
-          </SectionContextProvider>
+          </CourseContextProvider>
         </DimensionContextProvider>
       </NavigationContainer>
     </SafeAreaView>

@@ -47,9 +47,7 @@ export function HubContent({ signOut, user }: HubContentProps) {
         renderItem={({ item }) => (
           <>
             <TouchableOpacity
-              onPress={
-                item.name === 'Abrir um curso' ? handleOnGetCourse : () => {}
-              }
+              onPress={item.name === 'Abrir um curso' && handleOnGetCourse}
               style={{
                 flex: 1,
                 flexDirection: 'row',

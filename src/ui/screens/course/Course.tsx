@@ -1,18 +1,17 @@
 import { useRoute } from '@react-navigation/native'
 import { Image } from 'expo-image'
 import { SubTitle, Container } from '@ui/components'
-import { useSection } from '@data/contexts/SectionContext'
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { useCourse } from '@data/contexts/CourseContext'
 
 export function Course() {
-  const { section } = useSection()
+  const { section } = useCourse()
   const route = useRoute()
 
   const { index, courses } = route.params as {
     index: number
     courses: CourseDTO[]
   }
-  console.log('index', courses[index].files[3] + section.images[1])
 
   return (
     <Container>
@@ -21,7 +20,7 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: courses[index].files[3] + section.images[index],
+          uri: courses[index].files[3] + section.images,
         }}
         style={{
           width: 200,

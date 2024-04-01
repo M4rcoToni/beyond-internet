@@ -1,8 +1,9 @@
 import React from 'react'
-import { FlatList, View, TouchableOpacity } from 'react-native'
+import { FlatList, View } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
-import { Section } from '@modules/course/screens/CourseType'
-import { useSection } from '@shared/hooks/useSection'
+import { Section } from '@ui/screens/course/CourseType'
+import { useCourseContentViewModel } from './useCourseContentViewModel'
+import { CourseItem } from './CourseItem'
 
 interface CourseContentProps {
   sections: Section[]
@@ -17,53 +18,32 @@ export function CourseContent({
   onPressBackButton,
   closeDrawer,
 }: CourseContentProps) {
-  const { handleSelectSection } = useSection()
+  const { handleSelectSection } = useCourseContentViewModel()
 
-  async function handleSelectSectionAndCloseDrawer(item: Section) {
-    await handleSelectSection(item)
-    closeDrawer()
-  }
   return (
-    <>
+    <Container>
       <FlatList
         style={{
           width: '100%',
           height: 780,
         }}
         data={sections}
-        shouldRasterizeIOS
         renderToHardwareTextureAndroid
+        maxToRenderPerBatch={1}
+        windowSize={4}
+        initialNumToRender={2}
+        onEndReachedThreshold={0.5}
+        scrollEventThrottle={2}
         keyExtractor={(item) => item.id.toString()}
-        ListHeaderComponent={() => (
-          <>
-            <Container>
-              <SubTitle size={32} text={courseName} />
-            </Container>
-            <Separator />
-          </>
-        )}
+        ListHeaderComponent={() => <SubTitle size={32} text={courseName} />}
         renderItem={({ item }) => (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
+          <CourseItem
+            item={item}
+            onPress={() => {
+              handleSelectSection(item)
+              closeDrawer()
             }}
-          >
-            <TouchableOpacity
-              onPress={() => handleSelectSectionAndCloseDrawer(item)}
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                paddingVertical: 16,
-                paddingLeft: 14,
-              }}
-            >
-              <SubTitle size={16} text={`${item.title}`} />
-            </TouchableOpacity>
-          </View>
+          />
         )}
         ItemSeparatorComponent={Separator}
       />
@@ -79,6 +59,6 @@ export function CourseContent({
           marginBottom: '10%',
         }}
       />
-    </>
+    </Container>
   )
 }

@@ -3,17 +3,16 @@ import { AuthRepository } from '@data/repositories/auth'
 import Toast from 'react-native-toast-message'
 import { useAuth } from '@data/contexts/AuthContext'
 import { CoursesRepository } from '@data/repositories/course'
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
-import { useState } from 'react'
 import { useNavigation, DrawerActions } from '@react-navigation/native'
+import { useCourse } from '@data/contexts/CourseContext'
 
 export function useDrawerContentViewModel(
   authRepository?: AuthRepository,
   courseRepository?: CoursesRepository,
 ) {
   const { user, setUserData } = useAuth()
+  const { courses, index, handleSetCourses } = useCourse()
   const navigation = useNavigation()
-  const [courses, setCourses] = useState<CourseDTO[]>([])
 
   async function handleLogout() {
     try {
@@ -30,6 +29,11 @@ export function useDrawerContentViewModel(
   const handleOnGetCourse = async () => {
     try {
       await courseRepository?.createCourse()
+      const courses = await courseRepository?.listCourses()
+
+      if (courses) {
+        handleSetCourses(courses)
+      }
       navigation.dispatch(DrawerActions.closeDrawer())
     } catch (error) {
       console.log('error', error)
@@ -45,5 +49,7 @@ export function useDrawerContentViewModel(
     handleLogout,
     handleOnGetCourse,
     user,
+    courses,
+    index,
   }
 }
