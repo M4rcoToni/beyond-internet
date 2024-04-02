@@ -20,7 +20,7 @@ export function Course() {
       <Image
         alt="Imagem do curso"
         source={{
-          uri: courses[index].files[3] + section.images,
+          uri: courses[index].images + section.images,
         }}
         style={{
           width: 200,

@@ -12,7 +12,10 @@ export async function initializeTableCourses(
             courseId      INTEGER NOT NULL,
             directoryName TEXT NOT NULL,
             uri           TEXT NOT NULL,
-            files         TEXT NOT NULL,
+            images        TEXT NOT NULL,
+            videos        TEXT NOT NULL,
+            pdfs          TEXT NOT NULL,
+            banner        TEXT NOT NULL,
             indexFile     TEXT NOT NULL,
             granted       INTEGER DEFAULT 0
         )`,
@@ -33,7 +36,10 @@ export class CourseModel {
   courseId: string
   directoryName: string
   uri: string
-  files: string
+  images: string
+  videos: string
+  pdfs: string
+  banner: string
   index: string
   granted: number
 }

@@ -46,10 +46,26 @@ export class CoursesService implements ICoursesService {
       uri,
     )
     const foundIndex = files.find((file) => file.indexOf('.json') !== -1)
-    if (!foundIndex) {
+    const foundBanner = files.find((file) => file.indexOf('banner') !== -1)
+    const foundImages = files.find((file) => file.indexOf('imagens') !== -1)
+    const foundVideos = files.find((file) => file.indexOf('videos') !== -1)
+    const foundPdfs = files.find((file) => file.indexOf('pdfs') !== -1)
+
+    if (
+      !foundIndex ||
+      !foundBanner ||
+      !foundImages ||
+      !foundVideos ||
+      !foundPdfs
+    ) {
       throw new Result(false, null, new Error('Curso não encontrado!'))
     }
+
     const index = foundIndex
+    const banner = foundBanner
+    const images = foundImages
+    const videos = foundVideos
+    const pdfs = foundPdfs
 
     if (index) {
       const filesContent = await FileSystem.getInfoAsync(index)
@@ -57,17 +73,19 @@ export class CoursesService implements ICoursesService {
       if (filesContent.exists) {
         const content = await FileSystem.readAsStringAsync(filesContent.uri)
 
-        const filesJson = JSON.stringify(files)
         const contentJson = JSON.parse(content)
 
         return {
           courseId: contentJson.id,
           directoryName: contentJson.name,
           uri,
-          files: filesJson,
+          images: String(images),
+          videos: String(videos),
+          pdfs: String(pdfs),
+          banner: String(banner),
           indexFile: contentJson,
           granted: 1,
-        } as unknown as CourseDTO
+        } as CourseDTO
       }
     }
     return null
@@ -84,6 +102,7 @@ export class CoursesService implements ICoursesService {
       ...course,
       indexFile: JSON.stringify(course.indexFile),
     })
+    console.log(createdCourse, 'createdCourse')
 
     if (!createdCourse) {
       throw new Result(false, null, new Error('Erro curso já cadastrado!'))
@@ -107,7 +126,6 @@ export class CoursesService implements ICoursesService {
 
     const formattedCourses = courses.map((item) => ({
       ...item,
-      files: JSON.parse(String(item.files)),
       indexFile: JSON.parse(String(item.indexFile)) as CourseType,
     }))
 

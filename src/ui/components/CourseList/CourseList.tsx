@@ -39,7 +39,7 @@ export function CourseList({
         <CourseCard
           title={item?.indexFile.name}
           subTitle={`${item?.indexFile?.sections?.length} aulas`}
-          image={item.files[0]}
+          image={item.banner}
           onPress={() => onCoursePress(item?.indexFile.sections[index], index)}
           onLongPress={() => {
             deleteCourse(item.courseId)

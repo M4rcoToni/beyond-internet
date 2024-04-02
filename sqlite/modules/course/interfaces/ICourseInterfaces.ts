@@ -25,7 +25,10 @@ export type CourseDTO = {
   courseId: string
   directoryName: string
   uri: string
-  files: string
+  images: string
+  videos: string
+  pdfs: string
+  banner: string
   indexFile: CourseType
   granted: number
 }
@@ -34,7 +37,10 @@ export type CreateCourseDTO = {
   courseId: string
   directoryName: string
   uri: string
-  files: string
+  images: string
+  videos: string
+  pdfs: string
+  banner: string
   indexFile: string
   granted: number
 }
