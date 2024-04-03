@@ -8,10 +8,10 @@ export type Section = {
   id: number
   title: string
   description: string
-  images: string[]
-  videos: string[]
-  pdfs: string[]
-  tests: Question[]
+  images: string[] | null
+  videos: string[] | null
+  pdfs: string[] | null
+  tests: Question[] | null
 }
 
 export type CourseType = {
