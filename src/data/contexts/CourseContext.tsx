@@ -1,5 +1,7 @@
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
-import { Section } from '@ui/screens/course/CourseType'
+import {
+  CourseDTO,
+  Section,
+} from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import React, { createContext, useContext, useState } from 'react'
 
 export type courseContextDataProps = {

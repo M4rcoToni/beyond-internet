@@ -2,12 +2,12 @@ import React, { useEffect, useLayoutEffect } from 'react'
 import { Container, Content } from './styles'
 
 import { CourseList } from '@ui/components/CourseList/CourseList'
-import { CourseType } from '../course/CourseType'
 import { useDimensions } from '../../../data/hooks/useDimensions'
 import { useHubViewModel } from './useHubViewModel'
 import { CoursesService } from '@data/services/course'
 import { CoursesRepository } from '@data/repositories/course'
 import Toast from 'react-native-toast-message'
+import { CourseType } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 export type Courses = {
   id?: string

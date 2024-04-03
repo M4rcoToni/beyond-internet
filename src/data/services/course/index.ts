@@ -2,10 +2,12 @@ import { ICoursesService } from '@data/interfaces/course'
 import { Result } from '@data/result'
 import { db } from '@sqlite/index'
 import { CourseController } from '@sqlite/modules/course/controller'
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import {
+  CourseDTO,
+  CourseType,
+} from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { CourseRepository } from '@sqlite/modules/course/repository'
 import { CourseService } from '@sqlite/modules/course/service'
-import { CourseType } from '@ui/screens/course/CourseType'
 import * as FileSystem from 'expo-file-system'
 
 export class CoursesService implements ICoursesService {

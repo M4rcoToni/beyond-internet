@@ -3,8 +3,10 @@ import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import { CourseEmpty } from './CourseEmpty/CourseEmpty'
 import { CourseCard } from '../CourseCard/CourseCard'
 import { Button } from '@ui/components'
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
-import { CourseType, Section } from '@ui/screens/course/CourseType'
+import {
+  CourseDTO,
+  Section,
+} from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 interface CourseListProps {
   data: CourseDTO[]

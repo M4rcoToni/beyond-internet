@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { Result } from '@data/result'
-import { Section } from '../course/CourseType'
+import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 export function useHubViewModel(courseRepository: CoursesRepository) {
   const { navigate } = useNavigation()

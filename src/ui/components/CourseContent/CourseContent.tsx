@@ -1,9 +1,9 @@
 import React from 'react'
 import { FlatList, View } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
-import { Section } from '@ui/screens/course/CourseType'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
 import { CourseItem } from './CourseItem'
+import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 interface CourseContentProps {
   sections: Section[]

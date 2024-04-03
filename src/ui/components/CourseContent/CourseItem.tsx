@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { SubTitle } from '../SubTitle/SubTitle'
-import { Section } from '@ui/screens/course/CourseType'
+import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 interface CourseItemProps {
   item: Section
