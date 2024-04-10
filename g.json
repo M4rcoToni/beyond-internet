@@ -1,0 +1,674 @@
+{
+  "id": 6,
+  "name": "Geografia",
+  "sections": [
+    {
+      "id": 7,
+      "title": "Sessão 1",
+      "description": "A geografia do Brasil é a área da ciência geográfica que se dedica ao estudo do espaço brasileiro e dos seus diferentes aspectos físicos e humanos. Assim sendo, divide-se a geografia do Brasil em duas grandes subáreas: Geografia física do Brasil: estuda os aspectos físicos do território brasileiro, o que engloba o relevo, o clima, o solo, a vegetação, a geologia e a hidrografia, levando em consideração todos os processos de formação e desenvolvimento, bem como as dinâmicas naturais referentes a cada um deles  Geografia humana do Brasil: estuda a população brasileira e as diferentes formas e dinâmicas espaciais resultantes da interação entre a sociedade e o meio natural. Entre os temas abordados pela geografia humana do Brasil estão: economia, urbanização, industrialização, dinâmicas populacionais, política, diversidade cultural, desigualdades socioespaciais e muitos outros temas que refletem a organização e o funcionamento do espaço brasileiro.Veja mais sobre 'Geografia do Brasil' em: https: //brasilescola.uol.com.br/brasil ",
+      "images": [
+        "%2Fgeografia1.png"
+      ],
+      "videos": [
+        "%2Fvideo1.mp4"
+      ],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 4,
+          "title": "Prova de Geografia",
+          "questions": [
+            {
+              "description": "Qual é a capital da França?",
+              "responses": [
+                "Paris",
+                "Londres",
+                "Berlim",
+                "Madrid",
+                "Roma"
+              ]
+            },
+            {
+              "description": "Qual é o rio mais longo do mundo?",
+              "responses": [
+                "Rio Amazonas",
+                "Rio Nilo",
+                "Rio Yangtzé",
+                "Rio Mississipi",
+                "Rio Amur"
+              ]
+            },
+            {
+              "description": "Quais são os países que fazem fronteira com o Brasil?",
+              "responses": [
+                "Argentina, Bolívia, Colômbia, Guiana Francesa, Guiana, Paraguai, Peru, Suriname, Uruguai, Venezuela",
+                "Chile, Equador, Paraguai, Peru, Uruguai, Venezuela",
+                "Bolívia, Colômbia, Guiana Francesa, Guiana, Paraguai, Peru, Suriname",
+                "Argentina, Bolívia, Chile, Colômbia, Guiana Francesa, Guiana, Paraguai, Peru, Suriname, Uruguai, Venezuela",
+                "Chile, Equador, Guiana Francesa, Guiana, Uruguai"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Sessão 2",
+      "description": "Descrição da Sessão 2",
+      "images": [
+        "%2Fgeografia2.png"
+      ],
+      "videos": [
+        "%2Fvideo2.mp4"
+      ],
+      "pdfs": [
+        "pdf\\2.pdf"
+      ],
+      "tests": [
+        {
+          "id": 5,
+          "title": "8",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Sessão 3",
+      "description": "Descrição da Sessão 3",
+      "images": [
+        "%2Fgeografia3.png"
+      ],
+      "videos": [
+        "%2Fvideo3.mp4"
+      ],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 6,
+          "title": "9",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Sessão 4",
+      "description": "Descrição da Sessão 4",
+      "images": [
+        "%2Fgeografia4.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 7,
+          "title": "10",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Sessão 5",
+      "description": "Descrição da Sessão 5",
+      "images": [
+        "%2Fgeografia5.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 8,
+          "title": "11",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Sessão 6",
+      "description": "Descrição da Sessão 6",
+      "images": [
+        "%2Fgeografia6.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 9,
+          "title": "12",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Sessão 7",
+      "description": "Descrição da Sessão 7",
+      "images": [
+        "%2Fgeografia7.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 10,
+          "title": "13",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Sessão 8",
+      "description": "Descrição da Sessão 8",
+      "images": [
+        "%2Fgeografia8.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 11,
+          "title": "14",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Sessão 9",
+      "description": "Descrição da Sessão 9",
+      "images": [
+        "%2Fgeografia9.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 12,
+          "title": "15",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Sessão 10",
+      "description": "Descrição da Sessão 10",
+      "images": [
+        "%2Fgeografia10.png"
+      ],
+      "videos": [],
+      "pdfs": [],
+      "tests": [
+        {
+          "id": 13,
+          "title": "16",
+          "questions": [
+            {
+              "description": "Pergunta 1",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 2",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 3",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 4",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            },
+            {
+              "description": "Pergunta 5",
+              "responses": [
+                "Resposta 1",
+                "Resposta 2",
+                "Resposta 3",
+                "Resposta 4",
+                "Resposta 5"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
