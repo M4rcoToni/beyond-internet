@@ -3,10 +3,8 @@ import { FlatList, RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import { CourseEmpty } from './CourseEmpty/CourseEmpty'
 import { CourseCard } from '../CourseCard/CourseCard'
 import { Button } from '@ui/components'
-import {
-  CourseDTO,
-  Section,
-} from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 interface CourseListProps {
   data: CourseDTO[]
@@ -14,7 +12,7 @@ interface CourseListProps {
   onRefresh: () => void
   getCourse?: () => void
   deleteCourse: (courseId: string) => void
-  onCoursePress: (section: Section, index: number) => void
+  onCoursePress: (section: SectionDTO, index: number) => void
   style?: StyleProp<ViewStyle>
 }
 

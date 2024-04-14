@@ -1,15 +1,13 @@
-import {
-  CourseDTO,
-  Section,
-} from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 import React, { createContext, useContext, useState } from 'react'
 
 export type courseContextDataProps = {
   courses: CourseDTO[]
-  section: Section
+  section: SectionDTO
   index: number
   handleSetCourses: (courses: CourseDTO[]) => void
-  handleSelectSection: (section: Section) => void
+  handleSelectSection: (section: SectionDTO) => void
   handleSetIndex: (index: number) => void
 }
 
@@ -25,10 +23,10 @@ export function CourseContextProvider({
 }: courseContextProviderProps) {
   const [courses, setCourses] = useState<CourseDTO[]>([])
 
-  const [section, setSection] = useState<Section>({} as Section)
+  const [section, setSection] = useState<SectionDTO>({} as SectionDTO)
   const [index, setIndex] = useState<number>(0)
 
-  const handleSelectSection = (section: Section) => {
+  const handleSelectSection = (section: SectionDTO) => {
     setSection(section)
   }
 

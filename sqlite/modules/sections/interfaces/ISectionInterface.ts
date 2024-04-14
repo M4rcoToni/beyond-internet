@@ -1,6 +1,6 @@
 export class SectionDTO {
   id?: string
-  order: number
+  position: number
   courseId: string
   title: string
   description: string

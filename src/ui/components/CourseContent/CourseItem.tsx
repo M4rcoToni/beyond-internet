@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { SubTitle } from '../SubTitle/SubTitle'
-import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 interface CourseItemProps {
-  item: Section
+  item: SectionDTO
   onPress?: () => void
 }
 

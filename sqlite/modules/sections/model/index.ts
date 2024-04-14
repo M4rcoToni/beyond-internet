@@ -9,6 +9,7 @@ export async function initializeTableSections(
         `CREATE TABLE IF NOT EXISTS sections
         (
             id            INTEGER PRIMARY KEY,
+            position         INTEGER NOT NULL,
             courseId      INTEGER NOT NULL,
             title         TEXT NOT NULL, 
             description   TEXT NOT NULL,

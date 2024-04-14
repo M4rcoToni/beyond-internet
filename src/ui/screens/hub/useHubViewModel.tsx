@@ -14,11 +14,12 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
 
   const handleOnListCourses = async () => {
     try {
-      await courseRepository.listCourses()
+      const response = await courseRepository.listCourses()
+      console.log('response', response)
 
-      // if (response) {
-      //   handleSetCourses(response)
-      // }
+      if (response) {
+        handleSetCourses(response)
+      }
     } catch (error) {
       console.log('error', error)
 

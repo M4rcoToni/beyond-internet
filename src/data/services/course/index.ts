@@ -104,24 +104,23 @@ export class CoursesService implements ICoursesService {
   async createCourse(): Promise<CourseDTO | null> {
     const course = await this.openCourse()
 
-    // if (!course) {
-    //   throw new Result(false, null, new Error('Erro ao abrir o curso!'))
-    // }
+    if (!course) {
+      throw new Result(false, null, new Error('Erro ao abrir o curso!'))
+    }
 
-    // const createdCourse = await this.courseController.create({
-    //   ...course,
-    //   indexFile: JSON.stringify(course.indexFile),
-    // })
-    // console.log(createdCourse, 'createdCourse')
+    const createdCourse = await this.courseController.create({
+      ...course,
+      indexFile: JSON.stringify(course.indexFile),
+    })
 
-    // if (!createdCourse) {
-    //   throw new Result(false, null, new Error('Erro curso já cadastrado!'))
-    // }
+    if (!createdCourse) {
+      throw new Result(false, null, new Error('Erro curso já cadastrado!'))
+    }
+
     course?.indexFile.sections.map(async (section) => {
-      // console.log(JSON.stringify(section, null, 2))
       await this.Section.create({
         id: String(section.id),
-        order: section.order,
+        position: section.position,
         courseId: section.courseId,
         title: section.title,
         description: section.description,

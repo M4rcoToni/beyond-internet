@@ -8,8 +8,8 @@ export async function initializeDatabase() {
 
   // prune the database
   // db.transaction((tx) => {
-  //   tx.executeSql('DROP TABLE IF EXISTS users;')
-  //   tx.executeSql('DROP TABLE IF EXISTS course;')
+  //   //   // tx.executeSql('DROP TABLE IF EXISTS users;')
+  //   //   // tx.executeSql('DROP TABLE IF EXISTS course;')
   //   tx.executeSql('DROP TABLE IF EXISTS sections;')
   // })
 
