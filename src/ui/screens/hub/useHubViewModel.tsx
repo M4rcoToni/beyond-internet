@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { Result } from '@data/result'
-import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export function useHubViewModel(courseRepository: CoursesRepository) {
   const { navigate } = useNavigation()
@@ -14,11 +14,11 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
 
   const handleOnListCourses = async () => {
     try {
-      const response = await courseRepository.listCourses()
+      await courseRepository.listCourses()
 
-      if (response) {
-        handleSetCourses(response)
-      }
+      // if (response) {
+      //   handleSetCourses(response)
+      // }
     } catch (error) {
       console.log('error', error)
 
@@ -75,7 +75,7 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
     }
   }
 
-  const handleOnCoursePress = (section: Section, index: number) => {
+  const handleOnCoursePress = (section: SectionDTO, index: number) => {
     handleSelectSection(section)
     handleSetIndex(index)
     navigate('Course', { index, courses })

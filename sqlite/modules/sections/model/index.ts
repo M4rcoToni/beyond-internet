@@ -30,6 +30,7 @@ export async function initializeTableSections(
 
 export class SectionModel {
   id?: string
+  order: number
   courseId: string
   title: string
   description: string

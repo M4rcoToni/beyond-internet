@@ -1,23 +1,9 @@
-type Question = {
-  id: number
-  title: string
-  questions: any[] // Você pode adicionar a tipagem correta para as perguntas
-}
-
-export type Section = {
-  id: number
-  title: string
-  description: string
-  images: string[] | null
-  videos: string[] | null
-  pdfs: string[] | null
-  tests: Question[] | null
-}
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export type CourseType = {
   id: number
   name: string
-  sections: Section[]
+  sections: SectionDTO[]
 }
 
 export type CourseDTO = {

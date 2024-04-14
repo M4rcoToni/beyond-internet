@@ -1,7 +1,7 @@
 import { SectionDTO } from '../interfaces/ISectionInterface'
 import { SectionService } from '../service'
 
-export class SectionCOntroller {
+export class SectionController {
   private sectionService: SectionService
 
   constructor(sectionService: SectionService) {
