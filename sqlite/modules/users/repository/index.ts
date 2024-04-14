@@ -135,6 +135,10 @@ export class UserRepository
       }
     })
 
+    if (user?.id) {
+      await this.update(user?.id, { isLogged: 1 })
+    }
+
     const passwordMatch = hash === userPassword
 
     if (!passwordMatch) {
