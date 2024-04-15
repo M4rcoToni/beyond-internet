@@ -2,7 +2,7 @@ import { SafeAreaView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 
-import { CourseContent } from '../CourseContent/CourseContent'
+import { CourseContent } from './CourseContent/CourseContent'
 import { HubContent } from './HubContent/HubContent'
 import { useDrawerContentViewModel } from './useDrawerContentViewModel'
 
@@ -18,7 +18,7 @@ interface DrawerContentProps {
 
 export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   const navigation = useNavigation()
-  const { user, handleLogout, courses, index } = useDrawerContentViewModel(
+  const { user, handleLogout, course, sections } = useDrawerContentViewModel(
     new AuthRepository(new AuthService()),
     new CoursesRepository(new CoursesService()),
   )
@@ -29,8 +29,8 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
         <HubContent signOut={handleLogout} user={user} />
       ) : (
         <CourseContent
-          sections={courses?.[index]?.indexFile.sections}
-          courseName={courses?.[index]?.indexFile.name}
+          sections={sections}
+          courseName={course?.indexFile.name || ''}
           onPressBackButton={() => navigation.navigate('Hub')}
           closeDrawer={() => drawer.closeDrawer()}
         />

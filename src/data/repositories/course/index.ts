@@ -100,4 +100,20 @@ export class CoursesRepository implements ICoursesRepository {
       )
     }
   }
+
+  async listSections(courseId: number) {
+    try {
+      return this.courseService.listSections(courseId)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao listar seções',
+        ),
+      )
+    }
+  }
 }

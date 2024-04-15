@@ -60,12 +60,12 @@ export class SectionRepository
     return section
   }
 
-  async list(): Promise<SectionDTO[]> {
+  async list(courseId: number): Promise<SectionDTO[]> {
     let sections: SectionDTO[] = []
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `SELECT * FROM ${this.tableName}`
-      const result = await tx.executeSqlAsync(sql)
+      const sql = `SELECT * FROM ${this.tableName} WHERE courseId = ? ORDER BY position`
+      const result = await tx.executeSqlAsync(sql, [courseId])
 
       if ('rows' in result) {
         sections = result.rows as SectionDTO[]
@@ -75,12 +75,12 @@ export class SectionRepository
     return sections
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(courseId: number): Promise<boolean> {
     let deleted = false
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `DELETE FROM ${this.tableName} WHERE id = ?`
-      await tx.executeSqlAsync(sql, [id])
+      const sql = `DELETE FROM ${this.tableName} WHERE courseId = ?`
+      await tx.executeSqlAsync(sql, [courseId])
       deleted = true
     })
 

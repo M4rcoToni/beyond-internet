@@ -3,10 +3,10 @@ import { FlatList, View } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
 import { CourseItem } from './CourseItem'
-import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 interface CourseContentProps {
-  sections: Section[]
+  sections: SectionDTO[]
   courseName: string
   onPressBackButton: () => void
   closeDrawer: () => void
@@ -18,7 +18,7 @@ export function CourseContent({
   onPressBackButton,
   closeDrawer,
 }: CourseContentProps) {
-  const { handleSelectSection } = useCourseContentViewModel()
+  const { handleSetIndex } = useCourseContentViewModel()
 
   return (
     <Container>
@@ -34,13 +34,13 @@ export function CourseContent({
         initialNumToRender={2}
         onEndReachedThreshold={0.5}
         scrollEventThrottle={2}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.position.toString()}
         ListHeaderComponent={() => <SubTitle size={32} text={courseName} />}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <CourseItem
             item={item}
             onPress={() => {
-              handleSelectSection(item)
+              handleSetIndex(index)
               closeDrawer()
             }}
           />

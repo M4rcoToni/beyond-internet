@@ -32,17 +32,17 @@ export class SectionController {
     }
   }
 
-  async list(): Promise<SectionDTO[]> {
+  async list(courseId: number): Promise<SectionDTO[]> {
     try {
-      return await this.sectionService.list()
+      return await this.sectionService.list(courseId)
     } catch (error) {
       throw new Error()
     }
   }
 
-  async delete(id: string): Promise<boolean> {
+  async delete(courseId: number): Promise<boolean> {
     try {
-      return await this.sectionService.delete(id)
+      return await this.sectionService.delete(courseId)
     } catch (error) {
       throw new Error()
     }

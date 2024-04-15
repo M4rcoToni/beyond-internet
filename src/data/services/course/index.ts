@@ -13,6 +13,7 @@ import { CourseService } from '@sqlite/modules/course/service'
 import { SectionController } from '@sqlite/modules/sections/controller'
 import { SectionRepository } from '@sqlite/modules/sections/repository'
 import { SectionService } from '@sqlite/modules/sections/service'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export class CoursesService implements ICoursesService {
   private courseController = new CourseController(
@@ -166,5 +167,22 @@ export class CoursesService implements ICoursesService {
     }
 
     return true
+  }
+
+  async listSections(courseId: number): Promise<SectionDTO[]> {
+    const sections = await this.Section.list(courseId)
+
+    const formattedSections = sections.map((item) => ({
+      ...item,
+      images: JSON.parse(String(item.images)),
+      videos: JSON.parse(String(item.videos)),
+      pdfs: JSON.parse(String(item.pdfs)),
+    }))
+
+    if (!formattedSections) {
+      throw new Result(false, null, new Error('Seções não encontradas!'))
+    }
+
+    return formattedSections
   }
 }

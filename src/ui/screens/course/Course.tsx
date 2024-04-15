@@ -1,34 +1,25 @@
-import { useRoute } from '@react-navigation/native'
 import { Image } from 'expo-image'
 import { SubTitle } from '@ui/components'
-import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
-import { useCourse } from '@data/contexts/CourseContext'
 import { Container, Content, CouseDescription } from './styles'
 import { ResizeMode, Video } from 'expo-av'
-import { useMemo } from 'react'
-import { Dimensions } from 'react-native'
+import { useCourseViewModel } from './useCourseViewModel'
 
 export function Course() {
-  const { section } = useCourse()
-  const route = useRoute()
+  const { course, index, sections, width } = useCourseViewModel()
 
-  const { index, courses } = route.params as {
-    index: number
-    courses: CourseDTO[]
+  if (!course) {
+    return null
   }
-  const width = useMemo(() => {
-    return Dimensions.get('window').width
-  }, [])
 
   return (
     <Container>
       <Content>
-        <SubTitle size={20} text={section.title} />
-        {courses[index].images + section.images !== null && (
+        <SubTitle size={20} text={sections[index].title} />
+        {course?.images + sections[index].images !== null && (
           <Image
             alt="Imagem do curso"
             source={{
-              uri: courses[index].images + section.images,
+              uri: course?.images + sections[index].images,
             }}
             style={{
               width: 200,
@@ -39,10 +30,10 @@ export function Course() {
           />
         )}
 
-        {courses[index].videos + section.videos !== null && (
+        {course?.videos + sections[index].videos !== null && (
           <Video
             source={{
-              uri: courses[index].videos + section.videos,
+              uri: course?.videos + sections[index].videos,
             }}
             rate={1.0}
             volume={1.0}
@@ -53,7 +44,7 @@ export function Course() {
           />
         )}
 
-        <CouseDescription>{section.description}</CouseDescription>
+        <CouseDescription>{sections[index].description}</CouseDescription>
       </Content>
     </Container>
   )

@@ -1,4 +1,5 @@
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export interface ICoursesRepository {
   requestPermission: () => Promise<string>
@@ -7,6 +8,7 @@ export interface ICoursesRepository {
   listCourses: () => Promise<CourseDTO[]>
   getCourseById: (id: string) => Promise<CourseDTO | null>
   deleteCourse: (id: string) => Promise<boolean>
+  listSections: (courseId: number) => Promise<SectionDTO[]>
 }
 
 export interface ICoursesService {
@@ -16,4 +18,5 @@ export interface ICoursesService {
   listCourses: () => Promise<CourseDTO[]>
   getCourseById: (id: string) => Promise<CourseDTO | null>
   deleteCourse: (id: string) => Promise<boolean>
+  listSections: (courseId: number) => Promise<SectionDTO[]>
 }

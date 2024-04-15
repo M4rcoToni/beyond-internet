@@ -1,14 +1,16 @@
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 
 export type courseContextDataProps = {
   courses: CourseDTO[]
-  section: SectionDTO
+  sections: SectionDTO[]
   index: number
+  courseId: string
   handleSetCourses: (courses: CourseDTO[]) => void
-  handleSelectSection: (section: SectionDTO) => void
+  handleSetSection: (section: SectionDTO[]) => void
   handleSetIndex: (index: number) => void
+  handleSetCourseId: (courseId: string) => void
 }
 
 type courseContextProviderProps = {
@@ -23,30 +25,37 @@ export function CourseContextProvider({
 }: courseContextProviderProps) {
   const [courses, setCourses] = useState<CourseDTO[]>([])
 
-  const [section, setSection] = useState<SectionDTO>({} as SectionDTO)
+  const [sections, setSections] = useState<SectionDTO[]>([])
   const [index, setIndex] = useState<number>(0)
-
-  const handleSelectSection = (section: SectionDTO) => {
-    setSection(section)
-  }
+  const [courseId, setCourseId] = useState<string>('')
 
   const handleSetIndex = (index: number) => {
     setIndex(index)
   }
 
-  const handleSetCourses = (courses: CourseDTO[]) => {
-    setCourses(courses)
+  const handleSetCourseId = (courseId: string) => {
+    setCourseId(courseId)
   }
+
+  const handleSetCourses = useCallback((courses: CourseDTO[]) => {
+    setCourses(courses)
+  }, [])
+
+  const handleSetSection = useCallback((sections: SectionDTO[]) => {
+    setSections(sections)
+  }, [])
 
   return (
     <CourseContext.Provider
       value={{
         courses,
-        section,
+        sections,
         index,
-        handleSelectSection,
+        courseId,
         handleSetCourses,
+        handleSetCourseId,
         handleSetIndex,
+        handleSetSection,
       }}
     >
       {children}

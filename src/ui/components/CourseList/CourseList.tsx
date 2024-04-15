@@ -12,7 +12,7 @@ interface CourseListProps {
   onRefresh: () => void
   getCourse?: () => void
   deleteCourse: (courseId: string) => void
-  onCoursePress: (section: SectionDTO, index: number) => void
+  onCoursePress: (courseId: number) => Promise<void>
   style?: StyleProp<ViewStyle>
 }
 
@@ -40,7 +40,7 @@ export function CourseList({
           title={item?.indexFile.name}
           subTitle={`${item?.indexFile?.sections?.length} aulas`}
           image={item.banner}
-          onPress={() => onCoursePress(item?.indexFile.sections[index], index)}
+          onPress={() => onCoursePress(Number(item.courseId))}
           onLongPress={() => {
             deleteCourse(item.courseId)
           }}
