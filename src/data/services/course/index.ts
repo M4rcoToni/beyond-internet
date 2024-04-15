@@ -1,18 +1,27 @@
+import * as FileSystem from 'expo-file-system'
 import { ICoursesService } from '@data/interfaces/course'
 import { Result } from '@data/result'
 import { db } from '@sqlite/index'
-import { CourseController } from '@sqlite/modules/course/controller'
 import {
   CourseDTO,
   CourseType,
 } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { CourseController } from '@sqlite/modules/course/controller'
 import { CourseRepository } from '@sqlite/modules/course/repository'
 import { CourseService } from '@sqlite/modules/course/service'
-import * as FileSystem from 'expo-file-system'
+
+import { SectionController } from '@sqlite/modules/sections/controller'
+import { SectionRepository } from '@sqlite/modules/sections/repository'
+import { SectionService } from '@sqlite/modules/sections/service'
+import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export class CoursesService implements ICoursesService {
   private courseController = new CourseController(
     new CourseService(new CourseRepository(db, 'course')),
+  )
+
+  private Section = new SectionController(
+    new SectionService(new SectionRepository(db, 'sections')),
   )
 
   async requestPermission(): Promise<string> {
@@ -104,13 +113,25 @@ export class CoursesService implements ICoursesService {
       ...course,
       indexFile: JSON.stringify(course.indexFile),
     })
-    console.log(createdCourse, 'createdCourse')
 
     if (!createdCourse) {
       throw new Result(false, null, new Error('Erro curso já cadastrado!'))
     }
 
-    return createdCourse
+    course?.indexFile.sections.map(async (section) => {
+      await this.Section.create({
+        id: String(section.id),
+        position: section.position,
+        courseId: section.courseId,
+        title: section.title,
+        description: section.description,
+        images: JSON.stringify(section.images || []),
+        videos: JSON.stringify(section.videos || []),
+        pdfs: JSON.stringify(section.pdfs || []),
+      })
+    })
+
+    return course
   }
 
   async getCourseById(id: string): Promise<CourseDTO | null> {
@@ -146,5 +167,22 @@ export class CoursesService implements ICoursesService {
     }
 
     return true
+  }
+
+  async listSections(courseId: number): Promise<SectionDTO[]> {
+    const sections = await this.Section.list(courseId)
+
+    const formattedSections = sections.map((item) => ({
+      ...item,
+      images: JSON.parse(String(item.images)),
+      videos: JSON.parse(String(item.videos)),
+      pdfs: JSON.parse(String(item.pdfs)),
+    }))
+
+    if (!formattedSections) {
+      throw new Result(false, null, new Error('Seções não encontradas!'))
+    }
+
+    return formattedSections
   }
 }

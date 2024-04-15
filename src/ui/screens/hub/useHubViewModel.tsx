@@ -5,16 +5,21 @@ import { useNavigation } from '@react-navigation/native'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { Result } from '@data/result'
-import { Section } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 export function useHubViewModel(courseRepository: CoursesRepository) {
   const { navigate } = useNavigation()
-  const { handleSelectSection, handleSetIndex, handleSetCourses, courses } =
-    useCourse()
+  const {
+    handleSetSection,
+    handleSetCourseId,
+    handleSetIndex,
+    handleSetCourses,
+    courses,
+  } = useCourse()
 
   const handleOnListCourses = async () => {
     try {
       const response = await courseRepository.listCourses()
+      console.log('response', response)
 
       if (response) {
         handleSetCourses(response)
@@ -75,10 +80,22 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
     }
   }
 
-  const handleOnCoursePress = (section: Section, index: number) => {
-    handleSelectSection(section)
-    handleSetIndex(index)
-    navigate('Course', { index, courses })
+  const handleOnCoursePress = async (courseId: number) => {
+    try {
+      const courses = await courseRepository.listSections(courseId)
+      if (courses) {
+        handleSetSection(courses)
+        handleSetCourseId(String(courseId))
+        handleSetIndex(0)
+        navigate('Course')
+      }
+    } catch (error) {
+      console.error('error', error)
+      Toast.show({
+        type: 'error',
+        text1: error instanceof Result ? error.getError()?.message : 'Erro',
+      })
+    }
   }
 
   return {

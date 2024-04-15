@@ -4,6 +4,8 @@
   "sections": [
     {
       "id": 7,
+      "position": 1,
+      "courseId": 6,
       "title": "Sessão 1",
       "description": "A geografia do Brasil é a área da ciência geográfica que se dedica ao estudo do espaço brasileiro e dos seus diferentes aspectos físicos e humanos. Assim sendo, divide-se a geografia do Brasil em duas grandes subáreas: Geografia física do Brasil: estuda os aspectos físicos do território brasileiro, o que engloba o relevo, o clima, o solo, a vegetação, a geologia e a hidrografia, levando em consideração todos os processos de formação e desenvolvimento, bem como as dinâmicas naturais referentes a cada um deles  Geografia humana do Brasil: estuda a população brasileira e as diferentes formas e dinâmicas espaciais resultantes da interação entre a sociedade e o meio natural. Entre os temas abordados pela geografia humana do Brasil estão: economia, urbanização, industrialização, dinâmicas populacionais, política, diversidade cultural, desigualdades socioespaciais e muitos outros temas que refletem a organização e o funcionamento do espaço brasileiro.Veja mais sobre 'Geografia do Brasil' em: https: //brasilescola.uol.com.br/brasil ",
       "images": [
@@ -54,6 +56,8 @@
     },
     {
       "id": 8,
+      "position": 2,
+      "courseId": 6,
       "title": "Sessão 2",
       "description": "Descrição da Sessão 2",
       "images": [
@@ -126,6 +130,8 @@
     },
     {
       "id": 9,
+      "position": 3,
+      "courseId": 6,
       "title": "Sessão 3",
       "description": "Descrição da Sessão 3",
       "images": [
@@ -196,6 +202,8 @@
     },
     {
       "id": 10,
+      "position": 4,
+      "courseId": 6,
       "title": "Sessão 4",
       "description": "Descrição da Sessão 4",
       "images": [
@@ -264,6 +272,8 @@
     },
     {
       "id": 11,
+      "position": 5,
+      "courseId": 6,
       "title": "Sessão 5",
       "description": "Descrição da Sessão 5",
       "images": [
@@ -332,6 +342,8 @@
     },
     {
       "id": 12,
+      "position": 6,
+      "courseId": 6,
       "title": "Sessão 6",
       "description": "Descrição da Sessão 6",
       "images": [
@@ -400,6 +412,8 @@
     },
     {
       "id": 13,
+      "position": 7,
+      "courseId": 6,
       "title": "Sessão 7",
       "description": "Descrição da Sessão 7",
       "images": [
@@ -468,6 +482,8 @@
     },
     {
       "id": 14,
+      "position": 8,
+      "courseId": 6,
       "title": "Sessão 8",
       "description": "Descrição da Sessão 8",
       "images": [
@@ -536,6 +552,8 @@
     },
     {
       "id": 15,
+      "position": 9,
+      "courseId": 6,
       "title": "Sessão 9",
       "description": "Descrição da Sessão 9",
       "images": [
@@ -604,6 +622,8 @@
     },
     {
       "id": 16,
+      "position": 10,
+      "courseId": 6,
       "title": "Sessão 10",
       "description": "Descrição da Sessão 10",
       "images": [

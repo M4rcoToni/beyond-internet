@@ -23,11 +23,11 @@ export class SectionService implements ISectionService {
     return await this.sectionRepository.findById(id)
   }
 
-  async list() {
-    return await this.sectionRepository.list()
+  async list(courseId: number) {
+    return await this.sectionRepository.list(courseId)
   }
 
-  async delete(id: string) {
-    return await this.sectionRepository.delete(id)
+  async delete(courseId: number) {
+    return await this.sectionRepository.delete(courseId)
   }
 }
