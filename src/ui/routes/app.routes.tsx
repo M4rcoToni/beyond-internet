@@ -19,6 +19,7 @@ export function AppRoutes() {
       <Navigator
         screenOptions={{
           headerShown: false,
+          animation: 'slide_from_right',
         }}
       >
         <Screen name="Root" component={HubDrawer} />

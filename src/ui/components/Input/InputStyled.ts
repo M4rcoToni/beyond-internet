@@ -17,7 +17,7 @@ export const InputStyled = styled(TextInput)`
   font-size: ${theme.FONT_SIZE.MD}px;
 
   border-radius: 6px;
-  padding: 16px;
+  padding-left: 16px;
 `
 export const ErrorMessage = styled.Text`
   align-self: 'flex-start';
