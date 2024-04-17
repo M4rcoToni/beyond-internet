@@ -28,7 +28,6 @@ export class CoursesService implements ICoursesService {
     try {
       const permissions =
         await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync()
-      console.log(permissions)
 
       if (!permissions.granted) {
         throw new Result(false, null, new Error('Erro sem permissão!'))

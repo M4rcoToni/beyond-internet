@@ -9,8 +9,6 @@ export class SectionRepository
 {
   async create(payload: SectionDTO): Promise<SectionDTO | null> {
     let insertedId: number | undefined
-    // console.log('payload', payload)
-    console.log(payload, 'payload')
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(payload)
@@ -25,7 +23,6 @@ export class SectionRepository
         insertedId = res.insertId
       }
     })
-    console.log('insertedId', insertedId)
 
     return this.findById(insertedId || 0)
   }

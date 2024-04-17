@@ -53,7 +53,6 @@ export class UserModel {
   }
 
   // static async create(payload: CreateUserDTO) {
-  //   console.log('payload', payload)
   //   let insertedId: number | undefined
   //   await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
   //     const fields = Object.keys(payload)

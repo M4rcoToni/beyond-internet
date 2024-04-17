@@ -19,14 +19,11 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
   const handleOnListCourses = async () => {
     try {
       const response = await courseRepository.listCourses()
-      console.log('response', response)
 
       if (response) {
         handleSetCourses(response)
       }
     } catch (error) {
-      console.log('error', error)
-
       Toast.show({
         type: 'error',
         text1:
