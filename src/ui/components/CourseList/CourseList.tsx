@@ -28,6 +28,7 @@ export function CourseList({
   ...rest
 }: CourseListProps) {
   return (
+    // TODO: Implement FlashList and change loading
     <FlatList
       {...rest}
       contentContainerStyle={{
