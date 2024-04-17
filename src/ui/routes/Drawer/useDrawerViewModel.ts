@@ -6,7 +6,7 @@ import { CoursesRepository } from '@data/repositories/course'
 import { Result } from '@data/result'
 
 export function useDrawerViewModel(courseRepository: CoursesRepository) {
-  const { index, section, handleSetCourses } = useCourse()
+  const { index, sections, handleSetCourses } = useCourse()
   const handleOnListCourses = async () => {
     try {
       const response = await courseRepository.listCourses()
@@ -29,10 +29,10 @@ export function useDrawerViewModel(courseRepository: CoursesRepository) {
 
   useEffect(() => {
     handleOnListCourses()
-  }, [index])
+  }, [])
 
   return {
     index,
-    section,
+    sections,
   }
 }

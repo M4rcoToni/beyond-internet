@@ -17,7 +17,7 @@ export function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
 
-  const { index, section } = useDrawerViewModel(
+  const { index, sections } = useDrawerViewModel(
     new CoursesRepository(new CoursesService()),
   )
   return (
@@ -54,7 +54,7 @@ export function HubDrawer() {
         name="Course"
         options={() => ({
           headerShown: true,
-          headerTitle: index && section ? section.title : 'Aulas',
+          headerTitle: index && sections ? sections[index].title : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
           gestureResponseDistance: {
