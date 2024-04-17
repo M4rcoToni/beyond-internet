@@ -13,6 +13,7 @@ interface CourseListProps {
   getCourse?: () => void
   deleteCourse: (courseId: string) => void
   onCoursePress: (courseId: number) => Promise<void>
+  isLoadingCourse?: boolean
   style?: StyleProp<ViewStyle>
 }
 
@@ -23,6 +24,7 @@ export function CourseList({
   getCourse,
   onCoursePress,
   deleteCourse,
+  isLoadingCourse,
   ...rest
 }: CourseListProps) {
   return (
@@ -40,6 +42,7 @@ export function CourseList({
           title={item?.indexFile.name}
           subTitle={`${item?.indexFile?.sections?.length} aulas`}
           image={item.banner}
+          isLoading={isLoadingCourse}
           onPress={() => onCoursePress(Number(item.courseId))}
           onLongPress={() => {
             deleteCourse(item.courseId)

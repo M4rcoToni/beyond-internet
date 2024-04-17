@@ -34,3 +34,15 @@ export const CardSubTitle = styled.Text`
   font-family: ${theme.FONT_FAMILY.REGULAR};
   color: ${theme.COLORS.BLACK};
 `
+
+export const Loading = styled.View`
+  margin: 10px;
+  position: absolute;
+  width: 230px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.192);
+  border-radius: 8px;
+  z-index: 2;
+`

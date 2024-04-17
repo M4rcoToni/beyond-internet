@@ -5,9 +5,11 @@ import { useNavigation } from '@react-navigation/native'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { Result } from '@data/result'
+import { useState } from 'react'
 
 export function useHubViewModel(courseRepository: CoursesRepository) {
   const { navigate } = useNavigation()
+  const [isLoading, setIsLoading] = useState(false)
   const {
     handleSetSection,
     handleSetCourseId,
@@ -57,17 +59,18 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
           text: 'Deletar',
           onPress: async () => {
             const res = await courseRepository.deleteCourse(id)
-            if (res)
+            if (res) {
               Toast.show({
                 type: 'success',
                 text1: 'Curso deletado com sucesso',
               })
-            handleOnListCourses()
+              handleSetCourses(
+                courses.filter((course) => course.courseId !== id),
+              )
+            }
           },
         },
       ])
-
-      handleOnListCourses()
     } catch (error) {
       console.error('error', error)
       Toast.show({
@@ -79,11 +82,12 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
 
   const handleOnCoursePress = async (courseId: number) => {
     try {
+      setIsLoading(true)
       const courses = await courseRepository.listSections(courseId)
       if (courses) {
+        handleSetIndex(0)
         handleSetSection(courses)
         handleSetCourseId(String(courseId))
-        handleSetIndex(0)
         navigate('Course')
       }
     } catch (error) {
@@ -92,6 +96,8 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
         type: 'error',
         text1: error instanceof Result ? error.getError()?.message : 'Erro',
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -101,5 +107,6 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
     handleOnListCourses,
     handleOnDeleteCourse,
     handleOnCoursePress,
+    isLoading,
   }
 }

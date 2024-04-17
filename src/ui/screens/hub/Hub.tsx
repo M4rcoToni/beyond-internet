@@ -28,6 +28,7 @@ export function Hub() {
     courses,
     handleOnDeleteCourse,
     handleOnCoursePress,
+    isLoading,
   } = useHubViewModel(new CoursesRepository(new CoursesService()))
 
   useLayoutEffect(() => {
@@ -47,6 +48,7 @@ export function Hub() {
           <CourseList
             data={courses}
             refreshing={false}
+            isLoadingCourse={isLoading}
             onRefresh={handleOnListCourses}
             getCourse={handleOnGetCourse}
             onCoursePress={handleOnCoursePress}
