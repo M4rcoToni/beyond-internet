@@ -23,3 +23,9 @@ export async function initializeTableTest(
     })
   })
 }
+
+export class TestModel {
+  testId?: string
+  title: string
+  completed: boolean
+}
