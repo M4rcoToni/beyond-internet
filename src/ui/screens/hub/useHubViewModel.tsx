@@ -4,10 +4,14 @@ import { useNavigation } from '@react-navigation/native'
 
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
-import { Result } from '@data/result'
 import { useState } from 'react'
+import { SectionsRepository } from '@data/repositories/sections'
+import { Result } from '@data/result'
 
-export function useHubViewModel(courseRepository: CoursesRepository) {
+export function useHubViewModel(
+  courseRepository: CoursesRepository,
+  sectionRepository: SectionsRepository,
+) {
   const { navigate } = useNavigation()
   const [isLoading, setIsLoading] = useState(false)
   const {
@@ -83,7 +87,7 @@ export function useHubViewModel(courseRepository: CoursesRepository) {
   const handleOnCoursePress = async (courseId: number) => {
     try {
       setIsLoading(true)
-      const courses = await courseRepository.listSections(courseId)
+      const courses = await sectionRepository.listSections(courseId)
       if (courses) {
         handleSetIndex(0)
         handleSetSection(courses)

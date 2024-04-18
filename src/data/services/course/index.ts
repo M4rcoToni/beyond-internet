@@ -9,20 +9,14 @@ import {
 import { CourseController } from '@sqlite/modules/course/controller'
 import { CourseRepository } from '@sqlite/modules/course/repository'
 import { CourseService } from '@sqlite/modules/course/service'
-
-import { SectionController } from '@sqlite/modules/sections/controller'
-import { SectionRepository } from '@sqlite/modules/sections/repository'
-import { SectionService } from '@sqlite/modules/sections/service'
-import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
+import { ISectionsService } from '@data/interfaces/sections'
 
 export class CoursesService implements ICoursesService {
   private courseController = new CourseController(
     new CourseService(new CourseRepository(db, 'course')),
   )
 
-  private Section = new SectionController(
-    new SectionService(new SectionRepository(db, 'sections')),
-  )
+  constructor(private readonly SectionsService: ISectionsService) {}
 
   async requestPermission(): Promise<string> {
     try {
@@ -33,9 +27,7 @@ export class CoursesService implements ICoursesService {
         throw new Result(false, null, new Error('Erro sem permissão!'))
       }
 
-      const uri = permissions.directoryUri
-
-      return uri
+      return permissions.directoryUri
     } catch (error) {
       throw new Result(false, null, new Error('Erro ao solicitar permissão!'))
     }
@@ -72,11 +64,6 @@ export class CoursesService implements ICoursesService {
     }
 
     const index = foundIndex
-    const banner = foundBanner
-    const images = foundImages
-    const videos = foundVideos
-    const pdfs = foundPdfs
-
     if (index) {
       const filesContent = await FileSystem.getInfoAsync(index)
 
@@ -89,10 +76,10 @@ export class CoursesService implements ICoursesService {
           courseId: contentJson.id,
           directoryName: contentJson.name,
           uri,
-          images: String(images),
-          videos: String(videos),
-          pdfs: String(pdfs),
-          banner: String(banner),
+          images: String(foundImages),
+          videos: String(foundVideos),
+          pdfs: String(foundPdfs),
+          banner: String(foundBanner),
           indexFile: contentJson,
           granted: 1,
         } as CourseDTO
@@ -117,18 +104,13 @@ export class CoursesService implements ICoursesService {
       throw new Result(false, null, new Error('Erro curso já cadastrado!'))
     }
 
-    course?.indexFile.sections.map(async (section) => {
-      await this.Section.create({
-        id: String(section.id),
-        position: section.position,
-        courseId: section.courseId,
-        title: section.title,
-        description: section.description,
-        images: JSON.stringify(section.images || []),
-        videos: JSON.stringify(section.videos || []),
-        pdfs: JSON.stringify(section.pdfs || []),
-      })
-    })
+    const sectionsCreated = await this.SectionsService.createSection(
+      course?.indexFile.sections,
+    )
+
+    if (!sectionsCreated) {
+      throw new Result(false, null, new Error('Erro ao criar seções!'))
+    }
 
     return course
   }
@@ -159,11 +141,7 @@ export class CoursesService implements ICoursesService {
   }
 
   async deleteCourse(id: string): Promise<boolean> {
-    const deletedSections = await this.Section.delete(Number(id))
-
-    if (!deletedSections) {
-      throw new Result(false, null, new Error('Erro ao deletar seções!'))
-    }
+    await this.SectionsService.deleteSection(Number(id))
 
     const deletedCourse = await this.courseController.delete(id)
 
@@ -172,22 +150,5 @@ export class CoursesService implements ICoursesService {
     }
 
     return true
-  }
-
-  async listSections(courseId: number): Promise<SectionDTO[]> {
-    const sections = await this.Section.list(courseId)
-
-    const formattedSections = sections.map((item) => ({
-      ...item,
-      images: JSON.parse(String(item.images)),
-      videos: JSON.parse(String(item.videos)),
-      pdfs: JSON.parse(String(item.pdfs)),
-    }))
-
-    if (!formattedSections) {
-      throw new Result(false, null, new Error('Seções não encontradas!'))
-    }
-
-    return formattedSections
   }
 }

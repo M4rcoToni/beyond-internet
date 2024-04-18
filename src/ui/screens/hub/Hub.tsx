@@ -1,13 +1,15 @@
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { Container, Content } from './styles'
 
 import { CourseList } from '@ui/components/CourseList/CourseList'
-import { useDimensions } from '../../../data/hooks/useDimensions'
 import { useHubViewModel } from './useHubViewModel'
 import { CoursesService } from '@data/services/course'
 import { CoursesRepository } from '@data/repositories/course'
 import Toast from 'react-native-toast-message'
 import { CourseType } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
+import { SectionsRepository } from '@data/repositories/sections'
+import { SectionsService } from '@data/services/sections'
+import { useDimensions } from '@data/hooks/useDimensions'
 
 export type Courses = {
   id?: string
@@ -29,10 +31,14 @@ export function Hub() {
     handleOnDeleteCourse,
     handleOnCoursePress,
     isLoading,
-  } = useHubViewModel(new CoursesRepository(new CoursesService()))
+  } = useHubViewModel(
+    new CoursesRepository(new CoursesService(new SectionsService())),
+    new SectionsRepository(new SectionsService()),
+  )
 
   useLayoutEffect(() => {
     handleOnListCourses()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
