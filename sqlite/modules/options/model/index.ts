@@ -24,3 +24,10 @@ export async function initializeTableOptions(
     })
   })
 }
+
+export class OptionsModel {
+  id?: number
+  questionId: number
+  description: string
+  answer: number
+}

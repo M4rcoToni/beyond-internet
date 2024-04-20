@@ -1,7 +1,7 @@
 import * as SQLite from 'expo-sqlite'
 import { BaseRepository } from '@sqlite/modules/common/BaseRepository'
-import { SectionModel } from '../model'
 import { ISectionRepository, SectionDTO } from '../interfaces/ISectionInterface'
+import { SectionModel } from '@sqlite/modules/sections/model'
 
 export class SectionRepository
   extends BaseRepository<SectionModel>
