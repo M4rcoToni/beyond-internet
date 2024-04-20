@@ -23,3 +23,9 @@ export async function initializeTableQuestions(
     })
   })
 }
+
+export class QuestionModel {
+  questionId?: string
+  testId: string
+  description: string
+}

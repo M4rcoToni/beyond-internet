@@ -6,7 +6,6 @@ import { Result } from '@data/result'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 
 export class SectionsRepository implements ISectionsRepository {
-  // eslint-disable-next-line no-useless-constructor
   constructor(private readonly sectionService: ISectionsService) {}
 
   async listSections(courseId: number): Promise<SectionDTO[]> {
