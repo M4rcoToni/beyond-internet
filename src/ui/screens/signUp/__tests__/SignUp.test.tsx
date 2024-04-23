@@ -1,7 +1,8 @@
 import React from 'react'
 import { SignUp } from '@screens/signUp/SignUp'
-import { fireEvent, render, screen } from '@testing-library/react-native'
+import { act, fireEvent, render, screen } from '@testing-library/react-native'
 import { NavigationContainer } from '@react-navigation/native'
+import { AuthRepository } from '@data/repositories/auth'
 
 describe('SignUp', () => {
   it('renders screen', () => {
@@ -88,5 +89,40 @@ describe('SignUp', () => {
     ).toBeTruthy()
 
     expect(await screen.findByText('As senhas devem ser iguais.')).toBeTruthy()
+  })
+
+  it('should be register user', async () => {
+    render(
+      <NavigationContainer>
+        <SignUp />
+      </NavigationContainer>,
+    )
+
+    const nameInput = screen.getByTestId('name-input')
+    const cpfInput = screen.getByTestId('cpf-input')
+    const passwordInput = screen.getByTestId('password-input')
+    const passwordConfirmInput = screen.getByTestId('password-confirm-input')
+    const button = screen.getByTestId('signup-button')
+
+    fireEvent.changeText(nameInput, 'John Doe')
+    fireEvent.changeText(cpfInput, '047.196.130-20')
+    fireEvent.changeText(passwordInput, '123456')
+    fireEvent.changeText(passwordConfirmInput, '123456')
+
+    fireEvent.press(button)
+    await act(async () => {
+      const spy = jest.spyOn(AuthRepository.prototype, 'createUser')
+      // TODO better way to mock this
+      spy.mockImplementation(() => {
+        return Promise.resolve({
+          name: nameInput.props.value,
+          cpf: cpfInput.props.value,
+          password: passwordInput.props.value,
+        })
+      })
+
+      expect(await screen.findByText('Usuário criado com sucesso')).toBeTruthy()
+      expect(spy).toHaveBeenCalled()
+    })
   })
 })
