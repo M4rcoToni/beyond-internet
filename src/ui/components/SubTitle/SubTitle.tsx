@@ -1,7 +1,8 @@
 import React from 'react'
 import { SubTitleStyled } from './styles'
+import { TextProps } from 'react-native'
 
-interface SubTitleProps {
+interface SubTitleProps extends TextProps {
   size?: number
   text: string
 }

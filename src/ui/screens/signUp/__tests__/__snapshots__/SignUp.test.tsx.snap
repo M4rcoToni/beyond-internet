@@ -1,0 +1,397 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUp renders screen 1`] = `
+<RNCSafeAreaView
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "backgroundColor": "#f2f2f2",
+      "flexBasis": 0,
+      "flexGrow": 1,
+      "flexShrink": 1,
+      "paddingBottom": 24,
+      "paddingLeft": 24,
+      "paddingRight": 24,
+      "paddingTop": 24,
+    }
+  }
+>
+  <RCTScrollView
+    contentContainerStyle={
+      {
+        "flexGrow": 1,
+      }
+    }
+  >
+    <View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "gap": 14,
+            "justifyContent": "center",
+            "marginTop": 30,
+          }
+        }
+      >
+        <ViewManagerAdapter_ExpoImage
+          accessibilityLabel="Logo do IFSUL"
+          contentFit="cover"
+          contentPosition={
+            {
+              "left": "50%",
+              "top": "50%",
+            }
+          }
+          height={100}
+          onError={[Function]}
+          onLoad={[Function]}
+          onLoadStart={[Function]}
+          onProgress={[Function]}
+          placeholder={[]}
+          responsivePolicy="live"
+          source={[]}
+          style={
+            {
+              "height": 100,
+              "width": 120,
+            }
+          }
+          transition={
+            {
+              "duration": 600,
+            }
+          }
+          width={120}
+        />
+        <Text
+          size={16}
+          style={
+            {
+              "color": "#000000",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "textAlign": "center",
+            }
+          }
+        >
+          Cadastro
+        </Text>
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Nome Completo"
+          placeholderTextColor="#FFFFFF"
+          style={
+            {
+              "backgroundColor": "#7C7C8A",
+              "borderBottomLeftRadius": 6,
+              "borderBottomRightRadius": 6,
+              "borderTopLeftRadius": 6,
+              "borderTopRightRadius": 6,
+              "color": "#FFFFFF",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "maxHeight": 56,
+              "maxWidth": 400,
+              "minHeight": 56,
+              "paddingLeft": 16,
+              "width": "100%",
+            }
+          }
+          testID="name-input"
+        />
+        <TextInput
+          maxLength={14}
+          onChangeText={[Function]}
+          placeholder="Informe seu CPF"
+          placeholderTextColor="#FFFFFF"
+          style={
+            {
+              "backgroundColor": "#7C7C8A",
+              "borderBottomLeftRadius": 6,
+              "borderBottomRightRadius": 6,
+              "borderTopLeftRadius": 6,
+              "borderTopRightRadius": 6,
+              "color": "#FFFFFF",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "maxHeight": 56,
+              "maxWidth": 400,
+              "minHeight": 56,
+              "paddingLeft": 16,
+              "width": "100%",
+            }
+          }
+          testID="cpf-input"
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Senha"
+          placeholderTextColor="#FFFFFF"
+          style={
+            {
+              "backgroundColor": "#7C7C8A",
+              "borderBottomLeftRadius": 6,
+              "borderBottomRightRadius": 6,
+              "borderTopLeftRadius": 6,
+              "borderTopRightRadius": 6,
+              "color": "#FFFFFF",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "maxHeight": 56,
+              "maxWidth": 400,
+              "minHeight": 56,
+              "paddingLeft": 16,
+              "width": "100%",
+            }
+          }
+          testID="password-input"
+        />
+        <TextInput
+          onChangeText={[Function]}
+          placeholder="Confirme sua senha"
+          placeholderTextColor="#FFFFFF"
+          style={
+            {
+              "backgroundColor": "#7C7C8A",
+              "borderBottomLeftRadius": 6,
+              "borderBottomRightRadius": 6,
+              "borderTopLeftRadius": 6,
+              "borderTopRightRadius": 6,
+              "color": "#FFFFFF",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "maxHeight": 56,
+              "maxWidth": 400,
+              "minHeight": 56,
+              "paddingLeft": 16,
+              "width": "100%",
+            }
+          }
+          testID="password-confirm-input"
+        />
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#00875F",
+              "borderBottomLeftRadius": 6,
+              "borderBottomRightRadius": 6,
+              "borderTopLeftRadius": 6,
+              "borderTopRightRadius": 6,
+              "height": 56,
+              "justifyContent": "center",
+              "maxHeight": 56,
+              "maxWidth": 400,
+              "opacity": 1,
+              "width": "100%",
+            }
+          }
+          testID="signup-button"
+        >
+          <Text
+            style={
+              {
+                "color": "#FFFFFF",
+                "fontFamily": "Poppins_700Bold",
+                "fontSize": 16,
+                "textAlign": "center",
+              }
+            }
+          >
+            Cadastre-se
+          </Text>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": undefined,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "color": "#FFFFFF",
+              "fontFamily": "Poppins_400Regular",
+              "fontSize": 16,
+              "opacity": 1,
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            size={16}
+            style={
+              {
+                "color": "#000000",
+                "fontFamily": "Poppins_400Regular",
+                "fontSize": 16,
+                "textAlign": "center",
+              }
+            }
+          >
+            Voltar para o login
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+  <View
+    collapsable={false}
+    onLayout={[Function]}
+    onMoveShouldSetResponder={[Function]}
+    onMoveShouldSetResponderCapture={[Function]}
+    onResponderEnd={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderReject={[Function]}
+    onResponderRelease={[Function]}
+    onResponderStart={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onStartShouldSetResponderCapture={[Function]}
+    pointerEvents="box-none"
+    style={
+      {
+        "alignItems": "center",
+        "justifyContent": "center",
+        "left": 0,
+        "opacity": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "transform": [
+          {
+            "translateY": 0,
+          },
+        ],
+      }
+    }
+    testID="toastAnimatedContainer"
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "backgroundColor": "#FFF",
+          "borderLeftColor": "#69C779",
+          "borderLeftWidth": 5,
+          "borderRadius": 6,
+          "elevation": 2,
+          "flexDirection": "row",
+          "height": 60,
+          "opacity": 1,
+          "shadowOffset": {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.1,
+          "shadowRadius": 6,
+          "width": 340,
+        }
+      }
+      testID="toastTouchableContainer"
+    >
+      <View
+        style={
+          [
+            {
+              "alignItems": "flex-start",
+              "flex": 1,
+              "justifyContent": "center",
+              "paddingHorizontal": 25,
+            },
+            undefined,
+          ]
+        }
+        testID="toastContentContainer"
+      />
+    </View>
+  </View>
+</RNCSafeAreaView>
+`;

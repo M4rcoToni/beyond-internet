@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import Toast from 'react-native-toast-message'
-import { FormDataProps, LoginFormDataProps } from '@data/utils/FormValidator'
+import { FormDataProps } from '@data/utils/FormValidator'
 import { Result } from '@data/result'
 import { AuthRepository } from '@data/repositories/auth'
 import { useState } from 'react'

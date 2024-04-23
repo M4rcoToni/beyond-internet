@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message'
 import { Controller, useForm } from 'react-hook-form'
 import { Image } from 'expo-image'
 import { Content } from './styles'
-import { SubTitle, Input, Container, Button, Link } from '@ui/components'
+import { Button, Container, Input, Link, SubTitle } from '@ui/components'
 import { LoginFormDataProps, signInSchema } from 'data/utils/FormValidator'
 import { ScrollView } from 'react-native'
 import { useSignInViewModel } from './useSignInViewModel'
@@ -14,7 +14,7 @@ import { AuthRepository } from '@data/repositories/auth'
 import { CPFMask } from '@data/utils/CpfMask'
 
 export function SignIn() {
-  const navigation = useNavigation()
+  const { navigate } = useNavigation()
 
   const { handleSignIn, loading } = useSignInViewModel(
     new AuthRepository(new AuthService()),
@@ -55,6 +55,7 @@ export function SignIn() {
                 value={value}
                 keyboardType="numeric"
                 errorMessage={errors.cpf?.message}
+                testID="cpf-input"
               />
             )}
           />
@@ -69,6 +70,7 @@ export function SignIn() {
                 value={value}
                 secureTextEntry
                 errorMessage={errors.password?.message}
+                testID="sigin-password-input"
               />
             )}
           />
@@ -79,10 +81,12 @@ export function SignIn() {
             isLoading={loading}
             style={{ height: 56 }}
             onPress={handleSubmit(handleSignIn)}
+            testID="signin-button"
           />
           <Link
             title="Cadastre-se"
-            onPress={() => navigation.navigate('signUp')}
+            testID="signup-link"
+            onPress={() => navigate('signUp')}
           />
         </Content>
       </ScrollView>

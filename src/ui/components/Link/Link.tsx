@@ -5,11 +5,12 @@ import { LinkStyled } from './LinkStyled'
 interface Link {
   title: string
   onPress: () => void
+  testID?: string
 }
 
-export function Link({ onPress, title }: Link) {
+export function Link({ onPress, title, testID }: Link) {
   return (
-    <LinkStyled onPress={onPress}>
+    <LinkStyled onPress={onPress} testID={testID}>
       <SubTitle text={title} />
     </LinkStyled>
   )

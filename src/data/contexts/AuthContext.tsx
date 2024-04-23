@@ -34,13 +34,16 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }, [])
 
   const loadUser = useCallback(async () => {
-    const user = await userRepository.first()
+    try {
+      const user = await userRepository.first()
 
-    setUser(user)
-    if (!user?.id || user) {
-      setTimeout(() => {
-        setLoadingUser(false)
-      }, 600)
+      if (user?.id) {
+        setUser(user)
+      }
+    } catch (error) {
+      console.error('Error loading user: ', error)
+    } finally {
+      setLoadingUser(false)
     }
   }, [])
 

@@ -1,14 +1,14 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 
-import { useForm, Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Toast from 'react-native-toast-message'
 
 import { Content } from './styles'
 import { Image } from 'expo-image'
 
-import { SubTitle, Input, Button, Link, Container } from '@ui/components'
+import { Button, Container, Input, Link, SubTitle } from '@ui/components'
 import { FormDataProps, signUpSchema } from '@data/utils/FormValidator'
 import { ScrollView } from 'react-native'
 import { CPFMask } from '@data/utils/CpfMask'
@@ -42,7 +42,7 @@ export function SignUp() {
             responsivePolicy="live"
             alt="Logo do IFSUL"
           />
-          <SubTitle text="Cadastre-se" />
+          <SubTitle text="Cadastro" testID="sign-up-title" />
           <Controller
             control={control}
             name="name"
@@ -52,6 +52,7 @@ export function SignUp() {
                 onChangeText={onChange}
                 value={value}
                 errorMessage={errors.name?.message}
+                testID="name-input"
               />
             )}
           />
@@ -68,6 +69,7 @@ export function SignUp() {
                 maxLength={14}
                 value={value}
                 errorMessage={errors.cpf?.message}
+                testID="cpf-input"
               />
             )}
           />
@@ -81,6 +83,7 @@ export function SignUp() {
                 onChangeText={onChange}
                 value={value}
                 errorMessage={errors.password?.message}
+                testID="password-input"
               />
             )}
           />
@@ -94,6 +97,7 @@ export function SignUp() {
                 onChangeText={onChange}
                 value={value}
                 errorMessage={errors.passwordConfirm?.message}
+                testID="password-confirm-input"
               />
             )}
           />
@@ -103,6 +107,7 @@ export function SignUp() {
             type="PRIMARY"
             style={{ height: 56 }}
             onPress={handleSubmit(handleSignUp)}
+            testID="signup-button"
           />
           <Link
             title="Voltar para o login"

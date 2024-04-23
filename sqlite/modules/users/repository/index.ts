@@ -37,7 +37,7 @@ export class UserRepository
         insertedId = res.insertId
       }
     })
-    this.update(insertedId || 0, { isLogged: 1 })
+    await this.update(insertedId || 0, { isLogged: 1 })
 
     return this.findById(insertedId || 0)
   }
