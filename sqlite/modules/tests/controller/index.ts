@@ -1,40 +1,41 @@
-import { SectionService } from '@sqlite/modules/sections/service'
-import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
+import { TestsDTO } from "../interfaces/ITestInterface"
+import { TestService } from "../service"
+
 
 export class TestsController {
-  private sectionService: SectionService
+  private testsService: TestService
 
-  constructor(sectionService: SectionService) {
-    this.sectionService = sectionService
+  constructor(testsService: TestService) {
+    this.testsService = testsService
   }
 
-  async create(payload: SectionDTO): Promise<SectionDTO | null> {
+  async create(payload: TestsDTO): Promise<TestsDTO | null> {
     try {
-      return await this.sectionService.create(payload)
+      return await this.testsService.create(payload)
     } catch (error) {
       throw new Error()
     }
   }
 
-  async update(id: number, data: SectionDTO): Promise<SectionDTO | null> {
+  async update(id: number, data: TestsDTO): Promise<TestsDTO | null> {
     try {
-      return await this.sectionService.update(id, data)
+      return await this.testsService.update(id, data)
     } catch (error) {
       throw new Error()
     }
   }
 
-  async findById(id: number): Promise<SectionDTO | null> {
+  async findById(id: number): Promise<TestsDTO | null> {
     try {
-      return await this.sectionService.findById(id)
+      return await this.testsService.findById(id)
     } catch (error) {
       throw new Error()
     }
   }
 
-  async list(courseId: number): Promise<SectionDTO[]> {
+  async list(): Promise<TestsDTO[]> {
     try {
-      return await this.sectionService.list(courseId)
+      return await this.testsService.list()
     } catch (error) {
       throw new Error()
     }
@@ -42,7 +43,7 @@ export class TestsController {
 
   async delete(courseId: number): Promise<boolean> {
     try {
-      return await this.sectionService.delete(courseId)
+      return await this.testsService.delete(courseId)
     } catch (error) {
       throw new Error()
     }

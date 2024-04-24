@@ -9,6 +9,7 @@ export async function initializeTableTest(
         `CREATE TABLE IF NOT EXISTS tests
         (
             testId        INTEGER PRIMARY KEY NOT NULL,
+            sectionId     INTEGER NOT NULL,
             title         TEXT NOT NULL,
             completed     INTEGER DEFAULT 0
         )`,
@@ -26,6 +27,7 @@ export async function initializeTableTest(
 
 export class TestModel {
   testId?: string
+  sectionId: string
   title: string
   completed: boolean
 }

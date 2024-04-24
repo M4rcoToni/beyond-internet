@@ -18,7 +18,7 @@ import { AuthService } from '@data/services/auth'
 
 export function SignUp() {
   const navigation = useNavigation()
-  const { handleSignUp } = useSignUpViewModel(
+  const { handleSignUp, loading } = useSignUpViewModel(
     new AuthRepository(new AuthService()),
   )
 
@@ -107,6 +107,8 @@ export function SignUp() {
             type="PRIMARY"
             style={{ height: 56 }}
             onPress={handleSubmit(handleSignUp)}
+            isLoading={loading}
+            disabled={loading}
             testID="signup-button"
           />
           <Link
