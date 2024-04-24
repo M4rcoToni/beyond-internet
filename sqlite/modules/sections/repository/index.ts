@@ -21,6 +21,8 @@ export class SectionRepository
       const res = await tx.executeSqlAsync(sql, values)
       if ('insertId' in res) {
         insertedId = res.insertId
+      } else {
+        console.log('SectionRepository', res)
       }
     })
 

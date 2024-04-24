@@ -1,30 +1,34 @@
-import { ITestsService } from "@data/interfaces/tests";
-import { db } from "@sqlite/index";
-import { SectionDTO } from "@sqlite/modules/sections/interfaces/ISectionInterface";
-import { TestsController } from "@sqlite/modules/tests/controller";
-import { TestsDTO } from "@sqlite/modules/tests/interfaces/ITestInterface";
-import { TestsRepository } from "@sqlite/modules/tests/repository";
-import { TestService } from "@sqlite/modules/tests/service";
+import { ITestsService } from '@data/interfaces/tests'
+import { db } from '@sqlite/index'
+import { TestsController } from '@sqlite/modules/tests/controller'
+import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
+import { TestsRepository } from '@sqlite/modules/tests/repository'
+import { TestService } from '@sqlite/modules/tests/service'
 
-export class TestsService implements ITestsService{
+export class TestsService implements ITestsService {
   private Tests = new TestsController(
-    new TestService(new TestsRepository(db, 'tests'))
+    new TestService(new TestsRepository(db, 'tests')),
   )
+
   async listTest(): Promise<TestsDTO[]> {
     return await this.Tests.list()
   }
-  async createTest(sections: SectionDTO[]): Promise<boolean> {
-    const testsPromises = sections.map(async (section) => {
+
+  async createTest(sectionId: number, tests: TestsDTO[]): Promise<boolean> {
+    const testsPromises = tests.map(async (test) => {
       await this.Tests.create({
-        id: String(section.id),
-        sectionId: section.id,
-        questions: JSON.stringify(section.questions || []),
+        testId: test.id,
+        sectionId,
+        title: test.title,
+        completed: 0,
       })
     })
 
     await Promise.all(testsPromises).catch(() => {
       throw new Error('Erro ao criar testes!')
     })
+
+    // TODO: Implementar a criação de questions
 
     return true
   }

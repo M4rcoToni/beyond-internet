@@ -2,6 +2,7 @@ import * as SQLite from 'expo-sqlite'
 import { initializeTableUsers } from './modules/users/model'
 import { initializeTableCourses } from './modules/course/model'
 import { initializeTableSections } from './modules/sections/model'
+import { initializeTableTest } from '@sqlite/modules/tests/model'
 
 export async function initializeDatabase() {
   const db = SQLite.openDatabase('beyond.db')
@@ -17,6 +18,7 @@ export async function initializeDatabase() {
     Promise.resolve(initializeTableUsers(db)),
     Promise.resolve(initializeTableCourses(db)),
     Promise.resolve(initializeTableSections(db)),
+    Promise.resolve(initializeTableTest(db)),
   ]
 
   Promise.allSettled(promises)
@@ -51,9 +53,16 @@ export async function initializeDatabase() {
       // })
 
       // select all sections
+      // await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      //   await tx.executeSqlAsync('SELECT * FROM sections;').then((result) => {
+      //     console.log('sections', result)
+      //   })
+      // })
+
+      // select all tests
       await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-        await tx.executeSqlAsync('SELECT * FROM sections;').then((result) => {
-          console.log('sections', result)
+        await tx.executeSqlAsync('SELECT * FROM tests;').then((result) => {
+          console.log('tests', result)
         })
       })
       return result

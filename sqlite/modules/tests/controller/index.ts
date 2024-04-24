@@ -1,6 +1,5 @@
-import { TestsDTO } from "../interfaces/ITestInterface"
-import { TestService } from "../service"
-
+import { TestsDTO } from '../interfaces/ITestInterface'
+import { TestService } from '../service'
 
 export class TestsController {
   private testsService: TestService

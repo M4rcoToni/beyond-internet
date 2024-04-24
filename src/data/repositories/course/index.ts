@@ -3,8 +3,8 @@ import { Result } from '@data/result'
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 export class CoursesRepository implements ICoursesRepository {
-  // eslint-disable-next-line no-useless-constructor
   constructor(private readonly courseService: ICoursesService) {}
+
   async openCourse(): Promise<CourseDTO | null> {
     try {
       return await this.courseService.openCourse()
@@ -41,6 +41,7 @@ export class CoursesRepository implements ICoursesRepository {
     try {
       return await this.courseService.createCourse()
     } catch (error) {
+      console.log('error', error)
       throw new Result(
         false,
         undefined,

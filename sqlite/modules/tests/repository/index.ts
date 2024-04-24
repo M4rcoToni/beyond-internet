@@ -19,11 +19,14 @@ export class TestsRepository
 
       const sql = `INSERT INTO ${this.tableName} (${fields.join(
         ', ',
-      )}) VALUES (${fields.map(() => '?').join(', ')}`
+      )}) VALUES (${fields.map(() => '?').join(', ')})`
 
       const res = await tx.executeSqlAsync(sql, values)
+
       if ('insertId' in res) {
         insertedId = res.insertId
+      } else {
+        console.log('TestsRepository', res)
       }
     })
 

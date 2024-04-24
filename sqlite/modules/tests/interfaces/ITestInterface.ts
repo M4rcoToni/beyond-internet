@@ -1,12 +1,12 @@
-import { QuestionsDTO } from "@sqlite/modules/questions/interfaces/IQuestionsInterface"
+import { QuestionsDTO } from '@sqlite/modules/questions/interfaces/IQuestionsInterface'
 
 export class TestsDTO {
-  id?: string
-  testId?: string
-  sectionId: string
+  id?: number
+  testId?: number
+  sectionId: number
   title: string
-  completed: boolean
-  questions: QuestionsDTO[]
+  completed: number // 0 - false, 1 - true
+  questions?: QuestionsDTO[]
 }
 
 export type UpdateTestsDTO = Partial<TestsDTO>

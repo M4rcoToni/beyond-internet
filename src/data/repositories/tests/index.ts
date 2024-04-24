@@ -1,9 +1,8 @@
-import { ITestsRepository, ITestsService } from "@data/interfaces/tests";
-import { Result } from "@data/result";
-import { SectionDTO } from "@sqlite/modules/sections/interfaces/ISectionInterface";
-import { TestsDTO } from "@sqlite/modules/tests/interfaces/ITestInterface";
+import { ITestsRepository, ITestsService } from '@data/interfaces/tests'
+import { Result } from '@data/result'
+import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 
-export class TestsRepository implements ITestsRepository{
+export class TestsRepository implements ITestsRepository {
   constructor(private readonly testService: ITestsService) {}
 
   async listTest(sectionId: number): Promise<TestsDTO[]> {
@@ -22,9 +21,9 @@ export class TestsRepository implements ITestsRepository{
     }
   }
 
-  async createTest(tests: SectionDTO[]): Promise<boolean> {
+  async createTest(sectionId: number, tests: TestsDTO[]): Promise<boolean> {
     try {
-      return await this.testService.createTest(tests)
+      return await this.testService.createTest(sectionId, tests)
     } catch (error) {
       throw new Result(
         false,
@@ -69,6 +68,4 @@ export class TestsRepository implements ITestsRepository{
       )
     }
   }
-
-
 }

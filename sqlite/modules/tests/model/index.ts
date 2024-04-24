@@ -29,5 +29,5 @@ export class TestModel {
   testId?: string
   sectionId: string
   title: string
-  completed: boolean
+  completed: number // 0 - false, 1 - true
 }

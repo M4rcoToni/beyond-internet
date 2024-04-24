@@ -5,14 +5,14 @@ import { SectionController } from '@sqlite/modules/sections/controller'
 import { SectionService } from '@sqlite/modules/sections/service'
 import { SectionRepository } from '@sqlite/modules/sections/repository'
 import { db } from '@sqlite/index'
-import { TestsService } from '../tests'
+import { TestsService } from '@data/services/tests'
 
 export class SectionsService implements ISectionsService {
   private Section = new SectionController(
     new SectionService(new SectionRepository(db, 'sections')),
   )
 
-  constructor( private readonly TestService: TestsService) {}
+  constructor(private readonly TestService: TestsService) {}
 
   async listSections(courseId: number): Promise<SectionDTO[]> {
     const sections = await this.Section.list(courseId)
@@ -49,7 +49,12 @@ export class SectionsService implements ISectionsService {
       throw new Result(false, null, new Error('Erro ao criar seções!'))
     })
 
-    await this.TestService.createTest(sections)
+    sections.flatMap(async (section) => {
+      await this.TestService?.createTest(
+        Number(section.id),
+        section.tests || [],
+      )
+    })
 
     return true
   }

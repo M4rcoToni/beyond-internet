@@ -10,6 +10,7 @@ import { CourseType } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { SectionsRepository } from '@data/repositories/sections'
 import { SectionsService } from '@data/services/sections'
 import { useDimensions } from '@data/hooks/useDimensions'
+import { TestsService } from '@data/services/tests'
 
 export type Courses = {
   id?: string
@@ -32,7 +33,9 @@ export function Hub() {
     handleOnCoursePress,
     isLoading,
   } = useHubViewModel(
-    new CoursesRepository(new CoursesService(new SectionsService())),
+    new CoursesRepository(
+      new CoursesService(new SectionsService(new TestsService())),
+    ),
     new SectionsRepository(new SectionsService()),
   )
 
