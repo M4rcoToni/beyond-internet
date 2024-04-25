@@ -1,14 +1,17 @@
-import { ITestsService } from '@data/interfaces/tests'
 import { db } from '@sqlite/index'
 import { TestsController } from '@sqlite/modules/tests/controller'
 import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 import { TestsRepository } from '@sqlite/modules/tests/repository'
 import { TestService } from '@sqlite/modules/tests/service'
+import { ITestsService } from '@data/interfaces/tests'
+import { QuestionsSerivce } from '@data/services/questions'
 
 export class TestsService implements ITestsService {
   private Tests = new TestsController(
     new TestService(new TestsRepository(db, 'tests')),
   )
+
+  constructor(private readonly QuestionsService: QuestionsSerivce) {}
 
   async listTest(): Promise<TestsDTO[]> {
     return await this.Tests.list()
@@ -28,7 +31,12 @@ export class TestsService implements ITestsService {
       throw new Error('Erro ao criar testes!')
     })
 
-    // TODO: Implementar a criação de questions
+    tests.flatMap(async (test) => {
+      await this.QuestionsService.createQuestion(
+        test.testId || 99,
+        test.questions || [],
+      )
+    })
 
     return true
   }

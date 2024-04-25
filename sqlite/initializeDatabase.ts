@@ -3,6 +3,7 @@ import { initializeTableUsers } from './modules/users/model'
 import { initializeTableCourses } from './modules/course/model'
 import { initializeTableSections } from './modules/sections/model'
 import { initializeTableTest } from '@sqlite/modules/tests/model'
+import { initializeTableQuestions } from '@sqlite/modules/questions/model'
 
 export async function initializeDatabase() {
   const db = SQLite.openDatabase('beyond.db')
@@ -19,6 +20,7 @@ export async function initializeDatabase() {
     Promise.resolve(initializeTableCourses(db)),
     Promise.resolve(initializeTableSections(db)),
     Promise.resolve(initializeTableTest(db)),
+    Promise.resolve(initializeTableQuestions(db)),
   ]
 
   Promise.allSettled(promises)
@@ -63,6 +65,13 @@ export async function initializeDatabase() {
       await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
         await tx.executeSqlAsync('SELECT * FROM tests;').then((result) => {
           console.log('tests', result)
+        })
+      })
+
+      // select all questions
+      await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+        await tx.executeSqlAsync('SELECT * FROM questions;').then((result) => {
+          console.log('questions', result)
         })
       })
       return result

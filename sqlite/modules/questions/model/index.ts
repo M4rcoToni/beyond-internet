@@ -8,9 +8,10 @@ export async function initializeTableQuestions(
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS questions
         (
-            questionId    INTEGER PRIMARY KEY AUTOINCREMENT,
+            questionId    INTEGER PRIMARY KEY NOT NULL,
             testId        INTEGER NOT NULL,
             description   TEXT NOT NULL,
+            answer        TEXT NOT NULL
         )`,
         [],
         () => {
@@ -25,7 +26,8 @@ export async function initializeTableQuestions(
 }
 
 export class QuestionModel {
-  questionId?: string
-  testId: string
+  questionId?: number
+  testId: number
+  answer: string
   description: string
 }

@@ -2,7 +2,6 @@ export class OptionsDTO {
   id?: number
   questionId: number
   description: string
-  answer: number
 }
 
 export type UpdateOptionsDTO = Partial<OptionsDTO>

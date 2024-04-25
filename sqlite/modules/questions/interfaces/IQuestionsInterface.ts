@@ -1,10 +1,11 @@
-import { OptionsDTO } from "@sqlite/modules/options/interfaces/IOptionsInterface"
+import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface'
 
 export class QuestionsDTO {
-  questionId?: string
-  testId: string
+  questionId?: number
+  testId: number
   description: string
-  options: OptionsDTO[]
+  answer: string
+  options?: OptionsDTO[]
 }
 
 export type UpdateQuestionsDTO = Partial<QuestionsDTO>

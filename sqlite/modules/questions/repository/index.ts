@@ -16,7 +16,7 @@ export class QuestionsRepository
 
       const sql = `INSERT INTO ${this.tableName} (${fields.join(
         ', ',
-      )}) VALUES (${fields.map(() => '?').join(', ')}`
+      )}) VALUES (${fields.map(() => '?').join(', ')})`
 
       const res = await tx.executeSqlAsync(sql, values)
       if ('insertId' in res) {

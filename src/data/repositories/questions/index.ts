@@ -1,8 +1,11 @@
-import { IQuestionsService } from '@data/interfaces/questions'
+import {
+  IQuestionsRepository,
+  IQuestionsService,
+} from '@data/interfaces/questions'
 import { QuestionsDTO } from '@sqlite/modules/questions/interfaces/IQuestionsInterface'
 import { Result } from '@data/result'
 
-export class QuestionsRepository {
+export class QuestionsRepository implements IQuestionsRepository {
   constructor(private readonly questionService: IQuestionsService) {}
 
   async listQuestions(testId: number): Promise<QuestionsDTO[]> {
@@ -21,9 +24,12 @@ export class QuestionsRepository {
     }
   }
 
-  async createQuestion(questions: QuestionsDTO[]): Promise<boolean> {
+  async createQuestion(
+    testId: number,
+    questions: QuestionsDTO[],
+  ): Promise<boolean> {
     try {
-      return await this.questionService.createQuestion(questions)
+      return await this.questionService.createQuestion(testId, questions)
     } catch (error) {
       throw new Result(
         false,
@@ -32,6 +38,22 @@ export class QuestionsRepository {
           error instanceof Result
             ? error.getError()?.message
             : 'Erro ao criar questão',
+        ),
+      )
+    }
+  }
+
+  async updateQuestion(id: number, data: QuestionsDTO): Promise<boolean> {
+    try {
+      return await this.questionService.updateQuestion(id, data)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao atualizar questão',
         ),
       )
     }

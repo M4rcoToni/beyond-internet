@@ -11,7 +11,6 @@ export async function initializeTableOptions(
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             questionId    INTEGER NOT NULL,
             description   TEXT NOT NULL,
-            answer        INTEGER DEFAULT 0
           )`,
         [],
         () => {
@@ -29,5 +28,4 @@ export class OptionsModel {
   id?: number
   questionId: number
   description: string
-  answer: number
 }

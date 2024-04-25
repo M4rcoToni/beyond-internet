@@ -21,18 +21,31 @@ export class QuestionsSerivce implements IQuestionsService {
     return questions
   }
 
-  async createQuestion(questions: QuestionsDTO[]): Promise<boolean> {
+  async createQuestion(
+    testId: number,
+    questions: QuestionsDTO[],
+  ): Promise<boolean> {
     const questionsPromises = questions.map(async (question) => {
       await this.Questions.create({
-        testId: question.testId,
+        testId,
         description: question.description,
-        questionId: question.questionId,
+        answer: question.answer,
       })
     })
 
     await Promise.all(questionsPromises).catch(() => {
       throw new Result(false, null, new Error('Erro ao criar questões!'))
     })
+
+    return true
+  }
+
+  async updateQuestion(id: number, data: QuestionsDTO): Promise<boolean> {
+    const updatedQuestion = await this.Questions.update(id, data)
+
+    if (!updatedQuestion) {
+      throw new Result(false, null, new Error('Erro ao atualizar questão!'))
+    }
 
     return true
   }
