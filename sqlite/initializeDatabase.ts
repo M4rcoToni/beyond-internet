@@ -8,11 +8,13 @@ import { initializeTableQuestions } from '@sqlite/modules/questions/model'
 export async function initializeDatabase() {
   const db = SQLite.openDatabase('beyond.db')
 
-  // prune the database
+  // // prune the database
   // db.transaction((tx) => {
   //   //   // tx.executeSql('DROP TABLE IF EXISTS users;')
   //   //   // tx.executeSql('DROP TABLE IF EXISTS course;')
-  //   tx.executeSql('DROP TABLE IF EXISTS sections;')
+  //   //   //tx.executeSql('DROP TABLE IF EXISTS sections;')
+  //   // tx.executeSql('DROP TABLE IF EXISTS tests;')
+  //   // tx.executeSql('DROP TABLE IF EXISTS questions;')
   // })
 
   const promises = [

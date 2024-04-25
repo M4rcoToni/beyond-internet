@@ -33,7 +33,7 @@ export class TestsService implements ITestsService {
 
     tests.flatMap(async (test) => {
       await this.QuestionsService.createQuestion(
-        test.testId || 99,
+        test.id || 99,
         test.questions || [],
       )
     })
