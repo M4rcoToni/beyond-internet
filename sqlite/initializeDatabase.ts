@@ -13,16 +13,16 @@ export async function initializeDatabase() {
   //   //   // tx.executeSql('DROP TABLE IF EXISTS users;')
   //   //   // tx.executeSql('DROP TABLE IF EXISTS course;')
   //   //   //tx.executeSql('DROP TABLE IF EXISTS sections;')
-  //   // tx.executeSql('DROP TABLE IF EXISTS tests;')
-  //   // tx.executeSql('DROP TABLE IF EXISTS questions;')
+  //   tx.executeSql('DROP TABLE IF EXISTS tests;')
+  //   tx.executeSql('DROP TABLE IF EXISTS questions;')
   // })
 
   const promises = [
-    Promise.resolve(initializeTableUsers(db)),
-    Promise.resolve(initializeTableCourses(db)),
-    Promise.resolve(initializeTableSections(db)),
-    Promise.resolve(initializeTableTest(db)),
-    Promise.resolve(initializeTableQuestions(db)),
+    await initializeTableUsers(db),
+    await initializeTableCourses(db),
+    await initializeTableSections(db),
+    await initializeTableTest(db),
+    await initializeTableQuestions(db),
   ]
 
   Promise.allSettled(promises)
@@ -50,18 +50,18 @@ export async function initializeDatabase() {
       })
 
       // select all courses
-      // await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      //   await tx.executeSqlAsync('SELECT * FROM course;').then((result) => {
-      //     console.log(result)
-      //   })
-      // })
+      await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+        await tx.executeSqlAsync('SELECT * FROM course;').then((result) => {
+          console.log(result)
+        })
+      })
 
       // select all sections
-      // await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      //   await tx.executeSqlAsync('SELECT * FROM sections;').then((result) => {
-      //     console.log('sections', result)
-      //   })
-      // })
+      await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+        await tx.executeSqlAsync('SELECT * FROM sections;').then((result) => {
+          console.log('sections', result)
+        })
+      })
 
       // select all tests
       await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {

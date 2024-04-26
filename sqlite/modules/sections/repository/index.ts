@@ -48,7 +48,7 @@ export class SectionRepository
     let section: SectionDTO | null = null
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `SELECT * FROM ${this.tableName} WHERE id = ?`
+      const sql = `SELECT * FROM ${this.tableName} WHERE courseId = ?`
       const result = await tx.executeSqlAsync(sql, [id])
 
       if ('rows' in result) {

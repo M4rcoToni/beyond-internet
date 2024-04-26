@@ -141,13 +141,15 @@ export class CoursesService implements ICoursesService {
   }
 
   async deleteCourse(id: string): Promise<boolean> {
-    await this.SectionsService?.deleteSection(Number(id))
+    await this.SectionsService?.findSectionById(Number(id))
 
     const deletedCourse = await this.courseController.delete(id)
 
     if (!deletedCourse) {
       throw new Result(false, null, new Error('Erro ao deletar curso!'))
     }
+
+    await this.SectionsService?.deleteSection(Number(id))
 
     return true
   }

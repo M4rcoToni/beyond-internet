@@ -55,4 +55,20 @@ export class SectionsRepository implements ISectionsRepository {
       )
     }
   }
+
+  async findSectionById(id: number): Promise<SectionDTO | null> {
+    try {
+      return await this.sectionService.findSectionById(id)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao buscar seção',
+        ),
+      )
+    }
+  }
 }

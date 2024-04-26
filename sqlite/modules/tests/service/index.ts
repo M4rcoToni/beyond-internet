@@ -24,8 +24,8 @@ export class TestService implements ITestsService {
     return await this.testRepository.findById(id)
   }
 
-  async list() {
-    return await this.testRepository.list()
+  async list(id: number) {
+    return await this.testRepository.list(id)
   }
 
   async delete(id: number) {

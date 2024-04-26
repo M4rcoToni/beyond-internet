@@ -32,9 +32,9 @@ export class TestsController {
     }
   }
 
-  async list(): Promise<TestsDTO[]> {
+  async list(id: number): Promise<TestsDTO[]> {
     try {
-      return await this.testsService.list()
+      return await this.testsService.list(id)
     } catch (error) {
       throw new Error()
     }

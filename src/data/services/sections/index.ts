@@ -8,14 +8,14 @@ import { db } from '@sqlite/index'
 import { TestsService } from '@data/services/tests'
 
 export class SectionsService implements ISectionsService {
-  private Section = new SectionController(
+  private sectionController = new SectionController(
     new SectionService(new SectionRepository(db, 'sections')),
   )
 
   constructor(private readonly TestService: TestsService) {}
 
   async listSections(courseId: number): Promise<SectionDTO[]> {
-    const sections = await this.Section.list(courseId)
+    const sections = await this.sectionController.list(courseId)
 
     const formattedSections = sections.map((item) => ({
       ...item,
@@ -33,7 +33,7 @@ export class SectionsService implements ISectionsService {
 
   async createSection(sections: SectionDTO[]): Promise<boolean> {
     const sectionsPromises = sections.map(async (section) => {
-      await this.Section.create({
+      await this.sectionController.create({
         id: String(section.id),
         position: section.position,
         courseId: section.courseId,
@@ -59,12 +59,38 @@ export class SectionsService implements ISectionsService {
     return true
   }
 
-  async deleteSection(id: number): Promise<boolean> {
-    const deletedSections = await this.Section.delete(Number(id))
+  async findSectionById(id: number): Promise<SectionDTO | null> {
+    const section = await this.sectionController.findById(id)
+
+    if (!section) {
+      throw new Result(false, null, new Error('Seção não encontrada!'))
+    }
+
+    return section
+  }
+
+  async deleteSection(courseId: number): Promise<boolean> {
+    const sections = await this.listSections(Number(courseId))
+
+    if (!sections) {
+      throw new Result(
+        false,
+        null,
+        new Error('Erro Seção não encontrada ao deletar!'),
+      )
+    }
+
+    const deletedSections = await this.sectionController.delete(
+      Number(courseId),
+    )
 
     if (!deletedSections) {
       throw new Result(false, null, new Error('Erro ao deletar seções!'))
     }
+
+    sections.flatMap(async (section) => {
+      await this.TestService?.deleteTest(Number(section.id) || 0)
+    })
 
     return true
   }

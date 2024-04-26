@@ -53,9 +53,9 @@ export class TestsRepository implements ITestsRepository {
     }
   }
 
-  async deleteTest(id: number): Promise<boolean> {
+  async deleteTest(sectionId: number): Promise<boolean> {
     try {
-      return await this.testService.deleteTest(id)
+      return await this.testService.deleteTest(sectionId)
     } catch (error) {
       throw new Result(
         false,

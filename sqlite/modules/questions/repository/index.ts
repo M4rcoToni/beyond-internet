@@ -46,7 +46,7 @@ export class QuestionsRepository
     let question: QuestionModel | null = null
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `SELECT * FROM ${this.tableName} WHERE id = ?`
+      const sql = `SELECT * FROM ${this.tableName} WHERE testId = ?`
       const result = await tx.executeSqlAsync(sql, [id])
 
       if ('rows' in result) {

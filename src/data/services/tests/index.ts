@@ -7,19 +7,25 @@ import { ITestsService } from '@data/interfaces/tests'
 import { QuestionsSerivce } from '@data/services/questions'
 
 export class TestsService implements ITestsService {
-  private Tests = new TestsController(
+  private testsController = new TestsController(
     new TestService(new TestsRepository(db, 'tests')),
   )
 
   constructor(private readonly QuestionsService: QuestionsSerivce) {}
 
-  async listTest(): Promise<TestsDTO[]> {
-    return await this.Tests.list()
+  async listTest(sectionId: number): Promise<TestsDTO[]> {
+    const test = await this.testsController.list(sectionId)
+
+    if (!test) {
+      throw new Error('Testes não encontrados!')
+    }
+
+    return test
   }
 
   async createTest(sectionId: number, tests: TestsDTO[]): Promise<boolean> {
     const testsPromises = tests.map(async (test) => {
-      await this.Tests.create({
+      await this.testsController.create({
         testId: test.id,
         sectionId,
         title: test.title,
@@ -42,7 +48,7 @@ export class TestsService implements ITestsService {
   }
 
   async updateTest(id: number, data: TestsDTO): Promise<boolean> {
-    const updatedTest = await this.Tests.update(id, data)
+    const updatedTest = await this.testsController.update(id, data)
 
     if (!updatedTest) {
       throw new Error('Erro ao atualizar teste!')
@@ -51,7 +57,19 @@ export class TestsService implements ITestsService {
     return true
   }
 
-  async deleteTest(id: number): Promise<boolean> {
-    return await this.Tests.delete(id)
+  async deleteTest(sectionId: number): Promise<boolean> {
+    const tests = await this.testsController.list(sectionId)
+
+    const testDeleted = await this.testsController.delete(sectionId)
+
+    if (!testDeleted) {
+      throw new Error('Erro ao deletar teste!')
+    }
+
+    tests.flatMap(async (test) => {
+      await this.QuestionsService.deleteQuestions(test?.testId || 0)
+    })
+
+    return true
   }
 }

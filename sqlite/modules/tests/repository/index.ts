@@ -63,12 +63,12 @@ export class TestsRepository
     return test
   }
 
-  async list(): Promise<TestsDTO[]> {
+  async list(id: number): Promise<TestsDTO[]> {
     let tests: TestsDTO[] = []
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `SELECT * FROM ${this.tableName}`
-      const result = await tx.executeSqlAsync(sql)
+      const sql = `SELECT * FROM ${this.tableName} WHERE sectionId = ? `
+      const result = await tx.executeSqlAsync(sql, [id])
 
       if ('rows' in result) {
         tests = result.rows as TestsDTO[]
@@ -82,7 +82,7 @@ export class TestsRepository
     let deleted = false
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `DELETE FROM ${this.tableName} WHERE id = ?`
+      const sql = `DELETE FROM ${this.tableName} WHERE sectionId = ?`
       await tx.executeSqlAsync(sql, [id])
       deleted = true
     })
