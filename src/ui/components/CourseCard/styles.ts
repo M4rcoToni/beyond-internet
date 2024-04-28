@@ -42,7 +42,7 @@ export const Loading = styled.View`
   height: 200px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.192);
+  background-color: rgba(212, 211, 211, 0.48);
   border-radius: 8px;
   z-index: 2;
 `

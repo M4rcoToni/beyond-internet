@@ -13,7 +13,8 @@ export function useHubViewModel(
   sectionRepository: SectionsRepository,
 ) {
   const { navigate } = useNavigation()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isOpeningCourse, setIsOpeningCourse] = useState(false)
+  const [isListingCourses, setIsListingCourses] = useState(false)
   const {
     handleSetSection,
     handleSetCourseId,
@@ -24,6 +25,7 @@ export function useHubViewModel(
 
   const handleOnListCourses = async () => {
     try {
+      setIsListingCourses(true)
       const response = await courseRepository.listCourses()
 
       if (response) {
@@ -37,12 +39,14 @@ export function useHubViewModel(
             ? error.getError()?.message
             : 'handleOnListCourses',
       })
+    } finally {
+      setIsListingCourses(false)
     }
   }
   const handleOnGetCourse = async () => {
     try {
       await courseRepository.createCourse()
-      handleOnListCourses()
+      await handleOnListCourses()
     } catch (error) {
       console.error('error', error)
       Toast.show({
@@ -86,7 +90,7 @@ export function useHubViewModel(
 
   const handleOnCoursePress = async (courseId: number) => {
     try {
-      setIsLoading(true)
+      setIsOpeningCourse(true)
       const courses = await sectionRepository.listSections(courseId)
       if (courses) {
         handleSetIndex(0)
@@ -101,7 +105,7 @@ export function useHubViewModel(
         text1: error instanceof Result ? error.getError()?.message : 'Erro',
       })
     } finally {
-      setIsLoading(false)
+      setIsOpeningCourse(false)
     }
   }
 
@@ -111,6 +115,7 @@ export function useHubViewModel(
     handleOnListCourses,
     handleOnDeleteCourse,
     handleOnCoursePress,
-    isLoading,
+    isOpeningCourse,
+    isListingCourses,
   }
 }

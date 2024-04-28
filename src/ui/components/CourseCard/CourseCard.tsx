@@ -46,7 +46,7 @@ export function CourseCard({
       </Content>
       {isLoading && (
         <Loading>
-          <ActivityIndicator size="large" color={theme.COLORS.GREEN_700} />
+          <ActivityIndicator size="large" color={theme.COLORS.GREEN_500} />
         </Loading>
       )}
     </TouchableOpacity>

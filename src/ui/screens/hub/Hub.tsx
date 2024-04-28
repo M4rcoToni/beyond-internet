@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { Container, Content } from './styles'
 
 import { CourseList } from '@ui/components/CourseList/CourseList'
@@ -32,7 +32,8 @@ export function Hub() {
     courses,
     handleOnDeleteCourse,
     handleOnCoursePress,
-    isLoading,
+    isOpeningCourse,
+    isListingCourses,
   } = useHubViewModel(
     new CoursesRepository(
       new CoursesService(
@@ -41,9 +42,10 @@ export function Hub() {
     ),
     new SectionsRepository(new SectionsService()),
   )
-
-  useLayoutEffect(() => {
-    handleOnListCourses()
+  useEffect(() => {
+    ;(async () => {
+      await handleOnListCourses()
+    })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -60,7 +62,8 @@ export function Hub() {
           <CourseList
             data={courses}
             refreshing={false}
-            isLoadingCourse={isLoading}
+            isLoadingCourse={isListingCourses}
+            isOpeningCourse={isOpeningCourse}
             onRefresh={handleOnListCourses}
             getCourse={handleOnGetCourse}
             onCoursePress={handleOnCoursePress}
