@@ -43,7 +43,11 @@ export function Hub() {
         ),
       ),
     ),
-    new SectionsRepository(new SectionsService()),
+    new SectionsRepository(
+      new SectionsService(
+        new TestsService(new QuestionsSerivce(new OptionService())),
+      ),
+    ),
   )
   useEffect(() => {
     ;(async () => {

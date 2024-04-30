@@ -23,6 +23,8 @@ export class OptionService implements IOptionsService {
   }
 
   async createOption(questionId: number, options: string[]): Promise<boolean> {
+    console.log('options', options)
+    console.log('questionId', questionId)
     const optionsPromises = options.map(async (option) => {
       await this.Options.create({
         questionId,

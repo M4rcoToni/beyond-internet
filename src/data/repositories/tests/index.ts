@@ -21,7 +21,7 @@ export class TestsRepository implements ITestsRepository {
     }
   }
 
-  async createTest(sectionId: number, tests: TestsDTO[]): Promise<boolean> {
+  async createTest(sectionId: number, tests: TestsDTO): Promise<boolean> {
     try {
       return await this.testService.createTest(sectionId, tests)
     } catch (error) {

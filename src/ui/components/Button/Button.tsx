@@ -1,8 +1,4 @@
-import {
-  ActivityIndicator,
-  StyleProp,
-  TouchableOpacityProps,
-} from 'react-native'
+import { ActivityIndicator, TouchableOpacityProps } from 'react-native'
 
 import { Title } from '../Title/Title'
 import { ButtonTypeStyleProps, ButtonStyled } from './ButtonStyled'
@@ -21,7 +17,7 @@ export function Button({
   ...rest
 }: Props) {
   return (
-    <ButtonStyled type={type} {...rest} style={style}>
+    <ButtonStyled type={type} {...rest} style={style} disabled={isLoading}>
       {isLoading ? (
         <ActivityIndicator size="small" color="#fff" />
       ) : (

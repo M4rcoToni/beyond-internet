@@ -1,16 +1,16 @@
-import { SubTitle } from '@ui/components'
-import { Course } from '@ui/screens/course/Course'
-import { Hub } from '@ui/screens/hub/Hub'
 import React from 'react'
 import { View, useWindowDimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { DrawerContent } from '@ui/components/DrawerContent/DrawerContent'
-import { useDrawerViewModel } from './useDrawerViewModel'
+
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
+import { TestRoutes } from '@routes/test.routes'
+
+import { DrawerContent, SubTitle } from '@ui/components'
+import { useDrawerViewModel } from './useDrawerViewModel'
+import { Course, Hub } from '@ui/screens'
 
 const Drawer = createDrawerNavigator()
-const MemoizedCourse = React.memo(Course)
 const MemoizedDrawer = React.memo(DrawerContent)
 
 export function HubDrawer() {
@@ -30,7 +30,8 @@ export function HubDrawer() {
         drawerStyle: isLargeScreen ? { width: '25%' } : { width: '90%' },
         overlayColor: '#0000002b',
         drawerStatusBarAnimation: 'slide',
-
+        freezeOnBlur: true,
+        swipeMinDistance: 60,
         headerRight: () => (
           <>
             <View style={{ width: 100, height: 20 }}>
@@ -46,6 +47,7 @@ export function HubDrawer() {
         options={{
           headerShown: true,
           headerTitle: 'Cursos',
+          drawerType: 'slide',
         }}
         component={Hub}
       />
@@ -53,16 +55,17 @@ export function HubDrawer() {
       <Drawer.Screen
         name="Course"
         options={() => ({
-          headerShown: true,
+          headerShown: false,
           headerTitle: index && sections ? sections[index].title : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
           gestureResponseDistance: {
             horizontal: 100,
           },
+          drawerType: 'slide',
           shouldPreventDefaultGesture: true,
         })}
-        component={MemoizedCourse}
+        component={Course}
       />
     </Drawer.Navigator>
   )

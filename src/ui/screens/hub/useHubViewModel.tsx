@@ -1,10 +1,10 @@
 import { Alert } from 'react-native'
 import Toast from 'react-native-toast-message'
 import { useNavigation } from '@react-navigation/native'
+import { useState } from 'react'
 
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
-import { useState } from 'react'
 import { SectionsRepository } from '@data/repositories/sections'
 import { Result } from '@data/result'
 
@@ -92,10 +92,10 @@ export function useHubViewModel(
   const handleOnCoursePress = async (courseId: number) => {
     try {
       setIsOpeningCourse(true)
-      const courses = await sectionRepository.listSections(courseId)
-      if (courses) {
+      const course = await sectionRepository.listSections(courseId)
+      if (course) {
         handleSetIndex(0)
-        handleSetSection(courses)
+        handleSetSection(course)
         handleSetCourseId(String(courseId))
         navigate('Course')
       }

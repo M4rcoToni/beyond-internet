@@ -1,4 +1,4 @@
-import { TestsDTO } from "@sqlite/modules/tests/interfaces/ITestInterface"
+import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 
 export class SectionDTO {
   id?: string
@@ -9,7 +9,7 @@ export class SectionDTO {
   images: string | null
   videos: string | null
   pdfs: string | null
-  tests?: TestsDTO[]
+  tests?: TestsDTO
 }
 
 export type UpdateSectionDTO = Partial<SectionDTO>

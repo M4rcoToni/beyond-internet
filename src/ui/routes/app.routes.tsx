@@ -4,13 +4,16 @@ import {
 } from '@react-navigation/native-stack'
 import { HubDrawer } from './Drawer/Drawer'
 import { CourseContextProvider } from '@data/contexts/CourseContext'
+import { TestRoutes } from '@routes/test.routes'
 
 type AppRoutes = {
   Hub: undefined
   Course: undefined
+  Test: undefined
 }
 
 export type AuthNavigatorRouterProps = NativeStackNavigationProp<AppRoutes>
+
 const { Navigator, Screen } = createNativeStackNavigator()
 
 export function AppRoutes() {
@@ -23,6 +26,7 @@ export function AppRoutes() {
         }}
       >
         <Screen name="Root" component={HubDrawer} />
+        <Screen name="TestRoutes" component={TestRoutes} />
       </Navigator>
     </CourseContextProvider>
   )

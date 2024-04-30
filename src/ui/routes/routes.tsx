@@ -7,8 +7,8 @@ import { useAuth } from '@data/contexts/AuthContext'
 import { DimensionContextProvider } from '@data/contexts/DimensionsContext'
 
 import { AuthRoutes } from './auth.routes'
-import { HubDrawer } from './Drawer/Drawer'
 import { CourseContextProvider } from '@data/contexts/CourseContext'
+import { AppRoutes } from '@routes/app.routes'
 
 export function Routes() {
   const { user, loadingUser } = useAuth()
@@ -22,7 +22,7 @@ export function Routes() {
       <NavigationContainer>
         <DimensionContextProvider>
           <CourseContextProvider>
-            {user ? <HubDrawer /> : <AuthRoutes />}
+            {user ? <AppRoutes /> : <AuthRoutes />}
           </CourseContextProvider>
         </DimensionContextProvider>
       </NavigationContainer>

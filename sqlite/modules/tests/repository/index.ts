@@ -12,7 +12,7 @@ export class TestsRepository
 {
   async create(payload: TestsDTO): Promise<TestsDTO | null> {
     let insertedId: number | undefined
-
+    console.log('payload', payload)
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(payload)
       const values = Object.values(payload)
@@ -29,8 +29,8 @@ export class TestsRepository
         console.log('TestsRepository', res)
       }
     })
-
-    return this.findById(insertedId || 0)
+    console.log('insertedId', insertedId)
+    return await this.findById(insertedId || 0)
   }
 
   async update(id: number, data: TestsDTO): Promise<TestsDTO | null> {
@@ -52,7 +52,7 @@ export class TestsRepository
     let test: TestsDTO | null = null
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
-      const sql = `SELECT * FROM ${this.tableName} WHERE id = ?`
+      const sql = `SELECT * FROM ${this.tableName} WHERE sectionId = ?`
       const result = await tx.executeSqlAsync(sql, [id])
 
       if ('rows' in result) {

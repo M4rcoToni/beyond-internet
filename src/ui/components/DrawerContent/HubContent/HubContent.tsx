@@ -1,7 +1,6 @@
-import { Separator, Button, SubTitle } from '@ui/components'
+import { Separator, Button, SubTitle, DrawerHeader } from '@ui/components'
 import React from 'react'
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
-import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
 // import { User } from '../../../../../sqlite/modules/users/model'
 import { Feather } from '@expo/vector-icons'

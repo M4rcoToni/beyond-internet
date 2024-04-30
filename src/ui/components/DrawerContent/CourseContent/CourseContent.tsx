@@ -2,8 +2,8 @@ import React from 'react'
 import { FlatList, View } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
-import { CourseItem } from './CourseItem'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
+import { CourseItem } from '@components/DrawerContent/CourseContent/CourseItem'
 
 interface CourseContentProps {
   sections: SectionDTO[]
@@ -18,7 +18,7 @@ export function CourseContent({
   onPressBackButton,
   closeDrawer,
 }: CourseContentProps) {
-  const { handleSetIndex } = useCourseContentViewModel()
+  const { handleSetIndex, sectionIndex } = useCourseContentViewModel()
 
   return (
     <Container>
@@ -43,6 +43,7 @@ export function CourseContent({
               handleSetIndex(index)
               closeDrawer()
             }}
+            isSelected={sectionIndex === index}
           />
         )}
         ItemSeparatorComponent={Separator}

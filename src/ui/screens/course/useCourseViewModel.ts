@@ -11,7 +11,7 @@ export const useCourseViewModel = () => {
       (course: CourseDTO) => Number(course.courseId) === Number(courseId),
     )
   }, [courses, courseId])
-
+  console.log('course', courses)
   const width = useMemo(() => {
     return Dimensions.get('window').width
   }, [])

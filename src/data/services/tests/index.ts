@@ -23,26 +23,28 @@ export class TestsService implements ITestsService {
     return test
   }
 
-  async createTest(sectionId: number, tests: TestsDTO[]): Promise<boolean> {
-    const testsPromises = tests.map(async (test) => {
-      await this.testsController.create({
-        testId: test.id,
-        sectionId,
-        title: test.title,
-        completed: 0,
-      })
+  async createTest(sectionId: number, tests: TestsDTO): Promise<boolean> {
+    console.log('tests', tests)
+    console.log('sectionId', sectionId)
+
+    const testPromise = await this.testsController.create({
+      testId: tests.id,
+      sectionId,
+      title: tests.title || '',
+      completed: 0,
     })
 
-    await Promise.all(testsPromises).catch(() => {
+    if (!testPromise) {
+      console.log('Erro ao criar testes!', testPromise)
       throw new Error('Erro ao criar testes!')
-    })
+    }
 
-    tests.flatMap(async (test) => {
+    if (tests.questions) {
       await this.QuestionsService.createQuestion(
-        test.id || 99,
-        test.questions || [],
+        tests.id || 99,
+        tests.questions,
       )
-    })
+    }
 
     return true
   }

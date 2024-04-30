@@ -24,6 +24,15 @@ export class SectionsService implements ISectionsService {
       pdfs: JSON.parse(String(item.pdfs)),
     }))
 
+    const testsPromises = formattedSections.map(async (section) => {
+      const tests = await this.TestService?.listTest(Number(section.id))
+      if (tests) {
+        section.tests = tests
+      }
+    })
+
+    await Promise.all(testsPromises)
+
     if (!formattedSections) {
       throw new Result(false, null, new Error('Seções não encontradas!'))
     }
@@ -49,11 +58,10 @@ export class SectionsService implements ISectionsService {
       throw new Result(false, null, new Error('Erro ao criar seções!'))
     })
 
-    sections.flatMap(async (section) => {
-      await this.TestService?.createTest(
-        Number(section.id),
-        section.tests || [],
-      )
+    sections.forEach((section) => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.TestService?.createTest(Number(section.id), section.tests?.[0])
     })
 
     return true

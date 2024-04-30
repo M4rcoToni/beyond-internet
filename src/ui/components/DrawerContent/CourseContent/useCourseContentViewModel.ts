@@ -1,9 +1,10 @@
 import { useCourse } from '@data/contexts/CourseContext'
 
 export const useCourseContentViewModel = () => {
-  const { handleSetIndex } = useCourse()
+  const { handleSetIndex, index } = useCourse()
 
   return {
     handleSetIndex,
+    sectionIndex: index,
   }
 }

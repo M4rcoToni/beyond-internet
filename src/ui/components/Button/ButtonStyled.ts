@@ -12,7 +12,7 @@ export const ButtonStyled = styled(TouchableOpacity).attrs({
   activeOpacity: 0.7,
 })<Props>`
   width: 100%;
-  max-width: 400px;
+  max-width: 200px;
 
   max-height: 56px;
 
