@@ -45,6 +45,7 @@ export function useHubViewModel(
   }
   const handleOnGetCourse = async () => {
     try {
+      console.log('handleOnGetCourse')
       await courseRepository.createCourse()
       await handleOnListCourses()
     } catch (error) {

@@ -71,7 +71,7 @@ export function CourseList({
         isEmpty ? (
           <ActivityIndicator size="large" color={theme.COLORS.GREEN_500} />
         ) : (
-          <CourseEmpty />
+          <CourseEmpty getCourse={getCourse} />
         )
       }
     />

@@ -12,6 +12,7 @@ import { SectionsService } from '@data/services/sections'
 import { useDimensions } from '@data/hooks/useDimensions'
 import { TestsService } from '@data/services/tests'
 import { QuestionsSerivce } from '@data/services/questions'
+import { OptionService } from '@data/services/options'
 
 export type Courses = {
   id?: string
@@ -37,7 +38,9 @@ export function Hub() {
   } = useHubViewModel(
     new CoursesRepository(
       new CoursesService(
-        new SectionsService(new TestsService(new QuestionsSerivce())),
+        new SectionsService(
+          new TestsService(new QuestionsSerivce(new OptionService())),
+        ),
       ),
     ),
     new SectionsRepository(new SectionsService()),

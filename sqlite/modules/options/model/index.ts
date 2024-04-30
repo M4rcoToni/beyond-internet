@@ -10,7 +10,7 @@ export async function initializeTableOptions(
           (
             id            INTEGER PRIMARY KEY AUTOINCREMENT,
             questionId    INTEGER NOT NULL,
-            description   TEXT NOT NULL,
+            description   TEXT NOT NULL
           )`,
         [],
         () => {

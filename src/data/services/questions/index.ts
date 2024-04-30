@@ -5,11 +5,14 @@ import { QuestionsRepository } from '@sqlite/modules/questions/repository'
 import { db } from '@sqlite/index'
 import { Result } from '@data/result'
 import { QuestionsDTO } from '@sqlite/modules/questions/interfaces/IQuestionsInterface'
+import { OptionService } from '@data/services/options'
 
 export class QuestionsSerivce implements IQuestionsService {
   private Questions = new QuestionsController(
     new QuestionsService(new QuestionsRepository(db, 'questions')),
   )
+
+  constructor(private readonly OptionsService: OptionService) {}
 
   async listQuestions(testId: number): Promise<QuestionsDTO[]> {
     const questions = await this.Questions.list(testId)
@@ -26,11 +29,17 @@ export class QuestionsSerivce implements IQuestionsService {
     questions: QuestionsDTO[],
   ): Promise<boolean> {
     const questionsPromises = questions.map(async (question) => {
-      await this.Questions.create({
+      const res = await this.Questions.create({
         testId,
         description: question.description,
         answer: question.answer,
       })
+      if (res?.questionId && question.options) {
+        const options: string[] = question.options.map((option) =>
+          JSON.stringify(option),
+        )
+        await this.OptionsService.createOption(res.questionId, options)
+      }
     })
 
     await Promise.all(questionsPromises).catch(() => {
@@ -51,11 +60,21 @@ export class QuestionsSerivce implements IQuestionsService {
   }
 
   async deleteQuestions(testId: number): Promise<boolean> {
+    const questions = await this.listQuestions(testId)
+
+    if (!questions) {
+      throw new Result(false, null, new Error('Questões não encontradas!'))
+    }
+
     const deletedQuestions = await this.Questions.delete(testId)
 
     if (!deletedQuestions) {
       throw new Result(false, null, new Error('Erro ao deletar questões!'))
     }
+
+    questions.map(async (question) => {
+      await this.OptionsService.deleteOptions(question.questionId || 0)
+    })
 
     return true
   }

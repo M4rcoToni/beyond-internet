@@ -9,7 +9,6 @@ export class OptionsRepository
 {
   async create(payload: OptionsModel): Promise<OptionsModel | null> {
     let insertedId: number | undefined
-
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(payload)
       const values = Object.values(payload)
