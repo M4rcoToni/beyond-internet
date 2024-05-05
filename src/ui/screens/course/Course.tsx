@@ -3,7 +3,6 @@ import { Button, SubTitle } from '@ui/components'
 import { Container, Content, CouseDescription } from './styles'
 import { ResizeMode, Video } from 'expo-av'
 import { useCourseViewModel } from './useCourseViewModel'
-import { View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
 export function Course() {
@@ -19,7 +18,7 @@ export function Course() {
 
   if (!tests) return null
 
-  const test = tests[index]
+  const test = tests
 
   return (
     <Container>

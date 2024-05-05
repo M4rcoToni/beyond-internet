@@ -21,6 +21,14 @@ export class QuestionsSerivce implements IQuestionsService {
       throw new Result(false, null, new Error('Questões não encontradas!'))
     }
 
+    await Promise.all(
+      questions.map(async (question) => {
+        question.options = await this.OptionsService.listOptions(
+          question.questionId || 0,
+        )
+      }),
+    )
+
     return questions
   }
 
@@ -33,6 +41,7 @@ export class QuestionsSerivce implements IQuestionsService {
         testId,
         description: question.description,
         answer: question.answer,
+        questionId: question.id,
       })
 
       if (question.options && question.options?.length > 0) {

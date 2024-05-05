@@ -5,7 +5,7 @@ import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 export class TestsRepository implements ITestsRepository {
   constructor(private readonly testService: ITestsService) {}
 
-  async listTest(sectionId: number): Promise<TestsDTO[]> {
+  async listTest(sectionId: number): Promise<TestsDTO> {
     try {
       return await this.testService.listTest(sectionId)
     } catch (error) {

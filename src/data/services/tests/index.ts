@@ -20,6 +20,8 @@ export class TestsService implements ITestsService {
       throw new Error('Testes não encontrados!')
     }
 
+    test.questions = await this.QuestionsService.listQuestions(test.testId || 0)
+
     return test
   }
 

@@ -1,35 +1,17 @@
 import { TestsRepository } from '@data/repositories/tests'
 import Toast from 'react-native-toast-message'
 import { Result } from '@data/result'
-import { QuestionsRepository } from '@data/repositories/questions'
-import { OptionsRepository } from '@data/repositories/options'
 import { useState } from 'react'
-import { QuestionsDTO } from '@sqlite/modules/questions/interfaces/IQuestionsInterface'
-import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface'
+import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 
-export function useTestViewModel(
-  testRepository: TestsRepository,
-  questionRepository: QuestionsRepository,
-  optionRepository: OptionsRepository,
-) {
-  const [questions, setQuestions] = useState<QuestionsDTO[]>([])
-  const [options, setOptions] = useState<OptionsDTO[]>([])
-  const handleOnGetTest = async (testId: number) => {
+export function useTestViewModel(testRepository: TestsRepository) {
+  const [test, setTest] = useState<TestsDTO | null>(null)
+
+  const handleOnGetTest = async (sectionId: number) => {
     try {
-      console.log('handleOnGetTest')
-      const res = await questionRepository.listQuestions(testId)
-      if (!res) {
-        throw new Result(false, undefined, new Error('Erro ao listar questões'))
-      }
+      const test = await testRepository.listTest(sectionId)
 
-      setQuestions(res)
-      console.log(res, 'res')
-      if (res) {
-        const options = await optionRepository.listOptions(
-          questions[0].questionId || 0,
-        )
-      }
-      setOptions(options)
+      setTest(test)
     } catch (error) {
       console.error('error', error)
       Toast.show({
@@ -41,7 +23,6 @@ export function useTestViewModel(
 
   return {
     handleOnGetTest,
-    questions,
-    options,
+    test,
   }
 }
