@@ -8,7 +8,6 @@ export const Content = styled.View`
   border-radius: 10px;
   border: 1px solid ${theme.COLORS.GRAY_200};
   width: 230px;
-  height: 200px;
   background-color: ${theme.COLORS.WHITE};
 `
 export const CourseBanner = styled(Image)`
@@ -21,9 +20,9 @@ export const CardTitle = styled.Text`
   padding: 2% 2% 0 0;
 
   align-self: center;
-  font-size: ${theme.FONT_SIZE.MD}px;
   font-family: ${theme.FONT_FAMILY.REGULAR};
   color: ${theme.COLORS.BLACK};
+  font-size: 18px;
 `
 
 export const CardSubTitle = styled.Text`
@@ -39,10 +38,10 @@ export const Loading = styled.View`
   margin: 10px;
   position: absolute;
   width: 230px;
-  height: 200px;
+  height: 190px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(212, 211, 211, 0.48);
+  background-color: rgba(215, 214, 214, 0.41);
   border-radius: 8px;
   z-index: 2;
 `

@@ -1,6 +1,13 @@
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
-import React, { createContext, useCallback, useContext, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from 'react'
+import { ScrollView } from 'react-native'
 
 export type courseContextDataProps = {
   courses: CourseDTO[]
@@ -11,6 +18,7 @@ export type courseContextDataProps = {
   handleSetSection: (section: SectionDTO[]) => void
   handleSetIndex: (index: number) => void
   handleSetCourseId: (courseId: string) => void
+  courseScrollViewRef?: React.RefObject<ScrollView>
 }
 
 type courseContextProviderProps = {
@@ -28,6 +36,7 @@ export function CourseContextProvider({
   const [sections, setSections] = useState<SectionDTO[]>([])
   const [index, setIndex] = useState<number>(0)
   const [courseId, setCourseId] = useState<string>('')
+  const courseScrollViewRef = useRef<ScrollView>(null)
 
   const handleSetIndex = (index: number) => {
     setIndex(index)
@@ -56,6 +65,7 @@ export function CourseContextProvider({
         handleSetCourseId,
         handleSetIndex,
         handleSetSection,
+        courseScrollViewRef,
       }}
     >
       {children}
@@ -64,7 +74,5 @@ export function CourseContextProvider({
 }
 
 export function useCourse() {
-  const context = useContext(CourseContext)
-
-  return context
+  return useContext(CourseContext)
 }

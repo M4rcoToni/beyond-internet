@@ -4,7 +4,8 @@ import { useCourse } from '@data/contexts/CourseContext'
 import { CourseDTO } from '@sqlite/modules/course/interfaces/ICourseInterfaces'
 
 export const useCourseViewModel = () => {
-  const { sections, index, courses, courseId } = useCourse()
+  const { sections, index, courses, courseId, courseScrollViewRef } =
+    useCourse()
 
   const course = useMemo(() => {
     return courses.find(
@@ -16,14 +17,11 @@ export const useCourseViewModel = () => {
     return Dimensions.get('window').width
   }, [])
 
-  // if (!course) {
-  //   return null
-  // }
-
   return {
     course,
     width,
     sections,
     index,
+    courseScrollViewRef,
   }
 }

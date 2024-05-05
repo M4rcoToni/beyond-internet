@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
@@ -17,7 +17,8 @@ export function CourseContent({
   onPressBackButton,
   closeDrawer,
 }: CourseContentProps) {
-  const { handleSetIndex, sectionIndex } = useCourseContentViewModel()
+  const { handleSetIndex, sectionIndex, courseScrollViewRef } =
+    useCourseContentViewModel()
 
   return (
     <Container>
@@ -34,12 +35,30 @@ export function CourseContent({
         onEndReachedThreshold={0.5}
         scrollEventThrottle={2}
         keyExtractor={(item) => item.position.toString()}
-        ListHeaderComponent={() => <SubTitle size={32} text={courseName} />}
+        ListHeaderComponent={() => (
+          <>
+            <SubTitle size={32} text={courseName} />
+            <Text
+              style={{ fontSize: 24, textAlign: 'center', marginBottom: 20 }}
+            >
+              Seções feitas{' '}
+              {
+                sections.filter((section) => section.tests?.completed === 1)
+                  .length
+              }{' '}
+              / {sections.length}
+            </Text>
+          </>
+        )}
         renderItem={({ item, index }) => (
           <CourseItem
             item={item}
             onPress={() => {
               handleSetIndex(index)
+              courseScrollViewRef?.current?.scrollTo({
+                y: 0,
+                animated: true,
+              })
               closeDrawer()
             }}
             isSelected={sectionIndex === index}

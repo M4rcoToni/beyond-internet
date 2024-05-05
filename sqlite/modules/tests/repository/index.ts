@@ -32,19 +32,20 @@ export class TestsRepository
     return !!insertedId
   }
 
-  async update(id: number, data: TestsDTO): Promise<TestsDTO | null> {
+  async update(testId: number, data: TestsDTO): Promise<TestsDTO | null> {
+    console.log(data, 'data')
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(data)
       const values = Object.values(data)
 
       const sql = `UPDATE ${this.tableName} SET ${fields
         .map((field) => `${field} = ?`)
-        .join(', ')} WHERE id = ?`
+        .join(', ')} WHERE testId = ?`
 
-      await tx.executeSqlAsync(sql, [...values, id])
+      await tx.executeSqlAsync(sql, [...values, testId])
     })
 
-    return this.findById(id)
+    return this.findById(data.sectionId)
   }
 
   async findById(id: number): Promise<TestsDTO | null> {

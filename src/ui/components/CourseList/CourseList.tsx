@@ -56,6 +56,7 @@ export function CourseList({
           title={item?.indexFile.name}
           subTitle={`${item?.indexFile?.sections?.length} aulas`}
           image={item.banner}
+          couserId={Number(item.courseId)}
           isLoading={isOpeningCourse}
           onPress={() => onCoursePress(Number(item.courseId))}
           onLongPress={() => {

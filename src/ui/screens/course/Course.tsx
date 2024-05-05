@@ -4,9 +4,11 @@ import { Container, Content, CouseDescription } from './styles'
 import { ResizeMode, Video } from 'expo-av'
 import { useCourseViewModel } from './useCourseViewModel'
 import { useNavigation } from '@react-navigation/native'
+import { View, Text } from 'react-native'
 
 export function Course() {
-  const { course, index, sections, width } = useCourseViewModel()
+  const { course, index, sections, width, courseScrollViewRef } =
+    useCourseViewModel()
   const { navigate } = useNavigation()
   if (!course) return <SubTitle size={24} text={'title'} />
 
@@ -22,18 +24,18 @@ export function Course() {
 
   return (
     <Container>
-      <Content>
+      <Content ref={courseScrollViewRef}>
         <SubTitle size={24} text={title} />
 
         {images && (
           <Image
             alt="Imagem do curso"
             source={{ uri: imageDir + images }}
+            contentFit={'contain'}
             style={{
-              width: 200,
-              height: 200,
+              width: width - 40,
+              height: 300,
               alignSelf: 'center',
-              backgroundColor: 'red',
             }}
           />
         )}
@@ -52,22 +54,55 @@ export function Course() {
 
         <CouseDescription>{description}</CouseDescription>
 
-        <SubTitle text={test?.title} />
-        {test && (
-          <Button
-            type="PRIMARY"
-            title="Iniciar Teste"
-            onPress={() => {
-              navigate('TestRoutes', {
-                screen: 'Test',
-                params: {
-                  test,
-                },
-              })
+        <View
+          style={{
+            flex: 1,
+            width: '100%',
+            padding: 20,
+            justifyContent: 'space-between',
+            marginVertical: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: 'black',
+              marginTop: 10,
+              textAlign: 'left',
             }}
-            style={{ height: 50 }}
-          />
-        )}
+          >
+            {test.completed === 1 ? 'Refaça' : 'Realize'} o teste desta seção:
+          </Text>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'black',
+              marginVertical: 10,
+              textAlign: 'left',
+            }}
+          >
+            - {test?.title} {test.completed === 1 && '✅'}
+          </Text>
+          {test && (
+            <Button
+              type="PRIMARY"
+              title={
+                test.completed === 1 ? 'Teste finalizado' : 'Realizar teste'
+              }
+              onPress={() => {
+                navigate('TestRoutes', {
+                  screen: 'Test',
+                  params: {
+                    test,
+                  },
+                })
+              }}
+              style={{ height: 50 }}
+            />
+          )}
+        </View>
       </Content>
     </Container>
   )

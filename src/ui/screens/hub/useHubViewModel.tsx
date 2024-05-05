@@ -20,6 +20,7 @@ export function useHubViewModel(
     handleSetCourseId,
     handleSetIndex,
     handleSetCourses,
+    courseScrollViewRef,
     courses,
   } = useCourse()
 
@@ -93,10 +94,19 @@ export function useHubViewModel(
     try {
       setIsOpeningCourse(true)
       const course = await sectionRepository.listSections(courseId)
+      const lastSection = course.find(
+        (section) => section.tests?.completed === 1,
+      )
+      console.log(lastSection)
       if (course) {
-        handleSetIndex(0)
+        if (lastSection) {
+          handleSetIndex(course.indexOf(lastSection) + 1)
+        } else {
+          handleSetIndex(0)
+        }
         handleSetSection(course)
         handleSetCourseId(String(courseId))
+        courseScrollViewRef?.current?.scrollTo({ y: 0, animated: true })
         navigate('Course')
       }
     } catch (error) {

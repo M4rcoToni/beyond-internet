@@ -1,28 +1,47 @@
 import { TestsRepository } from '@data/repositories/tests'
 import Toast from 'react-native-toast-message'
-import { Result } from '@data/result'
-import { useState } from 'react'
 import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
+import { useCourse } from '@data/contexts/CourseContext'
 
 export function useTestViewModel(testRepository: TestsRepository) {
-  const [test, setTest] = useState<TestsDTO | null>(null)
-
-  const handleOnGetTest = async (sectionId: number) => {
+  const { handleSetIndex, index, courseScrollViewRef } = useCourse()
+  const handleCompleteTest = async (test: TestsDTO) => {
     try {
-      const test = await testRepository.listTest(sectionId)
+      if (!test.testId) {
+        return
+      }
 
-      setTest(test)
+      await testRepository.updateTest(test.testId, {
+        testId: test.testId,
+        sectionId: test.sectionId,
+        title: test.title,
+        completed: 1,
+      })
+
+      Toast.show({
+        type: 'success',
+        text1: 'Teste finalizado com sucesso!',
+        text2: 'Parabéns!',
+      })
+
+      handleSetIndex(index + 1)
+
+      courseScrollViewRef?.current?.scrollTo({
+        y: 0,
+        animated: true,
+      })
+      // TODO:  atualizar o contexto
     } catch (error) {
-      console.error('error', error)
+      console.log('Erro ao finalizar teste', error)
       Toast.show({
         type: 'error',
-        text1: error instanceof Result ? error.getError()?.message : 'Erro',
+        text1: 'Erro ao finalizar teste!',
+        text2: 'Tente novamente mais tarde.',
       })
     }
   }
 
   return {
-    handleOnGetTest,
-    test,
+    handleCompleteTest,
   }
 }

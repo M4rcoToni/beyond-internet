@@ -55,7 +55,8 @@
     "react-native-svg": "13.9.0",
     "react-native-toast-message": "^2.1.6",
     "styled-components": "^6.0.7",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "react-native-pager-view": "6.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

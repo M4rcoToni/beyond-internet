@@ -13,6 +13,8 @@ export const Content = styled.ScrollView.attrs({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 120,
+    marginTop: 44,
+    backgroundColor: theme.COLORS.WHITE,
   },
   showsVerticalScrollIndicator: false,
 })``
