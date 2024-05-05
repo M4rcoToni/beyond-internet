@@ -1,10 +1,9 @@
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
-import { CourseItem } from '@components/DrawerContent/CourseContent/CourseItem'
-
+import { CourseItem } from './CourseItem'
 interface CourseContentProps {
   sections: SectionDTO[]
   courseName: string

@@ -4,11 +4,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
-import { TestRoutes } from '@routes/test.routes'
 
-import { DrawerContent, SubTitle } from '@ui/components'
 import { useDrawerViewModel } from './useDrawerViewModel'
 import { Course, Hub } from '@ui/screens'
+import { DrawerContent } from '@components/DrawerContent/DrawerContent'
+import { SubTitle } from '@ui/components'
 
 const Drawer = createDrawerNavigator()
 const MemoizedDrawer = React.memo(DrawerContent)

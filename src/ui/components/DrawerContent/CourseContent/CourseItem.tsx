@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import { SubTitle } from '../../SubTitle/SubTitle'
+import { TouchableOpacity } from 'react-native'
 import { SectionDTO } from '@sqlite/modules/sections/interfaces/ISectionInterface'
 import theme from '@ui/theme'
+import { SubTitle } from '@ui/components'
 
 interface CourseItemProps {
   item: SectionDTO

@@ -1,6 +1,7 @@
 import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface'
 
 export class QuestionsDTO {
+  id?: number
   questionId?: number
   testId: number
   description: string

@@ -29,16 +29,17 @@ export class QuestionsSerivce implements IQuestionsService {
     questions: QuestionsDTO[],
   ): Promise<boolean> {
     const questionsPromises = questions.map(async (question) => {
-      const res = await this.Questions.create({
+      await this.Questions.create({
         testId,
         description: question.description,
         answer: question.answer,
       })
-      if (res?.questionId && question.options) {
+
+      if (question.options && question.options?.length > 0) {
         const options: string[] = question.options.map((option) =>
           JSON.stringify(option),
         )
-        await this.OptionsService.createOption(res.questionId, options)
+        await this.OptionsService.createOption(question.id || 99, options)
       }
     })
 

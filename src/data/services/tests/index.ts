@@ -13,7 +13,7 @@ export class TestsService implements ITestsService {
 
   constructor(private readonly QuestionsService: QuestionsSerivce) {}
 
-  async listTest(sectionId: number): Promise<TestsDTO[]> {
+  async listTest(sectionId: number): Promise<TestsDTO> {
     const test = await this.testsController.list(sectionId)
 
     if (!test) {
@@ -23,9 +23,10 @@ export class TestsService implements ITestsService {
     return test
   }
 
-  async createTest(sectionId: number, tests: TestsDTO): Promise<boolean> {
-    console.log('tests', tests)
-    console.log('sectionId', sectionId)
+  async createTest(sectionId: number, tests?: TestsDTO): Promise<boolean> {
+    if (!tests) {
+      throw new Error('Erro ao criar testes!')
+    }
 
     const testPromise = await this.testsController.create({
       testId: tests.id,
@@ -35,7 +36,6 @@ export class TestsService implements ITestsService {
     })
 
     if (!testPromise) {
-      console.log('Erro ao criar testes!', testPromise)
       throw new Error('Erro ao criar testes!')
     }
 
@@ -68,9 +68,7 @@ export class TestsService implements ITestsService {
       throw new Error('Erro ao deletar teste!')
     }
 
-    tests.flatMap(async (test) => {
-      await this.QuestionsService.deleteQuestions(test?.testId || 0)
-    })
+    await this.QuestionsService.deleteQuestions(tests?.testId || 0)
 
     return true
   }

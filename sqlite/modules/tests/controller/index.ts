@@ -8,7 +8,7 @@ export class TestsController {
     this.testsService = testsService
   }
 
-  async create(payload: TestsDTO): Promise<TestsDTO | null> {
+  async create(payload: TestsDTO): Promise<boolean> {
     try {
       return await this.testsService.create(payload)
     } catch (error) {
@@ -32,7 +32,7 @@ export class TestsController {
     }
   }
 
-  async list(id: number): Promise<TestsDTO[]> {
+  async list(id: number): Promise<TestsDTO> {
     try {
       return await this.testsService.list(id)
     } catch (error) {

@@ -25,7 +25,7 @@ export async function initializeDatabase() {
     console.log(res.filter((r) => r.status === 'rejected'))
 
     const tables = [
-      'users',
+      // 'users',
       'course',
       'sections',
       'tests',
@@ -35,6 +35,7 @@ export async function initializeDatabase() {
 
     for (const table of tables) {
       await executeAndLog(db, table)
+      // await dropTables(table)
     }
 
     return true
@@ -49,5 +50,14 @@ async function executeAndLog(db: SQLite.SQLiteDatabase, table: string) {
     await tx.executeSqlAsync(`SELECT * FROM ${table};`).then((result) => {
       console.log(table, result)
     })
+  })
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+async function dropTables(table: string) {
+  const db = SQLite.openDatabase('beyond.db')
+
+  await db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+    await tx.executeSqlAsync(`DROP TABLE IF EXISTS ${table};`)
   })
 }

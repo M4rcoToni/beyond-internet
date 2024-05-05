@@ -10,9 +10,8 @@ export class TestsRepository
   extends BaseRepository<TestModel>
   implements ITestsRepository
 {
-  async create(payload: TestsDTO): Promise<TestsDTO | null> {
+  async create(payload: TestsDTO): Promise<boolean> {
     let insertedId: number | undefined
-    console.log('payload', payload)
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(payload)
       const values = Object.values(payload)
@@ -29,8 +28,8 @@ export class TestsRepository
         console.log('TestsRepository', res)
       }
     })
-    console.log('insertedId', insertedId)
-    return await this.findById(insertedId || 0)
+
+    return !!insertedId
   }
 
   async update(id: number, data: TestsDTO): Promise<TestsDTO | null> {
@@ -63,15 +62,15 @@ export class TestsRepository
     return test
   }
 
-  async list(id: number): Promise<TestsDTO[]> {
-    let tests: TestsDTO[] = []
+  async list(id: number): Promise<TestsDTO> {
+    let tests: TestsDTO = {} as TestsDTO
 
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const sql = `SELECT * FROM ${this.tableName} WHERE sectionId = ? `
       const result = await tx.executeSqlAsync(sql, [id])
 
       if ('rows' in result) {
-        tests = result.rows as TestsDTO[]
+        tests = result.rows[0] as TestsDTO
       }
     })
 

@@ -3,13 +3,13 @@ import { useNavigation } from '@react-navigation/native'
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types'
 
 import { CourseContent } from './CourseContent/CourseContent'
-import { HubContent } from './HubContent/HubContent'
 import { useDrawerContentViewModel } from './useDrawerContentViewModel'
 
 import { AuthRepository } from '@data/repositories/auth'
 import { AuthService } from '@data/services/auth'
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
+import { HubContent } from '@components/DrawerContent/HubContent/HubContent'
 
 interface DrawerContentProps {
   drawer: DrawerNavigationHelpers

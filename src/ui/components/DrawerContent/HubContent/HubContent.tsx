@@ -1,13 +1,12 @@
-import { Separator, Button, SubTitle, DrawerHeader } from '@ui/components'
+import { Separator, Button, SubTitle } from '@ui/components'
 import React from 'react'
 import { FlatList, TouchableOpacity, StyleSheet } from 'react-native'
 import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
-// import { User } from '../../../../../sqlite/modules/users/model'
 import { Feather } from '@expo/vector-icons'
 import { useDrawerContentViewModel } from '../useDrawerContentViewModel'
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
-// import { useStorage } from '@shared/hooks/useStorage'
+import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 
 interface HubContentProps {
   signOut: () => void

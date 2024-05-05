@@ -58,10 +58,8 @@ export class SectionsService implements ISectionsService {
       throw new Result(false, null, new Error('Erro ao criar seções!'))
     })
 
-    sections.forEach((section) => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      this.TestService?.createTest(Number(section.id), section.tests?.[0])
+    sections.map(async (section) => {
+      await this.TestService?.createTest(Number(section.id), section.tests)
     })
 
     return true

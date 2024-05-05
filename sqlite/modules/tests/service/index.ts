@@ -12,7 +12,7 @@ export class TestService implements ITestsService {
     this.testRepository = testRepository
   }
 
-  async create(payload: TestsDTO): Promise<TestsDTO | null> {
+  async create(payload: TestsDTO): Promise<boolean> {
     return await this.testRepository.create(payload)
   }
 

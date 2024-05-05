@@ -24,8 +24,7 @@ export function TestScreen() {
   )
   const test = params.test
 
-  const { navigate, goBack } = useNavigation()
-  console.log(options, 'options')
+  const { goBack } = useNavigation()
 
   useEffect(() => {
     ;(async () => {
