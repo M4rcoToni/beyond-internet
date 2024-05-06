@@ -13,7 +13,14 @@ export function useDrawerContentViewModel(
   courseRepository?: CoursesRepository,
 ) {
   const { user, setUserData } = useAuth()
-  const { courses, index, handleSetCourses, courseId, sections } = useCourse()
+  const {
+    courses,
+    index,
+    handleSetCourses,
+    courseId,
+    sections,
+    hubFlatListRef,
+  } = useCourse()
   const navigation = useNavigation()
 
   async function handleLogout() {
@@ -60,5 +67,6 @@ export function useDrawerContentViewModel(
     course,
     sections,
     index,
+    hubFlatListRef,
   }
 }

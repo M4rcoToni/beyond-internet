@@ -21,6 +21,7 @@ export function useHubViewModel(
     handleSetIndex,
     handleSetCourses,
     courseScrollViewRef,
+    hubFlatListRef,
     courses,
   } = useCourse()
 
@@ -128,5 +129,6 @@ export function useHubViewModel(
     handleOnCoursePress,
     isOpeningCourse,
     isListingCourses,
+    hubFlatListRef,
   }
 }

@@ -18,10 +18,11 @@ interface DrawerContentProps {
 
 export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   const navigation = useNavigation()
-  const { user, handleLogout, course, sections } = useDrawerContentViewModel(
-    new AuthRepository(new AuthService()),
-    new CoursesRepository(new CoursesService()),
-  )
+  const { user, handleLogout, course, sections, hubFlatListRef } =
+    useDrawerContentViewModel(
+      new AuthRepository(new AuthService()),
+      new CoursesRepository(new CoursesService()),
+    )
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -31,7 +32,10 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
         <CourseContent
           sections={sections}
           courseName={course?.indexFile.name || ''}
-          onPressBackButton={() => navigation.navigate('Hub')}
+          onPressBackButton={() => {
+            navigation.navigate('Hub')
+            hubFlatListRef?.current?.forceUpdate()
+          }}
           closeDrawer={() => drawer.closeDrawer()}
         />
       )}

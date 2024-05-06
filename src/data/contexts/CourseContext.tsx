@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { ScrollView } from 'react-native'
+import { FlatList, ScrollView } from 'react-native'
 
 export type courseContextDataProps = {
   courses: CourseDTO[]
@@ -19,6 +19,7 @@ export type courseContextDataProps = {
   handleSetIndex: (index: number) => void
   handleSetCourseId: (courseId: string) => void
   courseScrollViewRef?: React.RefObject<ScrollView>
+  hubFlatListRef?: React.RefObject<FlatList>
 }
 
 type courseContextProviderProps = {
@@ -37,6 +38,7 @@ export function CourseContextProvider({
   const [index, setIndex] = useState<number>(0)
   const [courseId, setCourseId] = useState<string>('')
   const courseScrollViewRef = useRef<ScrollView>(null)
+  const hubFlatListRef = useRef<FlatList>(null)
 
   const handleSetIndex = (index: number) => {
     setIndex(index)
@@ -66,6 +68,7 @@ export function CourseContextProvider({
         handleSetIndex,
         handleSetSection,
         courseScrollViewRef,
+        hubFlatListRef,
       }}
     >
       {children}

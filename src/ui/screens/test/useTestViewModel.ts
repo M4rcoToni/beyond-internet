@@ -4,7 +4,13 @@ import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 import { useCourse } from '@data/contexts/CourseContext'
 
 export function useTestViewModel(testRepository: TestsRepository) {
-  const { handleSetIndex, index, courseScrollViewRef } = useCourse()
+  const {
+    handleSetIndex,
+    index,
+    courseScrollViewRef,
+    handleSetSection,
+    sections,
+  } = useCourse()
   const handleCompleteTest = async (test: TestsDTO) => {
     try {
       if (!test.testId) {
@@ -30,7 +36,24 @@ export function useTestViewModel(testRepository: TestsRepository) {
         y: 0,
         animated: true,
       })
-      // TODO:  atualizar o contexto
+
+      const updatedSections = sections.map((section) => {
+        if (section.tests?.sectionId === test.sectionId) {
+          return {
+            ...section,
+            tests: {
+              ...section.tests,
+              completed: 1,
+            },
+          }
+        }
+
+        return section
+      })
+
+      handleSetSection(updatedSections)
+
+      // TODO:  atualizar barra de progresso
     } catch (error) {
       console.log('Erro ao finalizar teste', error)
       Toast.show({

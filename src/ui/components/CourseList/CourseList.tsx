@@ -23,6 +23,7 @@ interface CourseListProps {
   isLoadingCourse?: boolean
   isOpeningCourse?: boolean
   style?: StyleProp<ViewStyle>
+  ref?: React.RefObject<FlatList<CourseDTO>>
 }
 
 export function CourseList({
@@ -34,6 +35,7 @@ export function CourseList({
   deleteCourse,
   isLoadingCourse,
   isOpeningCourse,
+  ref,
   ...rest
 }: CourseListProps) {
   const isEmpty = useMemo(
@@ -44,6 +46,7 @@ export function CourseList({
   return (
     <FlatList
       {...rest}
+      ref={ref}
       contentContainerStyle={{
         flex: 1,
       }}

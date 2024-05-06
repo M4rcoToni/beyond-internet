@@ -35,6 +35,7 @@ export function Hub() {
     handleOnCoursePress,
     isOpeningCourse,
     isListingCourses,
+    hubFlatListRef,
   } = useHubViewModel(
     new CoursesRepository(
       new CoursesService(
@@ -67,6 +68,7 @@ export function Hub() {
           }
         >
           <CourseList
+            ref={hubFlatListRef}
             data={courses}
             refreshing={false}
             isLoadingCourse={isListingCourses}
