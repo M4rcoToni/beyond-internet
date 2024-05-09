@@ -3,10 +3,12 @@ import Toast from 'react-native-toast-message'
 import { useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 
+import { Result } from '@data/result'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { SectionsRepository } from '@data/repositories/sections'
-import { Result } from '@data/result'
+import { AuthRepository } from '@data/repositories/auth'
+import { useAuth } from '@data/contexts/AuthContext'
 
 export function useHubViewModel(
   courseRepository: CoursesRepository,
@@ -24,6 +26,7 @@ export function useHubViewModel(
     hubFlatListRef,
     courses,
   } = useCourse()
+  const { setStudyTime } = useAuth()
 
   const handleOnListCourses = async () => {
     try {
@@ -107,6 +110,10 @@ export function useHubViewModel(
         handleSetSection(course)
         handleSetCourseId(String(courseId))
         courseScrollViewRef?.current?.scrollTo({ y: 0, animated: true })
+
+        const studyStartTime = Date.now()
+        setStudyTime(studyStartTime)
+
         navigate('Course')
       }
     } catch (error) {

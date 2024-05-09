@@ -4,6 +4,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from 'react'
 import { UserDTO } from '@sqlite/modules/users/interfaces/IUserInterface'
@@ -14,6 +15,8 @@ export type AuthContextDataProps = {
   user: UserDTO | null
   loadingUser: boolean
   setUserData: (user: UserDTO | null) => void
+  studyStartTime: React.MutableRefObject<number>
+  setStudyTime: (time: number) => void
 }
 
 type AuthContextProviderProps = {
@@ -27,10 +30,16 @@ export const AuthContext = createContext<AuthContextDataProps>(
 export function AuthContextProvider({ children }: AuthContextProviderProps) {
   const [user, setUser] = useState<UserDTO | null>(null)
   const [loadingUser, setLoadingUser] = useState(true)
+  const studyStartTime = useRef(0)
   const userRepository = new AuthRepository(new AuthService())
 
   const setUserData = useCallback((user: UserDTO | null) => {
     setUser(user)
+  }, [])
+
+  const setStudyTime = useCallback((time: number) => {
+    console.log('time', time)
+    studyStartTime.current = time
   }, [])
 
   const loadUser = useCallback(async () => {
@@ -57,6 +66,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         user,
         loadingUser,
         setUserData,
+        studyStartTime,
+        setStudyTime,
       }}
     >
       {children}

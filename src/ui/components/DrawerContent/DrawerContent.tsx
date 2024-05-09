@@ -17,8 +17,7 @@ interface DrawerContentProps {
 }
 
 export function DrawerContent({ drawer, screen }: DrawerContentProps) {
-  const navigation = useNavigation()
-  const { user, handleLogout, course, sections, hubFlatListRef } =
+  const { user, handleLogout, course, sections, handleBackToHub } =
     useDrawerContentViewModel(
       new AuthRepository(new AuthService()),
       new CoursesRepository(new CoursesService()),
@@ -32,10 +31,7 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
         <CourseContent
           sections={sections}
           courseName={course?.indexFile.name || ''}
-          onPressBackButton={() => {
-            navigation.navigate('Hub')
-            hubFlatListRef?.current?.forceUpdate()
-          }}
+          onPressBackButton={handleBackToHub}
           closeDrawer={() => drawer.closeDrawer()}
         />
       )}

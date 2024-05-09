@@ -13,7 +13,8 @@ export async function initializeTableUsers(
             name       TEXT    NOT NULL,
             cpf        TEXT    NOT NULL UNIQUE,
             password   TEXT    NOT NULL,
-            isLogged   INTEGER DEFAULT 0
+            isLogged   INTEGER DEFAULT 0,
+            totalStudyTime INTEGER DEFAULT 0
         )`,
         [],
         () => {
