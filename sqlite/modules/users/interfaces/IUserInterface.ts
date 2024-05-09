@@ -6,6 +6,8 @@ export type UserDTO = {
   cpf: string
   isLogged?: number
   totalStudyTime?: number
+  studyStreak?: number
+  lastStudyDate?: string
 }
 
 export type CreateUserDTO = {
@@ -14,6 +16,8 @@ export type CreateUserDTO = {
   password: string
   isLogged?: number
   totalStudyTime?: number
+  studyStreak?: number
+  lastStudyDate?: string
 }
 
 export type UpdateUserDTO = Partial<CreateUserDTO>

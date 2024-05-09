@@ -14,9 +14,9 @@ export async function initializeTableUsers(
             cpf        TEXT    NOT NULL UNIQUE,
             password   TEXT    NOT NULL,
             isLogged   INTEGER DEFAULT 0,
-            totalStudyTime INTEGER DEFAULT 0
-            studyStreak   INTEGER DEFAULT 0
-            lastStudyDate TEXT DEFAULT CURRENT_TIMESTAMP
+            totalStudyTime INTEGER DEFAULT 0,
+            studyStreak   INTEGER DEFAULT 0,
+            lastStudyDate TEXT 
         )`,
         [],
         () => {

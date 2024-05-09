@@ -3,8 +3,11 @@ import Toast from 'react-native-toast-message'
 import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
+import { AuthRepository } from '@data/repositories/auth'
+import { useAuth } from '@data/contexts/AuthContext'
 
 export function useTestViewModel(
+  userRepository: AuthRepository,
   courseRepository: CoursesRepository,
   testRepository: TestsRepository,
 ) {
@@ -16,6 +19,7 @@ export function useTestViewModel(
     handleSetCourses,
     sections,
   } = useCourse()
+  const { setUserData } = useAuth()
   const handleCompleteTest = async (test: TestsDTO) => {
     try {
       if (!test.testId) {
@@ -57,6 +61,12 @@ export function useTestViewModel(
       })
 
       handleSetSection(updatedSections)
+
+      const user = await userRepository.updateStreak()
+
+      if (user) {
+        setUserData(user)
+      }
 
       const response = await courseRepository.listCourses()
 

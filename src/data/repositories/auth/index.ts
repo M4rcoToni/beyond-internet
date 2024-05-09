@@ -54,4 +54,12 @@ export class AuthRepository implements IAuthRepository {
       throw new Result(false, undefined, new Error('Erro ao buscar usuário'))
     }
   }
+
+  async updateStreak(): Promise<UserDTO | null> {
+    try {
+      return await this.authService.updateStreak()
+    } catch (error) {
+      throw new Result(false, undefined, new Error('Erro ao atualizar streak'))
+    }
+  }
 }

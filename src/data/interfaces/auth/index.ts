@@ -17,6 +17,8 @@ export interface IAuthRepository {
   hashPassword: (password: string) => Promise<string>
 
   first: () => Promise<UserDTO | null>
+
+  updateStreak: () => Promise<UserDTO | null>
 }
 
 export interface IAuthService {
@@ -29,4 +31,6 @@ export interface IAuthService {
   hashPassword: (password: string) => Promise<string>
 
   first: () => Promise<UserDTO | null>
+
+  updateStreak: () => Promise<UserDTO | null>
 }

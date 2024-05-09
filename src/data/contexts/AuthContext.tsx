@@ -51,7 +51,9 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
     } catch (error) {
       console.error('Error loading user: ', error)
     } finally {
-      setLoadingUser(false)
+      setTimeout(() => {
+        setLoadingUser(false)
+      }, 1200)
     }
   }, [])
 

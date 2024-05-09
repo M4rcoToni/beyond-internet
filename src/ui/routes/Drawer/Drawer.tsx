@@ -1,10 +1,6 @@
 import React from 'react'
 import { View, useWindowDimensions } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-
-import { CoursesRepository } from '@data/repositories/course'
-import { CoursesService } from '@data/services/course'
-
 import { useDrawerViewModel } from './useDrawerViewModel'
 import { Course, Hub } from '@ui/screens'
 import { DrawerContent } from '@components/DrawerContent/DrawerContent'
@@ -17,9 +13,7 @@ export function HubDrawer() {
   const dimensions = useWindowDimensions()
   const isLargeScreen = dimensions.width >= 768
 
-  const { index, sections } = useDrawerViewModel(
-    new CoursesRepository(new CoursesService()),
-  )
+  const { index, sections, user } = useDrawerViewModel()
   return (
     <Drawer.Navigator
       drawerContent={(item) => (
@@ -35,7 +29,7 @@ export function HubDrawer() {
         headerRight: () => (
           <>
             <View style={{ width: 100, height: 20 }}>
-              <SubTitle text="6 dias" />
+              <SubTitle text={`${user?.studyStreak || 0} dias 📚`} />
             </View>
           </>
         ),

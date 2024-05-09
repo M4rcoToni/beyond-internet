@@ -22,6 +22,8 @@ import Toast from 'react-native-toast-message'
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
 import { SectionsService } from '@data/services/sections'
+import { AuthService } from '@data/services/auth'
+import { AuthRepository } from '@data/repositories/auth'
 
 export function TestScreen() {
   const route = useRoute()
@@ -29,6 +31,7 @@ export function TestScreen() {
   const { params } = route as { params: { test: TestsDTO } }
   const test = params?.test
   const { handleCompleteTest } = useTestViewModel(
+    new AuthRepository(new AuthService()),
     new CoursesRepository(
       new CoursesService(
         new SectionsService(

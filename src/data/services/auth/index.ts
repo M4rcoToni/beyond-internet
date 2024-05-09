@@ -44,4 +44,41 @@ export class AuthService implements IAuthService {
 
     return user
   }
+
+  async updateStreak() {
+    const userLogged = await this.userController.first()
+
+    if (!userLogged) return null
+
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    let studyStreak = userLogged.studyStreak || 0
+    const lastStudyDate = userLogged.lastStudyDate
+      ? new Date(userLogged.lastStudyDate)
+      : null
+
+    if (lastStudyDate) {
+      lastStudyDate.setHours(0, 0, 0, 0)
+      const diffInDays = Math.round(
+        (today.valueOf() - lastStudyDate.valueOf()) / (1000 * 60 * 60 * 24),
+      )
+
+      if (diffInDays === 1) {
+        studyStreak += 1
+      } else if (diffInDays > 1) {
+        studyStreak = 1
+      }
+    } else {
+      studyStreak = 1
+    }
+    console.log(today.toISOString(), studyStreak)
+
+    const user = await this.userController?.update(userLogged?.id || 0, {
+      studyStreak,
+      lastStudyDate: today.toISOString(),
+    })
+
+    return user
+  }
 }
