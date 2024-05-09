@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -26,6 +26,11 @@ interface CourseListProps {
   ref?: React.RefObject<FlatList<CourseDTO>>
 }
 
+interface RenderItemProps {
+  item: CourseDTO
+  index: number
+}
+
 export function CourseList({
   data,
   onRefresh,
@@ -43,6 +48,24 @@ export function CourseList({
     [data.length, isLoadingCourse],
   )
 
+  const renderItem = useCallback(
+    ({ item, index }: RenderItemProps) => (
+      <CourseCard
+        title={item?.indexFile.name}
+        subTitle={`${item?.indexFile?.sections?.length} aulas`}
+        image={item.banner}
+        couserId={Number(item.courseId)}
+        isLoading={isOpeningCourse}
+        onPress={() => onCoursePress(Number(item.courseId))}
+        onLongPress={() => {
+          deleteCourse(item.courseId)
+        }}
+        completionPercentage={item?.completionPercentage || 0}
+      />
+    ),
+    [deleteCourse, isOpeningCourse, onCoursePress],
+  )
+
   return (
     <FlatList
       {...rest}
@@ -52,24 +75,8 @@ export function CourseList({
       }}
       data={data}
       refreshing={refreshing}
-      // onRefresh={onRefresh}
       keyExtractor={(item) => item.courseId.toString()}
-      renderItem={({ item, index }) => (
-        <CourseCard
-          title={item?.indexFile.name}
-          subTitle={`${item?.indexFile?.sections?.length} aulas`}
-          image={item.banner}
-          couserId={Number(item.courseId)}
-          isLoading={isOpeningCourse}
-          onPress={() => onCoursePress(Number(item.courseId))}
-          onLongPress={() => {
-            deleteCourse(item.courseId)
-          }}
-        />
-      )}
-      // refreshControl={
-      //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      // }
+      renderItem={renderItem}
       ListEmptyComponent={
         isEmpty ? (
           <ActivityIndicator size="large" color={theme.COLORS.GREEN_500} />

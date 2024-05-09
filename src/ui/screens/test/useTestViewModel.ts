@@ -2,13 +2,18 @@ import { TestsRepository } from '@data/repositories/tests'
 import Toast from 'react-native-toast-message'
 import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
 import { useCourse } from '@data/contexts/CourseContext'
+import { CoursesRepository } from '@data/repositories/course'
 
-export function useTestViewModel(testRepository: TestsRepository) {
+export function useTestViewModel(
+  courseRepository: CoursesRepository,
+  testRepository: TestsRepository,
+) {
   const {
     handleSetIndex,
     index,
     courseScrollViewRef,
     handleSetSection,
+    handleSetCourses,
     sections,
   } = useCourse()
   const handleCompleteTest = async (test: TestsDTO) => {
@@ -53,7 +58,11 @@ export function useTestViewModel(testRepository: TestsRepository) {
 
       handleSetSection(updatedSections)
 
-      // TODO:  atualizar barra de progresso
+      const response = await courseRepository.listCourses()
+
+      if (response) {
+        handleSetCourses(response)
+      }
     } catch (error) {
       console.log('Erro ao finalizar teste', error)
       Toast.show({

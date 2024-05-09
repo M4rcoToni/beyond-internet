@@ -56,7 +56,7 @@ export function HubDrawer() {
         name="Course"
         options={() => ({
           headerShown: false,
-          headerTitle: index && sections ? sections[index].title : 'Aulas',
+          headerTitle: index && sections ? sections[index]?.title : 'Aulas',
           gestureEnabled: true,
           gestureDirection: 'horizontal',
           gestureResponseDistance: {

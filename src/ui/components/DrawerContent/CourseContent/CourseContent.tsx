@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { FlatList, Text } from 'react-native'
 import { Container, SubTitle, Separator, Button } from '@ui/components'
 import { useCourseContentViewModel } from './useCourseContentViewModel'
@@ -10,6 +10,10 @@ interface CourseContentProps {
   onPressBackButton: () => void
   closeDrawer: () => void
 }
+interface RenderItemProps {
+  item: SectionDTO
+  index: number
+}
 
 export function CourseContent({
   sections,
@@ -19,6 +23,28 @@ export function CourseContent({
 }: CourseContentProps) {
   const { handleSetIndex, sectionIndex, courseScrollViewRef } =
     useCourseContentViewModel()
+
+  const renderItem = useCallback(
+    ({ item, index }: RenderItemProps) => {
+      const handlePress = () => {
+        handleSetIndex(index)
+        courseScrollViewRef?.current?.scrollTo({
+          y: 0,
+          animated: true,
+        })
+        closeDrawer()
+      }
+
+      return (
+        <CourseItem
+          item={item}
+          onPress={handlePress}
+          isSelected={sectionIndex === index}
+        />
+      )
+    },
+    [handleSetIndex, courseScrollViewRef, closeDrawer, sectionIndex],
+  )
 
   return (
     <Container>
@@ -50,21 +76,7 @@ export function CourseContent({
             </Text>
           </>
         )}
-        renderItem={({ item, index }) => (
-          <CourseItem
-            item={item}
-            onPress={() => {
-              handleSetIndex(index)
-              courseScrollViewRef?.current?.scrollTo({
-                y: 0,
-                animated: true,
-              })
-              closeDrawer()
-            }}
-            isSelected={sectionIndex === index}
-          />
-        )}
-        ItemSeparatorComponent={Separator}
+        renderItem={renderItem}
       />
       <Button
         title="Voltar"
