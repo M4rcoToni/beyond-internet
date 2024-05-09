@@ -45,9 +45,9 @@ export function useHubViewModel(
       setIsListingCourses(false)
     }
   }
+
   const handleOnGetCourse = async () => {
     try {
-      console.log('handleOnGetCourse')
       await courseRepository.createCourse()
       await handleOnListCourses()
     } catch (error) {
@@ -98,7 +98,6 @@ export function useHubViewModel(
       const lastSection = course.find(
         (section) => section.tests?.completed === 1,
       )
-      console.log(lastSection)
       if (course) {
         if (lastSection) {
           handleSetIndex(course.indexOf(lastSection) + 1)

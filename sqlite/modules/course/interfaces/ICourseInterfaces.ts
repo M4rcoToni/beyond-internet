@@ -17,6 +17,7 @@ export type CourseDTO = {
   banner: string
   indexFile: CourseType
   granted: number
+  completionPercentage?: number
 }
 
 export type CreateCourseDTO = {

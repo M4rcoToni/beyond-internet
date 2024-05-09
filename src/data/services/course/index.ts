@@ -128,10 +128,27 @@ export class CoursesService implements ICoursesService {
   async listCourses(): Promise<CourseDTO[]> {
     const courses = await this.courseController.list()
 
-    const formattedCourses = courses.map((item) => ({
-      ...item,
-      indexFile: JSON.parse(String(item.indexFile)) as CourseType,
-    }))
+    const formattedCourses = await Promise.all(
+      courses.map(async (item) => {
+        const sections = await this.SectionsService?.listSections(
+          Number(item.courseId),
+        )
+
+        const completedSections =
+          sections?.filter((section) => section.tests?.completed === 0)
+            .length || 10
+        const totalSections = sections?.length || 10
+
+        const completionPercentage = Math.abs(
+          (completedSections / totalSections) * 100 - 100,
+        )
+        return {
+          ...item,
+          completionPercentage,
+          indexFile: JSON.parse(String(item.indexFile)) as CourseType,
+        }
+      }),
+    )
 
     if (!formattedCourses) {
       throw new Result(false, null, new Error('Cursos não encontrados!'))

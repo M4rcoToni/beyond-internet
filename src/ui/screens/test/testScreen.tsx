@@ -19,6 +19,9 @@ import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface
 import { TestNextButton } from '@components/TestNextButton/TestNextButton'
 import { useTestViewModel } from './useTestViewModel'
 import Toast from 'react-native-toast-message'
+import { CoursesRepository } from '@data/repositories/course'
+import { CoursesService } from '@data/services/course'
+import { SectionsService } from '@data/services/sections'
 
 export function TestScreen() {
   const route = useRoute()
@@ -26,6 +29,13 @@ export function TestScreen() {
   const { params } = route as { params: { test: TestsDTO } }
   const test = params?.test
   const { handleCompleteTest } = useTestViewModel(
+    new CoursesRepository(
+      new CoursesService(
+        new SectionsService(
+          new TestsService(new QuestionsSerivce(new OptionService())),
+        ),
+      ),
+    ),
     new TestsRepository(
       new TestsService(new QuestionsSerivce(new OptionService())),
     ),
