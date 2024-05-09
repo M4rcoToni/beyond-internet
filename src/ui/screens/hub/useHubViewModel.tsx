@@ -7,7 +7,6 @@ import { Result } from '@data/result'
 import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { SectionsRepository } from '@data/repositories/sections'
-import { AuthRepository } from '@data/repositories/auth'
 import { useAuth } from '@data/contexts/AuthContext'
 
 export function useHubViewModel(

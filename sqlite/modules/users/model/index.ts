@@ -15,6 +15,8 @@ export async function initializeTableUsers(
             password   TEXT    NOT NULL,
             isLogged   INTEGER DEFAULT 0,
             totalStudyTime INTEGER DEFAULT 0
+            studyStreak   INTEGER DEFAULT 0
+            lastStudyDate TEXT DEFAULT CURRENT_TIMESTAMP
         )`,
         [],
         () => {

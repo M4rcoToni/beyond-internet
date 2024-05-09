@@ -38,7 +38,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
   }, [])
 
   const setStudyTime = useCallback((time: number) => {
-    console.log('time', time)
     studyStartTime.current = time
   }, [])
 
