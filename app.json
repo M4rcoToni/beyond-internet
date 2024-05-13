@@ -1,10 +1,14 @@
 {
   "expo": {
-    "name": "beyond-internet",
+    "name": "Além da Internet",
     "slug": "beyond-internet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "notification": {
+      "color": "#00875F",
+      "icon": "./assets/notification-icon.png"
+    },
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -15,24 +19,34 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.m4rcotoni.beyondinternet"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.m4rcotoni.beyondinternet"
     },
-    // "extra": {
-    //   "eas": {
-    //     "projectId": "2e084d12-dd34-49b9-9581-391c1c7321c5"
-    //   }
-    // },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/2e084d12-dd34-49b9-9581-391c1c7321c5"
-    }
+    },
+    "plugins": [
+      "@notifee/react-native",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          }
+        }
+      ]
+    ]
   }
 }

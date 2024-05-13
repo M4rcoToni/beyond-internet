@@ -36,6 +36,7 @@ module.exports = function (api) {
             '@assets': './src/ui/assets',
             '@data': './src/data',
             '@sqlite': './sqlite',
+            '@notifications': './notifications',
           },
         },
       ],

@@ -1,11 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { View, ScrollView, BackHandler } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
-import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
-import { QuestionsSerivce } from '@data/services/questions'
-import { OptionService } from '@data/services/options'
-import { TestsRepository } from '@data/repositories/tests'
-import { TestsService } from '@data/services/tests'
+import Toast from 'react-native-toast-message'
 import PagerView from 'react-native-pager-view'
 import {
   TestScreenContainer,
@@ -15,15 +11,24 @@ import {
   QuestionDescription,
 } from './styles'
 import { QuestionButton } from '@components/QuestionButton/QuestionButton'
-import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface'
 import { TestNextButton } from '@components/TestNextButton/TestNextButton'
-import { useTestViewModel } from './useTestViewModel'
-import Toast from 'react-native-toast-message'
-import { CoursesRepository } from '@data/repositories/course'
-import { CoursesService } from '@data/services/course'
+
+import { OptionsDTO } from '@sqlite/modules/options/interfaces/IOptionsInterface'
+import { TestsDTO } from '@sqlite/modules/tests/interfaces/ITestInterface'
+
+import { QuestionsSerivce } from '@data/services/questions'
+import { OptionService } from '@data/services/options'
 import { SectionsService } from '@data/services/sections'
 import { AuthService } from '@data/services/auth'
 import { AuthRepository } from '@data/repositories/auth'
+import { TestsRepository } from '@data/repositories/tests'
+import { TestsService } from '@data/services/tests'
+import { CoursesRepository } from '@data/repositories/course'
+import { CoursesService } from '@data/services/course'
+import { NotificationsRepository } from '@data/repositories/notifications'
+import { NotificationsService } from '@data/services/notifications'
+
+import { useTestViewModel } from './useTestViewModel'
 
 export function TestScreen() {
   const route = useRoute()
@@ -42,6 +47,7 @@ export function TestScreen() {
     new TestsRepository(
       new TestsService(new QuestionsSerivce(new OptionService())),
     ),
+    new NotificationsRepository(new NotificationsService()),
   )
   const ref = useRef<PagerView>(null)
 
