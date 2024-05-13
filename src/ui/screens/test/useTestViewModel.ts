@@ -5,11 +5,13 @@ import { useCourse } from '@data/contexts/CourseContext'
 import { CoursesRepository } from '@data/repositories/course'
 import { AuthRepository } from '@data/repositories/auth'
 import { useAuth } from '@data/contexts/AuthContext'
+import { NotificationsRepository } from '@data/repositories/notifications'
 
 export function useTestViewModel(
   userRepository: AuthRepository,
   courseRepository: CoursesRepository,
   testRepository: TestsRepository,
+  notificationsRepository: NotificationsRepository,
 ) {
   const {
     handleSetIndex,
@@ -73,6 +75,8 @@ export function useTestViewModel(
       if (response) {
         handleSetCourses(response)
       }
+
+      await notificationsRepository.scheduleNotification()
     } catch (error) {
       console.log('Erro ao finalizar teste', error)
       Toast.show({

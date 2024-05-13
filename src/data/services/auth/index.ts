@@ -36,6 +36,18 @@ export class AuthService implements IAuthService {
   async first() {
     const user = await this.userController.first()
 
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    if (
+      user?.lastStudyDate &&
+      new Date(user.lastStudyDate).getTime() < today.getTime()
+    ) {
+      await this.userController.update(user?.id || 0, {
+        studyStreak: 0,
+      })
+    }
+
     return user
   }
 
@@ -72,12 +84,13 @@ export class AuthService implements IAuthService {
     } else {
       studyStreak = 1
     }
-    console.log(today.toISOString(), studyStreak)
 
     const user = await this.userController?.update(userLogged?.id || 0, {
       studyStreak,
       lastStudyDate: today.toISOString(),
     })
+
+    // TODO: Schedule notification
 
     return user
   }

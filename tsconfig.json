@@ -28,7 +28,10 @@
       ],
       "@sqlite/*": [
         "../sqlite/*"
-      ]
+      ],
+      "@notifications/*": [
+        "../notifications/*"
+      ],
     }
   },
   "include": [
