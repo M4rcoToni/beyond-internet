@@ -30,7 +30,8 @@ export class CourseRepository
         ', ',
       )}) VALUES (${fields.map(() => '?').join(', ')})`
 
-      await tx.executeSqlAsync(sql, values)
+      const res = await tx.executeSqlAsync(sql, values)
+      console.log('CreateCourse', res)
     })
 
     const course = await this.findById(payload.courseId || '')
@@ -83,5 +84,19 @@ export class CourseRepository
     })
 
     return deleted
+  }
+
+  async finishCourse(id: string): Promise<boolean> {
+    let finished = false
+    const completedDate = new Date().toLocaleDateString('pt-BR')
+    await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
+      await tx.executeSqlAsync(
+        `UPDATE ${this.tableName} SET completedDate = ? WHERE courseId = ?`,
+        [completedDate, id],
+      )
+      finished = true
+    })
+
+    return finished
   }
 }

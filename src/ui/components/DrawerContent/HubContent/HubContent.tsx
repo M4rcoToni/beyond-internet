@@ -7,6 +7,7 @@ import { useDrawerContentViewModel } from '../useDrawerContentViewModel'
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
+import { useNavigation } from '@react-navigation/native'
 
 interface HubContentProps {
   signOut: () => void
@@ -18,6 +19,9 @@ export function HubContent({ signOut, user }: HubContentProps) {
     undefined,
     new CoursesRepository(new CoursesService()),
   )
+
+  const { navigate } = useNavigation()
+
   return (
     <>
       <FlatList
@@ -35,17 +39,18 @@ export function HubContent({ signOut, user }: HubContentProps) {
           {
             name: 'Certificados',
             icon: 'check-square',
+            onPress: () => navigate('Certificate'),
           },
           {
             name: 'Abrir um curso',
             icon: 'plus-square',
-            // onPress: () => getDirectoryUri(),
+            onPress: handleOnGetCourse,
           },
         ]}
         renderItem={({ item }) => (
           <>
             <TouchableOpacity
-              onPress={item.name === 'Abrir um curso' && handleOnGetCourse}
+              onPress={item?.onPress}
               style={{
                 flex: 1,
                 flexDirection: 'row',

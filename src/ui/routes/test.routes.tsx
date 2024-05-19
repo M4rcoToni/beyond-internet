@@ -3,7 +3,6 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack'
 import { TestScreen } from '@screens/test/testScreen'
-import { QuestionScreen } from '@screens/question/Question'
 
 type CourseRoutes = {
   Hub: undefined
@@ -24,7 +23,6 @@ export function TestRoutes() {
       }}
     >
       <Screen name="Test" component={TestScreen} />
-      <Screen name="Question" component={QuestionScreen} />
     </Navigator>
   )
 }

@@ -6,6 +6,8 @@ import { CoursesRepository } from '@data/repositories/course'
 import { AuthRepository } from '@data/repositories/auth'
 import { useAuth } from '@data/contexts/AuthContext'
 import { NotificationsRepository } from '@data/repositories/notifications'
+import { useState } from 'react'
+import { Alert } from 'react-native'
 
 export function useTestViewModel(
   userRepository: AuthRepository,
@@ -13,6 +15,7 @@ export function useTestViewModel(
   testRepository: TestsRepository,
   notificationsRepository: NotificationsRepository,
 ) {
+  const [isLoading, setIsLoading] = useState(false)
   const {
     handleSetIndex,
     index,
@@ -20,10 +23,12 @@ export function useTestViewModel(
     handleSetSection,
     handleSetCourses,
     sections,
+    courseId,
   } = useCourse()
   const { setUserData } = useAuth()
   const handleCompleteTest = async (test: TestsDTO) => {
     try {
+      setIsLoading(true)
       if (!test.testId) {
         return
       }
@@ -39,13 +44,6 @@ export function useTestViewModel(
         type: 'success',
         text1: 'Teste finalizado com sucesso!',
         text2: 'Parabéns!',
-      })
-
-      handleSetIndex(index + 1)
-
-      courseScrollViewRef?.current?.scrollTo({
-        y: 0,
-        animated: true,
       })
 
       const updatedSections = sections.map((section) => {
@@ -77,6 +75,22 @@ export function useTestViewModel(
       }
 
       await notificationsRepository.scheduleNotification()
+
+      if (index === sections.length - 1) {
+        await courseRepository.finishCourse(courseId)
+        Alert.alert(
+          'Parabéns!',
+          'Você finalizou o curso com sucesso!\n Agora você pode gerar seu certificado.',
+        )
+        return
+      }
+
+      handleSetIndex(index + 1)
+
+      courseScrollViewRef?.current?.scrollTo({
+        y: 0,
+        animated: true,
+      })
     } catch (error) {
       console.log('Erro ao finalizar teste', error)
       Toast.show({
@@ -84,10 +98,13 @@ export function useTestViewModel(
         text1: 'Erro ao finalizar teste!',
         text2: 'Tente novamente mais tarde.',
       })
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return {
     handleCompleteTest,
+    isLoading,
   }
 }

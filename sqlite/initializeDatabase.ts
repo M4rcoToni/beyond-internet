@@ -25,7 +25,7 @@ export async function initializeDatabase() {
     console.log(res.filter((r) => r.status === 'rejected'))
 
     const tables = [
-      'users',
+      // 'users',
       'course',
       'sections',
       'tests',

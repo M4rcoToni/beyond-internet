@@ -98,10 +98,11 @@ export class CoursesService implements ICoursesService {
     const createdCourse = await this.courseController.create({
       ...course,
       indexFile: JSON.stringify(course.indexFile),
+      completedDate: 'Não concluído',
     })
 
     if (!createdCourse) {
-      throw new Result(false, null, new Error('Erro curso já cadastrado!'))
+      throw new Result(false, null, new Error('Erro curso ao criar o curso!'))
     }
 
     const sectionsCreated = await this.SectionsService?.createSection(
@@ -135,13 +136,14 @@ export class CoursesService implements ICoursesService {
         )
 
         const completedSections =
-          sections?.filter((section) => section.tests?.completed === 0)
-            .length || 10
-        const totalSections = sections?.length || 10
+          sections?.filter((section) => section.tests?.completed).length || 0
+
+        const totalSections = sections?.length || 0
 
         const completionPercentage = Math.abs(
-          (completedSections / totalSections) * 100 - 100,
+          (completedSections / totalSections) * 100,
         )
+
         return {
           ...item,
           completionPercentage,
@@ -167,6 +169,16 @@ export class CoursesService implements ICoursesService {
     }
 
     await this.SectionsService?.deleteSection(Number(id))
+
+    return true
+  }
+
+  async finishCourse(id: string): Promise<boolean> {
+    const course = await this.courseController.finishCourse(id)
+
+    if (!course) {
+      throw new Result(false, null, new Error('Erro ao finalizar curso!'))
+    }
 
     return true
   }

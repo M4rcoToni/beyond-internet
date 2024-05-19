@@ -50,4 +50,12 @@ export class CourseController {
       throw new Error()
     }
   }
+
+  async finishCourse(id: string): Promise<boolean> {
+    try {
+      return await this.courseService.finishCourse(id)
+    } catch (error) {
+      throw new Error()
+    }
+  }
 }

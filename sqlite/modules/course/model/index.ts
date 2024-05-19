@@ -17,6 +17,7 @@ export async function initializeTableCourses(
             pdfs          TEXT NOT NULL,
             banner        TEXT NOT NULL,
             indexFile     TEXT NOT NULL,
+            completedDate TEXT NOT NULL,
             granted       INTEGER DEFAULT 0
         )`,
         [],

@@ -7,6 +7,7 @@ export interface ICoursesRepository {
   listCourses: () => Promise<CourseDTO[]>
   getCourseById: (id: string) => Promise<CourseDTO | null>
   deleteCourse: (id: string) => Promise<boolean>
+  finishCourse: (id: string) => Promise<boolean>
 }
 
 export interface ICoursesService {
@@ -16,4 +17,5 @@ export interface ICoursesService {
   listCourses: () => Promise<CourseDTO[]>
   getCourseById: (id: string) => Promise<CourseDTO | null>
   deleteCourse: (id: string) => Promise<boolean>
+  finishCourse: (id: string) => Promise<boolean>
 }

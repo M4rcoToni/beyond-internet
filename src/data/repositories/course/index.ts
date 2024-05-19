@@ -101,4 +101,20 @@ export class CoursesRepository implements ICoursesRepository {
       )
     }
   }
+
+  async finishCourse(id: string): Promise<boolean> {
+    try {
+      return this.courseService.finishCourse(id)
+    } catch (error) {
+      throw new Result(
+        false,
+        undefined,
+        new Error(
+          error instanceof Result
+            ? error.getError()?.message
+            : 'Erro ao finalizar curso',
+        ),
+      )
+    }
+  }
 }
