@@ -1,0 +1,34 @@
+export const CertificadoHtml = `
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body style="text-align: center; font-family: Helvetica Neue; display: flex; flex: auto;  justify-content: center; align-items: center;flex-direction: column;">
+  <h1 style="font-size: 50px;  font-weight: normal;">
+   Certificado de conclusão de curso
+  </h1>
+  <p style="font-size: 20px; font-weight: normal;">
+    Certificamos que <strong>{{name}}</strong> concluiu o curso de <strong>Geografia</strong> com sucesso.
+  </p>
+  <p style="font-size: 20px; font-weight: normal;">
+    Data de conclusão: <strong>{{date}}</strong>
+  </p>
+<!--  <p style="font-size: 20px; font-weight: normal;">-->
+<!--    Nota final: <strong>{{grade}}</strong>-->
+<!--  </p>-->
+  <p style="font-size: 20px; font-weight: normal;">
+    Este certificado é válido em todo o território nacional.
+  </p>
+  <p style="font-size: 20px; font-weight: normal;">
+    <strong>Assinatura do diretor</strong>
+  </p>
+  <p style="font-size: 20px; font-weight: normal;">
+    <strong>Código de autenticação: {{code}}</strong>
+  </p>
+</body>
+</html>
+`
