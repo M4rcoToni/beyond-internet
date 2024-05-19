@@ -41,8 +41,12 @@ export function CertificateCard({
       <Divider />
       <View>
         <CourseName>{certificate.courseName}</CourseName>
-        <Text>Porcentagem: {certificate.completionPercentage}%</Text>
-        <Text>
+        <Text
+          numberOfLines={2}
+          style={{
+            width: 200,
+          }}
+        >
           Data de conclusão:{' '}
           {certificate.completionDate
             ? certificate.completionDate

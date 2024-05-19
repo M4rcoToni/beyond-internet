@@ -18,6 +18,7 @@ export type CourseDTO = {
   indexFile: CourseType
   granted: number
   completionPercentage?: number
+  completedDate?: string
 }
 
 export type CreateCourseDTO = {
@@ -30,6 +31,7 @@ export type CreateCourseDTO = {
   banner: string
   indexFile: string
   granted: number
+  completedDate?: string
 }
 
 export interface ICourseRepository {
@@ -38,6 +40,7 @@ export interface ICourseRepository {
   list: () => Promise<CourseDTO[]>
   findById: (id: string) => Promise<CourseDTO | null>
   delete: (id: string) => Promise<boolean>
+  finishCourse: (id: string) => Promise<boolean>
 }
 
 export interface ICourseService {
@@ -46,4 +49,5 @@ export interface ICourseService {
   list: () => Promise<CourseDTO[]>
   findById: (id: string) => Promise<CourseDTO | null>
   delete: (id: string) => Promise<boolean>
+  finishCourse: (id: string) => Promise<boolean>
 }

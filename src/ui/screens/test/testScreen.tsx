@@ -35,7 +35,7 @@ export function TestScreen() {
   const { goBack } = useNavigation()
   const { params } = route as { params: { test: TestsDTO } }
   const test = params?.test
-  const { handleCompleteTest } = useTestViewModel(
+  const { handleCompleteTest, isLoading } = useTestViewModel(
     new AuthRepository(new AuthService()),
     new CoursesRepository(
       new CoursesService(
@@ -150,6 +150,7 @@ export function TestScreen() {
                 onGoToNextQuestion={handleNextQuestion}
                 onFinished={handleFinishTest}
                 isFinished={isFinished}
+                isLoading={isLoading}
                 isCorrect={
                   currentOptionId === selectedOptions[currentQuestion]?.id
                 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { TestScreenNextButton, TestScreenNextButtonText } from './styles'
+import { ActivityIndicator } from 'react-native'
+import theme from '@ui/theme'
 
 interface TestNextButtonProps {
   onVerifyOption: () => void
@@ -9,6 +11,7 @@ interface TestNextButtonProps {
   isCorrect: boolean
   isSelected: boolean
   isFinished: boolean
+  isLoading?: boolean
 }
 
 export function TestNextButton({
@@ -19,6 +22,7 @@ export function TestNextButton({
   disabled,
   isSelected,
   isCorrect,
+  isLoading,
 }: TestNextButtonProps) {
   if (isCorrect && isFinished) {
     return (
@@ -28,7 +32,11 @@ export function TestNextButton({
         isSelected={true}
         isCorrect={true}
       >
-        <TestScreenNextButtonText>Finalizar teste</TestScreenNextButtonText>
+        {isLoading ? (
+          <ActivityIndicator color={theme.COLORS.WHITE} />
+        ) : (
+          <TestScreenNextButtonText>Finalizar teste</TestScreenNextButtonText>
+        )}
       </TestScreenNextButton>
     )
   }

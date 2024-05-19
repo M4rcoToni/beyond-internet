@@ -40,7 +40,7 @@ export function useCertificateViewModel(
         text1:
           error instanceof Result
             ? error.getError()?.message
-            : 'Erro ao gerar certificado.ts',
+            : 'Erro ao gerar certificado',
       })
     }
   }

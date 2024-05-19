@@ -21,7 +21,7 @@ export class CertificatesService implements ICertificatesService {
           courseName: course.indexFile.name,
           completionPercentage: course.completionPercentage,
           courseImage: course.banner,
-          completionDate: null, // TODO: add to course completion date
+          completionDate: course?.completedDate,
         } as ICertificate
       })
 
@@ -41,14 +41,13 @@ export class CertificatesService implements ICertificatesService {
 
   async generateCertificate(courseId: string, username: string): Promise<void> {
     try {
-      console.log(courseId, username, 'generateCertificate')
       const course = await this.courseRepository.getCourseById(courseId)
 
       if (!course) {
         throw new Result(false, undefined, new Error('Curso não encontrado!'))
       }
 
-      const hasCompleted = course.completionPercentage === 100
+      const hasCompleted = course?.completedDate !== 'Não concluído'
 
       if (!hasCompleted) {
         throw new Result(
@@ -59,8 +58,8 @@ export class CertificatesService implements ICertificatesService {
       }
 
       const name = username
-      const date = new Date().toLocaleDateString('pt-BR') // TODO: change to course completion date
-      const code = require('crypto').randomBytes(12).toString('hex')
+      const date = String(course.completedDate)
+      const code = Math.floor(Math.random() * 1000000).toString()
 
       const htmlWithValues = CertificadoHtml.replace('{{name}}', name)
         .replace('{{date}}', date)

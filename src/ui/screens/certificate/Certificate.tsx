@@ -8,6 +8,7 @@ import { CoursesService } from '@data/services/course'
 import { CertificatesService } from '@data/services/certificates'
 import { CertificateCard } from '@components/CertificateCard/CertificateCard'
 import Toast from 'react-native-toast-message'
+import { CertificatesTitle } from '@screens/certificate/styles'
 
 export function Certificate() {
   const { certificates, handleOnGetCertificates, handleOnGenerateCertificate } =
@@ -35,6 +36,11 @@ export function Certificate() {
           />
         )}
         keyExtractor={(item) => item.courseId}
+        ListEmptyComponent={() => (
+          <Container>
+            <CertificatesTitle>Nenhum certificado encontrado</CertificatesTitle>
+          </Container>
+        )}
       />
       <Toast />
     </Container>
