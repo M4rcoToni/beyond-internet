@@ -10,6 +10,10 @@ import { AuthService } from '@data/services/auth'
 import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
 import { HubContent } from '@components/DrawerContent/HubContent/HubContent'
+import { SectionsService } from '@data/services/sections'
+import { TestsService } from '@data/services/tests'
+import { QuestionsSerivce } from '@data/services/questions'
+import { OptionService } from '@data/services/options'
 
 interface DrawerContentProps {
   drawer: DrawerNavigationHelpers
@@ -20,7 +24,13 @@ export function DrawerContent({ drawer, screen }: DrawerContentProps) {
   const { user, handleLogout, course, sections, handleBackToHub } =
     useDrawerContentViewModel(
       new AuthRepository(new AuthService()),
-      new CoursesRepository(new CoursesService()),
+      new CoursesRepository(
+        new CoursesService(
+          new SectionsService(
+            new TestsService(new QuestionsSerivce(new OptionService())),
+          ),
+        ),
+      ),
     )
 
   return (

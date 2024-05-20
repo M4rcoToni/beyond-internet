@@ -23,7 +23,7 @@ export class AuthRepository implements IAuthRepository {
     try {
       return await this.authService.createUser(payload)
     } catch (error) {
-      console.log(error)
+      console.log('createUser', error)
       throw new Result(false, undefined, new Error('Erro ao criar usuário'))
     }
   }

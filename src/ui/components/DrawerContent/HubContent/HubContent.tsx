@@ -8,6 +8,10 @@ import { CoursesRepository } from '@data/repositories/course'
 import { CoursesService } from '@data/services/course'
 import { DrawerHeader } from '../DrawerHeader/DrawerHeader'
 import { useNavigation } from '@react-navigation/native'
+import { SectionsService } from '@data/services/sections'
+import { OptionService } from '@data/services/options'
+import { QuestionsSerivce } from '@data/services/questions'
+import { TestsService } from '@data/services/tests'
 
 interface HubContentProps {
   signOut: () => void
@@ -17,7 +21,13 @@ interface HubContentProps {
 export function HubContent({ signOut, user }: HubContentProps) {
   const { handleOnGetCourse } = useDrawerContentViewModel(
     undefined,
-    new CoursesRepository(new CoursesService()),
+    new CoursesRepository(
+      new CoursesService(
+        new SectionsService(
+          new TestsService(new QuestionsSerivce(new OptionService())),
+        ),
+      ),
+    ),
   )
 
   const { navigate } = useNavigation()

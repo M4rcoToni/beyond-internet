@@ -12,6 +12,7 @@ export class TestsRepository
 {
   async create(payload: TestsDTO): Promise<boolean> {
     let insertedId: number | undefined
+    console.log('payload', payload)
     await this.db.transactionAsync(async (tx: SQLite.SQLTransactionAsync) => {
       const fields = Object.keys(payload)
       const values = Object.values(payload)
@@ -21,11 +22,9 @@ export class TestsRepository
       )}) VALUES (${fields.map(() => '?').join(', ')})`
 
       const res = await tx.executeSqlAsync(sql, values)
-
+      console.log('TestsRepository', res)
       if ('insertId' in res) {
         insertedId = res.insertId
-      } else {
-        console.log('TestsRepository', res)
       }
     })
 

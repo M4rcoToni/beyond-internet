@@ -30,8 +30,10 @@ export class SectionsService implements ISectionsService {
         section.tests = tests
       }
     })
-
-    await Promise.all(testsPromises)
+    await Promise.all(testsPromises).catch((e) => {
+      console.log('error', e)
+      throw new Result(false, null, new Error('Erro ao buscar testes!'))
+    })
 
     if (!formattedSections) {
       throw new Result(false, null, new Error('Seções não encontradas!'))
@@ -54,12 +56,18 @@ export class SectionsService implements ISectionsService {
       })
     })
 
-    await Promise.all(sectionsPromises).catch(() => {
+    await Promise.all(sectionsPromises).catch((e) => {
+      console.log('error', e)
       throw new Result(false, null, new Error('Erro ao criar seções!'))
     })
 
-    sections.map(async (section) => {
+    const testsPromises = sections.map(async (section) => {
       await this.TestService?.createTest(Number(section.id), section.tests)
+    })
+
+    await Promise.all(testsPromises).catch((e) => {
+      console.log('error', e)
+      throw new Result(false, null, new Error('Erro ao criar testes!'))
     })
 
     return true

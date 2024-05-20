@@ -19,10 +19,9 @@ export class SectionRepository
       )}) VALUES (${fields.map(() => '?').join(', ')})`
 
       const res = await tx.executeSqlAsync(sql, values)
+      console.log('SectionRepository', res)
       if ('insertId' in res) {
         insertedId = res.insertId
-      } else {
-        console.log('SectionRepository', res)
       }
     })
 

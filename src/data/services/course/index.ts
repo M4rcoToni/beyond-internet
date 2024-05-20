@@ -16,7 +16,7 @@ export class CoursesService implements ICoursesService {
     new CourseService(new CourseRepository(db, 'course')),
   )
 
-  constructor(private readonly SectionsService?: ISectionsService) {}
+  constructor(private readonly SectionsService: ISectionsService) {}
 
   async requestPermission(): Promise<string> {
     try {
@@ -102,7 +102,7 @@ export class CoursesService implements ICoursesService {
     })
 
     if (!createdCourse) {
-      throw new Result(false, null, new Error('Erro curso ao criar o curso!'))
+      throw new Result(false, null, new Error('Erro ao criar o curso!'))
     }
 
     const sectionsCreated = await this.SectionsService?.createSection(
