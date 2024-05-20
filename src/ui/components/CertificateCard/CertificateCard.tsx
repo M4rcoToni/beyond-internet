@@ -20,7 +20,7 @@ export function CertificateCard({
   certificate,
   onPress,
 }: CertificateCardProps) {
-  const hasCompletionDate = certificate.completionDate
+  const hasCompletionDate = certificate.completionDate !== 'Não concluído'
 
   return (
     <CardContainer
@@ -28,7 +28,7 @@ export function CertificateCard({
         if (hasCompletionDate && onPress) {
           onPress()
         } else {
-          Alert.alert('Aviso', 'Curso não finalizado!')
+          Alert.alert('Aviso', 'Curso não concluído!')
         }
       }}
     >
@@ -47,10 +47,7 @@ export function CertificateCard({
             width: 200,
           }}
         >
-          Data de conclusão:{' '}
-          {certificate.completionDate
-            ? certificate.completionDate
-            : 'Não finalizado'}
+          Data de conclusão: {certificate.completionDate}
         </Text>
       </View>
       <CompletionBadge hasCompletionDate={hasCompletionDate}>
