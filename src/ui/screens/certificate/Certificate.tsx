@@ -36,6 +36,9 @@ export function Certificate() {
           />
         )}
         keyExtractor={(item) => item.courseId}
+        contentContainerStyle={{
+          gap: 16,
+        }}
         ListEmptyComponent={() => (
           <Container>
             <CertificatesTitle>Nenhum certificado encontrado</CertificatesTitle>
