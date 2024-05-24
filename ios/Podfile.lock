@@ -22,6 +22,8 @@ PODS:
     - ExpoModulesCore
   - ExpoCrypto (12.4.1):
     - ExpoModulesCore
+  - ExpoDevice (5.4.0):
+    - ExpoModulesCore
   - ExpoImage (1.3.5):
     - ExpoModulesCore
     - SDWebImage (~> 5.15.8)
@@ -36,6 +38,10 @@ PODS:
     - React-NativeModulesApple
     - React-RCTAppDelegate
     - ReactCommon/turbomodule/core
+  - ExpoPrint (12.4.2):
+    - ExpoModulesCore
+  - ExpoSharing (11.5.0):
+    - ExpoModulesCore
   - ExpoSQLite (11.3.2):
     - ExpoModulesCore
   - EXSplashScreen (0.20.5):
@@ -576,9 +582,12 @@ DEPENDENCIES:
   - EXManifests (from `../node_modules/expo-manifests/ios`)
   - Expo (from `../node_modules/expo`)
   - ExpoCrypto (from `../node_modules/expo-crypto/ios`)
+  - ExpoDevice (from `../node_modules/expo-device/ios`)
   - ExpoImage (from `../node_modules/expo-image/ios`)
   - ExpoKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - ExpoPrint (from `../node_modules/expo-print/ios`)
+  - ExpoSharing (from `../node_modules/expo-sharing/ios`)
   - ExpoSQLite (from `../node_modules/expo-sqlite/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXStructuredHeaders (from `../node_modules/expo-structured-headers/ios`)
@@ -672,12 +681,18 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo"
   ExpoCrypto:
     :path: "../node_modules/expo-crypto/ios"
+  ExpoDevice:
+    :path: "../node_modules/expo-device/ios"
   ExpoImage:
     :path: "../node_modules/expo-image/ios"
   ExpoKeepAwake:
     :path: "../node_modules/expo-keep-awake/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core"
+  ExpoPrint:
+    :path: "../node_modules/expo-print/ios"
+  ExpoSharing:
+    :path: "../node_modules/expo-sharing/ios"
   ExpoSQLite:
     :path: "../node_modules/expo-sqlite/ios"
   EXSplashScreen:
@@ -792,9 +807,12 @@ SPEC CHECKSUMS:
   EXManifests: cf66451b11b2c2f6464917528d792759f7fd6ce0
   Expo: d310f3b84bd30843324d41f23ea7cc5e4273abf1
   ExpoCrypto: a382ab9a2fa91f0b511ce1fe4d6baecee40a1615
+  ExpoDevice: 1c1b0c9cad96c292c1de73948649cfd654b2b3c0
   ExpoImage: 723efcb8d9377ae8645a6f7a1579305f5b80a76f
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
   ExpoModulesCore: e4e437139259c5a73530a8895af69774ff8ec12d
+  ExpoPrint: e1531d216196f51b431c7cc4d906e569f79f10e7
+  ExpoSharing: 825b2b3fc919a2656f75def0069f584bbd6e359a
   ExpoSQLite: 4caf114e0f7ef450525b88799e8168ea9860fb66
   EXSplashScreen: c0e7f2d4a640f3b875808ed0b88575538daf6d82
   EXStructuredHeaders: 324cc3130571d2696357fafd8be7fd9a0b5fdf6e
@@ -857,6 +875,6 @@ SPEC CHECKSUMS:
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 3efc43e0d48686ce2e8c60f99d4e6bd349aff981
 
-PODFILE CHECKSUM: e3f6e253676375eb4833e306b2b5b232043d1352
+PODFILE CHECKSUM: 816af6aca35c10d00de8c3a114bc523d5e6fc7f6
 
 COCOAPODS: 1.15.2
