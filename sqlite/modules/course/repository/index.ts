@@ -31,7 +31,6 @@ export class CourseRepository
       )}) VALUES (${fields.map(() => '?').join(', ')})`
 
       const res = await tx.executeSqlAsync(sql, values)
-      console.log('CreateCourse', res)
     })
 
     const course = await this.findById(payload.courseId || '')
