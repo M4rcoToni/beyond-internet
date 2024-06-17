@@ -9,20 +9,20 @@ export class NotificationsService implements INotificationsService {
 
   async scheduleNotification(): Promise<void> {
     await scheduleNotification(
-      'Continue seu streak!',
-      'Complete um teste agora para manter seu streak de estudos.',
+      'Continue sua sequência!',
+      'Complete um teste agora para manter sua sequência de estudos.',
       1320, // 22 horas
     )
 
     await scheduleNotification(
-      'Não perca seu streak!',
-      'Fazer um teste agora ajudará a manter seu streak de estudos.',
+      'Não perca seus livrinhos!',
+      'Fazer um teste agora ajudará a manter sua consistência nos estudos.',
       1380, // 23 horas
     )
 
     await scheduleNotification(
-      'Seu streak está em risco!',
-      'Complete um teste agora para não perder seu streak de estudos.',
+      'Sua sequência está em risco!',
+      'Complete um teste agora para não perder seus livrinhos e seu conhecimento.',
       1430, // 23 horas e 50 minutos
     )
   }
