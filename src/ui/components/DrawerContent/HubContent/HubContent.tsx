@@ -42,10 +42,10 @@ export function HubContent({ signOut, user }: HubContentProps) {
             name: 'Cursos',
             icon: 'folder',
           },
-          {
-            name: 'Provas',
-            icon: 'file-text',
-          },
+          // {
+          //   name: 'Provas',
+          //   icon: 'file-text',
+          // },
           {
             name: 'Certificados',
             icon: 'check-square',
